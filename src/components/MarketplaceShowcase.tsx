@@ -1,41 +1,5 @@
 import {ArrowUpRight,ChevronLeft,ChevronRight} from 'lucide-react'
 import {useEffect,useState} from 'react'
 import ProductMockup from './ProductMockup'
-
-const items=[
- {title:'Atlas',type:'MARKETPLACE',text:'Цифровая платформа для управления заказами и командами.',kind:'platform' as const},
- {title:'Nexum AI',type:'AI PRODUCT',text:'Рабочее пространство для AI-ассистентов и агентов.',kind:'ai' as const},
- {title:'Forma',type:'COMMERCE',text:'Концепт цифрового магазина с editorial-подачей.',kind:'commerce' as const},
- {title:'Pulse',type:'MOBILE PRODUCT',text:'Мобильный продукт для ежедневных рабочих процессов.',kind:'mobile' as const},
- {title:'North',type:'DATA PRODUCT',text:'Система управления показателями и операциями.',kind:'dashboard' as const},
-]
-
-export default function MarketplaceShowcase(){
- const[index,setIndex]=useState(0)
- const next=()=>setIndex(i=>(i+1)%items.length)
- const prev=()=>setIndex(i=>(i-1+items.length)%items.length)
- useEffect(()=>{const timer=window.setInterval(next,6000);return()=>window.clearInterval(timer)},[])
- const item=items[index]
- return <section className="marketplace" id="marketplace">
-  <div className="marketplace-top">
-   <div><span className="marketplace-kicker">NEXUM / MARKETPLACE</span><h2>Продукты, которые<br/><i>можно запустить.</i></h2></div>
-   <a className="marketplace-button" href="#marketplace">Маркетплейс <ArrowUpRight size={16}/></a>
-  </div>
-  <div className="marketplace-stage">
-   <button className="market-arrow prev" onClick={prev} aria-label="Предыдущая работа"><ChevronLeft size={18}/></button>
-   <div className="marketplace-copy">
-    <span>{String(index+1).padStart(2,'0')} / {String(items.length).padStart(2,'0')}</span>
-    <small>{item.type}</small>
-    <h3>{item.title}</h3>
-    <p>{item.text}</p>
-    <a href="#work">Смотреть проект <ArrowUpRight size={14}/></a>
-   </div>
-   <div className="marketplace-mockup"><ProductMockup kind={item.kind} large/></div>
-   <button className="market-arrow next" onClick={next} aria-label="Следующая работа"><ChevronRight size={18}/></button>
-  </div>
-  <div className="marketplace-bottom">
-   <div className="market-dots">{items.map((x,i)=><button key={x.title} className={i===index?'active':''} onClick={()=>setIndex(i)} aria-label={x.title}/>)}</div>
-   <span>CONCEPTS / SELECTED DIGITAL PRODUCTS</span>
-  </div>
- </section>
-}
+const items=[{title:'Atlas',type:'MARKETPLACE',ruType:'МАРКЕТПЛЕЙС',text:'Цифровая платформа для управления заказами и командами.',enText:'Digital platform for managing orders and teams.',kind:'platform' as const},{title:'Nexum AI',type:'AI PRODUCT',ruType:'AI-ПРОДУКТ',text:'Рабочее пространство для AI-ассистентов и агентов.',enText:'Workspace for AI assistants and agents.',kind:'ai' as const},{title:'Forma',type:'COMMERCE',ruType:'КОММЕРЦИЯ',text:'Концепт цифрового магазина с editorial-подачей.',enText:'Editorial concept for a digital commerce experience.',kind:'commerce' as const},{title:'Pulse',type:'MOBILE PRODUCT',ruType:'МОБИЛЬНЫЙ ПРОДУКТ',text:'Мобильный продукт для ежедневных рабочих процессов.',enText:'Mobile product for everyday workflows.',kind:'mobile' as const},{title:'North',type:'DATA PRODUCT',ruType:'DATA-ПРОДУКТ',text:'Система управления показателями и операциями.',enText:'System for managing metrics and operations.',kind:'dashboard' as const}]
+export default function MarketplaceShowcase({language}:{language:'ru'|'en'}){const ru=language==='ru';const[index,setIndex]=useState(0);const next=()=>setIndex(i=>(i+1)%items.length);const prev=()=>setIndex(i=>(i-1+items.length)%items.length);useEffect(()=>{const timer=window.setInterval(next,6000);return()=>window.clearInterval(timer)},[]);const item=items[index];return <section className="marketplace" id="marketplace"><div className="marketplace-top"><div><span className="marketplace-kicker">{ru?'NEXUM / МАРКЕТПЛЕЙС':'NEXUM / MARKETPLACE'}</span><h2>{ru?<>Продукты, которые<br/><i>можно запустить.</i></>:<>Products that<br/><i>can be launched.</i></>}</h2></div><a className="marketplace-button" href="#marketplace">{ru?'Маркетплейс':'Marketplace'} <ArrowUpRight size={16}/></a></div><div className="marketplace-stage"><button className="market-arrow prev" onClick={prev} aria-label={ru?'Предыдущая работа':'Previous work'}><ChevronLeft size={18}/></button><div className="marketplace-copy"><span>{String(index+1).padStart(2,'0')} / {String(items.length).padStart(2,'0')}</span><small>{ru?item.ruType:item.type}</small><h3>{item.title}</h3><p>{ru?item.text:item.enText}</p><a href="#work">{ru?'Смотреть проект':'View project'} <ArrowUpRight size={14}/></a></div><div className="marketplace-mockup"><ProductMockup kind={item.kind} large language={language}/></div><button className="market-arrow next" onClick={next} aria-label={ru?'Следующая работа':'Next work'}><ChevronRight size={18}/></button></div><div className="marketplace-bottom"><div className="market-dots">{items.map((x,i)=><button key={x.title} className={i===index?'active':''} onClick={()=>setIndex(i)} aria-label={x.title}/>)}</div><span>{ru?'КОНЦЕПЦИИ / ИЗБРАННЫЕ ЦИФРОВЫЕ ПРОДУКТЫ':'CONCEPTS / SELECTED DIGITAL PRODUCTS'}</span></div></section>}
