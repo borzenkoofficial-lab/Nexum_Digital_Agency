@@ -7,7 +7,7 @@ type Item={id:string;title:string;category:Exclude<Category,'ALL'>;label:string;
 const categories:Category[]=['ALL','SITES','APPS','TELEGRAM','PLUGINS','AI','SAAS']
 const items:Item[]=[
  {id:'atlas',title:'Atlas',category:'SAAS',label:'Operations platform',description:'Рабочая система для заказов, команд и операционных процессов.',kind:'platform',icon:LayoutGrid},
- {id:'forma',title:'Forma',category:'SITES',label:'Editorial website',description:'Имиджевый сайт с выразительной типографикой и продуктовой подачей.',kind:'commerce',icon:Globe},
+ {id:'forma',title:'Forma',category:'SITES',label:'Editorial website',description:'Имиджевый сайт с выразительной типографикой и продуктовой подачей.',kind:'website',icon:Globe},
  {id:'pulse',title:'Pulse',category:'APPS',label:'Mobile application',description:'Мобильное приложение для ежедневных задач и командной работы.',kind:'mobile',icon:PanelTop},
  {id:'nexum-bot',title:'Nexum Bot',category:'TELEGRAM',label:'Telegram bot',description:'Telegram-бот для заявок, уведомлений, поддержки и автоматизации.',kind:'telegram',icon:MessageCircle},
  {id:'forge',title:'Forge',category:'PLUGINS',label:'Product plugin',description:'Расширение, которое добавляет AI-инструменты прямо в рабочий интерфейс.',kind:'plugin',icon:Plug},
@@ -23,7 +23,12 @@ export default function MarketplacePage(){
   <section className="marketplace-catalog" id="marketplace-catalog">
    <div className="marketplace-filters">{categories.map(c=><button key={c} className={category===c?'active':''} onClick={()=>{setCategory(c);setSelected(null)}}>{c}</button>)}</div>
    <div className="marketplace-grid">{filtered.map((item,index)=>{const Icon=item.icon;return <button className="market-card" key={item.id} onClick={()=>setSelected(item)}>
-    <div className="market-card-visual"><div className="market-card-top"><span>0{index+1}</span><Icon size={15}/></div><div className="market-card-mock"><ProductMockup kind={item.kind}/></div><span className="market-card-open"><ArrowUpRight size={15}/></span></div>
+    <div className={`market-card-visual market-card-visual-${item.kind}`}>
+      <div className="market-card-top"><span>0{index+1}</span><Icon size={15}/></div>
+      <div className="market-card-mock"><ProductMockup kind={item.kind}/></div>
+      <div className="market-3d-badge" aria-hidden="true"><div className="market-3d-face"><Icon size={22}/></div></div>
+      <span className="market-card-open"><ArrowUpRight size={15}/></span>
+    </div>
     <div className="market-card-info"><div><small>{item.category} / {item.label}</small><h2>{item.title}</h2><p>{item.description}</p></div><span className="market-card-arrow"><ArrowUpRight size={17}/></span></div>
    </button>})}</div>
   </section>
