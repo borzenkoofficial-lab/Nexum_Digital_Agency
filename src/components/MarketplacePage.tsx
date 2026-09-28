@@ -31,7 +31,8 @@ export default function MarketplacePage(){
     <button className={'market-card market-card-'+item.size} style={{'--delay':String(Math.min(index,8)*45)+'ms'} as Record<string,string>} onClick={()=>setSelected(item)}>
       <div className={'market-card-visual market-card-visual-'+item.kind}>
         <div className="market-card-top"><span>{item.number}</span><Icon size={15}/></div>
-        <div className="market-card-mock"><ProductMockup kind={item.kind}/></div>
+        {item.size==='hero'&&<div className="market-hero-stamp"><span>SELECTED CASE</span><b>{item.label}</b><i>CONCEPT / NEXUM</i></div>}
+        <div className="market-card-mock"><ProductMockup kind={item.kind} large={item.size==='hero'}/></div>
         <div className={'market-3d-badge market-object-'+item.kind} aria-hidden="true"><div className="market-3d-shadow"/><div className="market-3d-face"><Icon size={22}/></div></div>
         <span className="market-card-open"><ArrowUpRight size={15}/></span>
       </div>
