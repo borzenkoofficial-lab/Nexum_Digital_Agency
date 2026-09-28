@@ -3,7 +3,10 @@ import {BarChart3, Bot, CheckCircle2, CircleUserRound, FileText, MessageSquare, 
 type Props={kind:'dashboard'|'mobile'|'ai'|'commerce'|'platform'|'telegram'|'plugin'|'website';large?:boolean}
 
 export default function ProductMockup({kind,large=false}:Props){
- if(kind==='mobile') return <Mobile/>\n if(kind==='telegram') return <Telegram/>\n if(kind==='plugin') return <Plugin/>\n if(kind==='website') return <Website/>
+ if(kind==='mobile') return <Mobile/>
+ if(kind==='telegram') return <Telegram/>
+ if(kind==='plugin') return <Plugin/>
+ if(kind==='website') return <Website/>
  return <div className={`browser-scene ${large?'large':''} mockup-${kind}`}>
    <div className="browser">
      <div className="browser-bar"><span/><span/><span/><div className="address">app.nexum.systems</div><div className="browser-status"/></div>
@@ -52,7 +55,13 @@ function Commerce(){
  </main>
 }
 
-function Website(){return <div className="website-scene"><div className="website-nav"><b>FORMA</b><span>Index</span><span>Projects</span><span>About</span><span>↗</span></div><div className="website-hero"><small>DIGITAL PRODUCT STUDIO</small><h3>Ideas<br/><i>into products.</i></h3><p>Strategy, design and technology for ambitious digital businesses.</p></div><div className="website-grid"><span>01 / 06</span><b>Selected work</b><span>Scroll ↓</span></div></div>}\n\nfunction Telegram(){return <div className="telegram-scene"><div className="telegram-window"><div className="telegram-head"><Bot size={15}/><div><b>Nexum Bot</b><span>online</span></div></div><div className="telegram-chat"><div className="tg-date">TODAY</div><div className="tg-bubble bot">Привет. Чем могу помочь?<small>09:41</small></div><div className="tg-bubble user">Найди открытые заявки на сегодня.<small>09:42</small></div><div className="tg-bubble bot">Нашёл 12 заявок. Сформировать подборку?<small>09:42</small></div></div><div className="tg-actions"><span>Мои заявки</span><span>Новая заявка</span><span>Поддержка</span></div></div></div>}\n\nfunction Plugin(){return <div className="plugin-scene"><div className="plugin-panel"><div className="plugin-top"><span><Plug size={13}/> NEXUM PLUGIN</span><span>•••</span></div><div className="plugin-title">AI tools<br/><i>inside your workflow.</i></div><div className="plugin-actions"><button><Sparkles size={13}/> Generate</button><button><Search size={13}/> Analyze</button><button><Zap size={13}/> Automate</button></div><div className="plugin-footer"><span>Connected to workspace</span><b>●</b></div></div></div>}\n\nfunction Mobile(){
+function Website(){return <div className="website-scene"><div className="website-nav"><b>FORMA</b><span>Index</span><span>Projects</span><span>About</span><span>↗</span></div><div className="website-hero"><small>DIGITAL PRODUCT STUDIO</small><h3>Ideas<br/><i>into products.</i></h3><p>Strategy, design and technology for ambitious digital businesses.</p></div><div className="website-grid"><span>01 / 06</span><b>Selected work</b><span>Scroll ↓</span></div></div>}
+
+function Telegram(){return <div className="telegram-scene"><div className="telegram-window"><div className="telegram-head"><Bot size={15}/><div><b>Nexum Bot</b><span>online</span></div></div><div className="telegram-chat"><div className="tg-date">TODAY</div><div className="tg-bubble bot">Привет. Чем могу помочь?<small>09:41</small></div><div className="tg-bubble user">Найди открытые заявки на сегодня.<small>09:42</small></div><div className="tg-bubble bot">Нашёл 12 заявок. Сформировать подборку?<small>09:42</small></div></div><div className="tg-actions"><span>Мои заявки</span><span>Новая заявка</span><span>Поддержка</span></div></div></div>}
+
+function Plugin(){return <div className="plugin-scene"><div className="plugin-panel"><div className="plugin-top"><span><Plug size={13}/> NEXUM PLUGIN</span><span>•••</span></div><div className="plugin-title">AI tools<br/><i>inside your workflow.</i></div><div className="plugin-actions"><button><Sparkles size={13}/> Generate</button><button><Search size={13}/> Analyze</button><button><Zap size={13}/> Automate</button></div><div className="plugin-footer"><span>Connected to workspace</span><b>●</b></div></div></div>}
+
+function Mobile(){
  return <div className="device-scene"><div className="phone">
   <div className="phone-speaker"/>
   <div className="phone-screen">
