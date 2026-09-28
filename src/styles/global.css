@@ -56,6 +56,42 @@ nav button:hover{background:var(--hover);color:var(--ink)}
 .market-dots button{width:22px;height:3px;padding:0;background:#d7d7dd;border-radius:4px;transition:width .2s ease,background .2s ease}
 .market-dots button.active{width:38px;background:var(--accent)}
 @keyframes marketFade{from{opacity:.45;transform:translateX(8px)}to{opacity:1;transform:none}}
+/* Marketplace compact layout */
+.marketplace{padding:82px 5vw 34px}
+.marketplace-top{max-width:1180px;margin:0 auto 28px}
+.marketplace-stage{max-width:1180px;margin:0 auto;grid-template-columns:170px minmax(0,1fr);gap:34px;min-height:360px;padding:26px 48px;border-radius:16px}
+.marketplace-copy>span{margin-bottom:20px}
+.marketplace-copy h3{font-size:clamp(28px,3vw,44px);margin:7px 0 12px}
+.marketplace-copy p{max-width:235px;margin-bottom:17px}
+.marketplace-mockup .browser-scene{padding:3%;box-shadow:0 14px 38px rgba(0,0,0,.065)}
+.marketplace-mockup .device-scene{min-height:300px;padding:6%}
+.marketplace-bottom{max-width:1180px;margin:13px auto 0}
+@media(max-width:900px){
+ .marketplace{padding:82px 5vw 30px}
+ .marketplace-top{margin-bottom:24px}
+ .marketplace-stage{grid-template-columns:150px minmax(0,1fr);gap:24px;min-height:330px;padding:22px 38px}
+ .marketplace-copy h3{font-size:34px}
+ .marketplace-mockup .device-scene{min-height:280px}
+}
+@media(max-width:600px){
+ .marketplace{padding:76px 5vw 28px}
+ .marketplace-top{display:block;margin-bottom:20px}
+ .marketplace h2{font-size:42px}
+ .marketplace-button{margin-top:18px}
+ .marketplace-stage{grid-template-columns:1fr;gap:12px;min-height:0;padding:20px 16px 24px}
+ .marketplace-copy{padding:0 8px}
+ .marketplace-copy>span{margin-bottom:15px}
+ .marketplace-copy p{max-width:none}
+ .marketplace-mockup{order:2}
+ .marketplace-mockup .browser-scene{padding:3%}
+ .marketplace-mockup .device-scene{min-height:300px}
+ .market-arrow{top:auto;bottom:18px;transform:none}
+ .market-arrow:hover{transform:scale(1.05)}
+ .market-arrow.prev{left:auto;right:58px}.market-arrow.next{right:16px}
+ .marketplace-bottom{margin-top:12px}
+ .marketplace-bottom>span{display:none}
+}
+
 \n.hero{
  min-height:100vh;padding:128px 5vw 70px;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,48%);
  gap:6vw;align-items:center;overflow:hidden;
