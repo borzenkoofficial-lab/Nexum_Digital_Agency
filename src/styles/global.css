@@ -822,3 +822,8 @@ footer{padding:25px 5vw;display:grid;grid-template-columns:1fr 2fr auto;align-it
  .history-list article{grid-template-columns:1fr;gap:8px;padding:22px 0}
  .history-list h3{font-size:24px}
 }
+
+/* Top carousel headline: keep the rotating phrase prominent without causing layout shifts. */
+.marketplace-top h2 .hero-quote{display:block;width:100%;min-width:0;height:1.08em;margin:.08em 0 0;overflow:hidden;white-space:nowrap;}
+.marketplace-top h2 .hero-quote span{font-size:.78em;letter-spacing:-.045em;}
+@media(max-width:600px){.marketplace-top h2 .hero-quote{height:1.15em}.marketplace-top h2 .hero-quote span{font-size:.62em;letter-spacing:-.04em}}
