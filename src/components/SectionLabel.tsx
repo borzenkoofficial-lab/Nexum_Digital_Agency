@@ -1,0 +1,1 @@
+export default function SectionLabel({n,label}:{n:string;label:string}){return <div className="section-label"><span>{n}</span><span>{label}</span></div>}
