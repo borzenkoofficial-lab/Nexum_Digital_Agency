@@ -3,17 +3,17 @@ import {useMemo,useState} from 'react'
 import ProductMockup from './ProductMockup'
 
 type Category='ALL'|'SITES'|'APPS'|'TELEGRAM'|'PLUGINS'|'AI'|'SAAS'
-type Item={id:string;title:string;category:Exclude<Category,'ALL'>;label:string;description:string;kind:'dashboard'|'mobile'|'ai'|'commerce'|'platform';icon:typeof Globe}
+type Item={id:string;title:string;category:Exclude<Category,'ALL'>;label:string;description:string;kind:'dashboard'|'mobile'|'ai'|'commerce'|'platform'|'telegram'|'plugin'|'website';icon:typeof Globe}
 const categories:Category[]=['ALL','SITES','APPS','TELEGRAM','PLUGINS','AI','SAAS']
 const items:Item[]=[
  {id:'atlas',title:'Atlas',category:'SAAS',label:'Operations platform',description:'Рабочая система для заказов, команд и операционных процессов.',kind:'platform',icon:LayoutGrid},
  {id:'forma',title:'Forma',category:'SITES',label:'Editorial website',description:'Имиджевый сайт с выразительной типографикой и продуктовой подачей.',kind:'commerce',icon:Globe},
  {id:'pulse',title:'Pulse',category:'APPS',label:'Mobile application',description:'Мобильное приложение для ежедневных задач и командной работы.',kind:'mobile',icon:PanelTop},
- {id:'nexum-bot',title:'Nexum Bot',category:'TELEGRAM',label:'Telegram bot',description:'Telegram-бот для заявок, уведомлений, поддержки и автоматизации.',kind:'ai',icon:MessageCircle},
- {id:'forge',title:'Forge',category:'PLUGINS',label:'Product plugin',description:'Расширение, которое добавляет AI-инструменты прямо в рабочий интерфейс.',kind:'platform',icon:Plug},
+ {id:'nexum-bot',title:'Nexum Bot',category:'TELEGRAM',label:'Telegram bot',description:'Telegram-бот для заявок, уведомлений, поддержки и автоматизации.',kind:'telegram',icon:MessageCircle},
+ {id:'forge',title:'Forge',category:'PLUGINS',label:'Product plugin',description:'Расширение, которое добавляет AI-инструменты прямо в рабочий интерфейс.',kind:'plugin',icon:Plug},
  {id:'nexum-ai',title:'Nexum AI',category:'AI',label:'AI workspace',description:'AI-ассистент, который работает с данными, источниками и действиями.',kind:'ai',icon:Bot},
  {id:'north',title:'North',category:'SAAS',label:'Analytics SaaS',description:'Дашборд для показателей, отчётности и контроля бизнеса.',kind:'dashboard',icon:Box},
- {id:'studio',title:'Studio',category:'SITES',label:'Digital product site',description:'Сайт цифрового продукта с демонстрацией интерфейса и сценариев.',kind:'commerce',icon:Code2},
+ {id:'studio',title:'Studio',category:'SITES',label:'Digital product site',description:'Сайт цифрового продукта с демонстрацией интерфейса и сценариев.',kind:'website',icon:Code2},
 ]
 export default function MarketplacePage(){
  const[category,setCategory]=useState<Category>('ALL');const[selected,setSelected]=useState<Item|null>(null)
