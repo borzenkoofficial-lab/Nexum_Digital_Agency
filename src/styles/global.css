@@ -473,3 +473,17 @@ footer{padding:25px 5vw;display:grid;grid-template-columns:1fr 2fr auto;align-it
  .market-modal-copy{padding:4px 6px 14px}
  .market-modal-meta{margin-bottom:18px}
 }
+
+/* Premium marketplace 3D objects */
+.market-3d-badge{width:82px;height:82px;right:34px;top:46px;perspective:700px;filter:none;z-index:4}
+.market-3d-shadow{position:absolute;left:9px;right:9px;bottom:4px;height:15px;border-radius:50%;background:rgba(24,24,30,.16);filter:blur(9px);transform:rotateX(72deg);transition:.35s ease}
+.market-3d-face{position:relative;width:58px;height:58px;border-radius:17px;box-shadow:12px 14px 0 -3px #b9b6ff,18px 20px 25px rgba(65,58,170,.2),inset 1px 1px 0 rgba(255,255,255,.55);transition:.35s cubic-bezier(.2,.7,.2,1)}
+.market-card:hover .market-3d-face{transform:translate3d(0,-9px,22px) rotate(-5deg) scale(1.08)}
+.market-card:hover .market-3d-shadow{opacity:.65;transform:translateY(6px) scale(.8) rotateX(72deg)}
+.market-object-mobile .market-3d-face{width:43px;height:70px;border-radius:11px;transform:rotate(8deg);box-shadow:8px 10px 0 -2px #b9b6ff,15px 18px 25px rgba(40,38,100,.2)}
+.market-object-telegram .market-3d-face{border-radius:50%;transform:rotate(-10deg);box-shadow:9px 10px 0 -2px #aaa7ff,15px 18px 25px rgba(70,62,180,.22)}
+.market-object-plugin .market-3d-face{border-radius:12px;transform:rotate(7deg);box-shadow:8px 9px 0 -2px #c1beff,14px 17px 25px rgba(65,58,170,.2)}
+.market-object-ai .market-3d-face{border-radius:50%;box-shadow:10px 12px 0 -3px #aaa5ff,17px 20px 28px rgba(65,58,170,.22)}
+.market-object-website .market-3d-face{width:68px;height:47px;border-radius:8px;transform:rotate(-5deg);box-shadow:10px 10px 0 -2px #b8b8c0,17px 18px 24px rgba(30,30,35,.18)}
+.market-object-dashboard .market-3d-face,.market-object-platform .market-3d-face{width:67px;height:51px;border-radius:9px;transform:rotate(4deg);box-shadow:10px 10px 0 -2px #aaa9b2,17px 18px 24px rgba(30,30,35,.18)}
+@media(max-width:600px){.market-3d-badge{width:66px;height:66px;right:18px;top:34px}.market-3d-face{width:48px;height:48px}.market-object-mobile .market-3d-face{width:36px;height:58px}}
