@@ -19,7 +19,7 @@ export default function MarketplaceShowcase(){
  return <section className="marketplace" id="marketplace">
   <div className="marketplace-top">
    <div><span className="marketplace-kicker">NEXUM / MARKETPLACE</span><h2>Продукты, которые<br/><i>можно запустить.</i></h2></div>
-   <a className="marketplace-button" href="#work">Маркетплейс <ArrowUpRight size={16}/></a>
+   <a className="marketplace-button" href="#marketplace">Маркетплейс <ArrowUpRight size={16}/></a>
   </div>
   <div className="marketplace-stage">
    <button className="market-arrow prev" onClick={prev} aria-label="Предыдущая работа"><ChevronLeft size={18}/></button>
