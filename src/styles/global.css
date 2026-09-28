@@ -92,7 +92,8 @@ nav button:hover{background:var(--hover);color:var(--ink)}
  .marketplace-bottom>span{display:none}
 }
 
-\n.hero{
+
+.hero{
  min-height:100vh;padding:128px 5vw 70px;display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,48%);
  gap:6vw;align-items:center;overflow:hidden;
 }
