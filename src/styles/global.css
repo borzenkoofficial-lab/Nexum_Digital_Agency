@@ -809,3 +809,16 @@ footer{padding:25px 5vw;display:grid;grid-template-columns:1fr 2fr auto;align-it
 @media(prefers-reduced-motion:reduce){
   .hero-quote span{transition:none}
 }
+
+/* Studio history */
+.history-section{border-top:1px solid var(--line)}
+.history-list{margin-top:54px;border-top:1px solid var(--line)}
+.history-list article{display:grid;grid-template-columns:minmax(150px,.32fr) 1fr;gap:48px;padding:28px 0;border-bottom:1px solid var(--line)}
+.history-list article>span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle);padding-top:5px}
+.history-list h3{margin:0 0 8px;font-size:clamp(22px,2.3vw,34px);letter-spacing:-.035em;font-weight:500}
+.history-list p{max-width:650px;margin:0;color:var(--muted);line-height:1.55;font-size:14px}
+@media(max-width:700px){
+ .history-list{margin-top:34px}
+ .history-list article{grid-template-columns:1fr;gap:8px;padding:22px 0}
+ .history-list h3{font-size:24px}
+}
