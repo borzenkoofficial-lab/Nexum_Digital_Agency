@@ -1,0 +1,2 @@
+import {ArrowUpRight} from 'lucide-react';import ProductMockup from './ProductMockup';import type {Work} from '../data/content'
+export default function WorkCard({work,index}:{work:Work;index:number}){return <a className={`work-card work-${index}`} href={`#case/${work.id}`}><div className="work-visual"><ProductMockup kind={work.kind} large={index===0}/><span className="work-number">{work.id}</span></div><div className="work-meta"><div><small>{work.category}</small><h3>{work.title}</h3><p>{work.description}</p></div><ArrowUpRight/></div></a>}
