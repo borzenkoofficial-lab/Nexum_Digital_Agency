@@ -326,6 +326,98 @@ footer{padding:25px 5vw;display:grid;grid-template-columns:1fr 2fr auto;align-it
  .market-modal-copy h2{font-size:34px}
 }
 
+/* Marketplace card 3D presentation */
+.market-card-visual{
+  min-height:460px;
+  perspective:1200px;
+  padding:48px 46px 34px;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(255,255,255,.95),transparent 42%),
+    linear-gradient(145deg,#f7f7f9,#ececf0);
+}
+.market-card-mock{
+  height:100%;
+  min-height:365px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:rotateX(2deg) rotateY(-3deg) translateZ(0);
+  transform-style:preserve-3d;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.market-card:hover .market-card-mock{
+  transform:rotateX(0) rotateY(0) translateY(-7px) scale(1.025);
+}
+.market-card-mock .browser-scene,
+.market-card-mock .device-scene,
+.market-card-mock .telegram-scene,
+.market-card-mock .plugin-scene,
+.market-card-mock .website-scene{
+  width:100%;
+  min-height:340px;
+}
+.market-card-mock .browser-scene{padding:5%;box-shadow:0 25px 55px rgba(0,0,0,.10)}
+.market-card-mock .device-scene{min-height:350px;padding:7%}
+.market-card-mock .telegram-scene{min-height:350px;padding:7%;box-shadow:0 25px 55px rgba(0,0,0,.08)}
+.market-card-mock .plugin-scene{min-height:350px;padding:7%;box-shadow:0 25px 55px rgba(0,0,0,.08)}
+.market-card-mock .website-scene{min-height:350px;padding:30px}
+.market-card-visual-mobile .market-card-mock,
+.market-card-visual-telegram .market-card-mock{
+  transform:rotateX(2deg) rotateY(3deg);
+}
+.market-card-visual-mobile .market-card-mock:hover,
+.market-card-visual-telegram .market-card-mock:hover{transform:rotateX(0) rotateY(0) translateY(-7px) scale(1.025)}
+.market-3d-badge{
+  position:absolute;
+  right:30px;
+  top:42px;
+  width:64px;
+  height:64px;
+  display:grid;
+  place-items:center;
+  transform:rotate(-7deg) rotateX(8deg) rotateY(-10deg);
+  transform-style:preserve-3d;
+  filter:drop-shadow(0 12px 12px rgba(0,0,0,.14));
+  transition:transform .3s ease;
+}
+.market-card:hover .market-3d-badge{transform:rotate(0) translateY(-5px) scale(1.08)}
+.market-3d-face{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:15px;
+  color:#fff;
+  background:linear-gradient(145deg,#827aff,#4f47c8);
+  box-shadow:
+    8px 9px 0 -2px #b8b5ff,
+    12px 13px 18px rgba(65,58,170,.22),
+    inset 1px 1px 0 rgba(255,255,255,.5);
+  transform:translateZ(14px);
+}
+.market-card-visual-telegram .market-3d-face{background:linear-gradient(145deg,#7b73ff,#4d45c7)}
+.market-card-visual-mobile .market-3d-face{border-radius:17px;transform:translateZ(14px) rotate(5deg)}
+.market-card-visual-website .market-3d-face{background:linear-gradient(145deg,#303038,#111116)}
+.market-card-visual-plugin .market-3d-face{background:linear-gradient(145deg,#8b84ff,#5a52d9)}
+.market-card-visual-ai .market-3d-face{border-radius:50%;background:radial-gradient(circle at 35% 30%,#aaa5ff,#5148d0 68%,#28236e)}
+.market-card-visual-platform .market-3d-face,
+.market-card-visual-dashboard .market-3d-face{background:linear-gradient(145deg,#3b3b43,#17171b)}
+.market-card-visual-commerce .market-3d-face{background:linear-gradient(145deg,#ececf1,#a9a9b4);color:#333}
+@media(max-width:900px){
+  .market-card-visual{min-height:400px;padding:42px 30px 28px}
+  .market-card-mock{min-height:320px}
+  .market-card-mock .browser-scene,.market-card-mock .device-scene,.market-card-mock .telegram-scene,.market-card-mock .plugin-scene,.market-card-mock .website-scene{min-height:300px}
+  .market-3d-badge{right:20px;top:36px}
+}
+@media(max-width:600px){
+  .market-card-visual{min-height:380px;padding:38px 18px 22px}
+  .market-card-mock{min-height:320px}
+  .market-card-mock .browser-scene,.market-card-mock .device-scene,.market-card-mock .telegram-scene,.market-card-mock .plugin-scene,.market-card-mock .website-scene{min-height:290px}
+  .market-3d-badge{width:54px;height:54px;right:17px;top:31px}
+  .market-3d-face{width:44px;height:44px;border-radius:13px}
+}
+
 /* Marketplace product-specific mockups */
 .telegram-scene{background:#e9edf2;border:1px solid var(--line);border-radius:12px;padding:5%;min-height:260px;display:grid;place-items:center}
 .telegram-window{width:min(430px,92%);background:#f7f9fb;border:1px solid #d8dde4;border-radius:13px;overflow:hidden;box-shadow:0 14px 35px rgba(0,0,0,.08)}
