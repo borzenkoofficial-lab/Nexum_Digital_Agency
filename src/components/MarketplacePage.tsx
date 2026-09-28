@@ -14,10 +14,10 @@ const items:Item[]=[
  {id:'nexum-ai',title:'Nexum AI',category:'AI',label:'AI workspace',description:'AI-ассистент, который работает с данными, источниками и действиями.',kind:'ai',icon:Bot},
  {id:'north',title:'North',category:'SAAS',label:'Analytics SaaS',description:'Дашборд для показателей, отчётности и контроля бизнеса.',kind:'dashboard',icon:Box},
  {id:'studio',title:'Studio',category:'SITES',label:'Digital product site',description:'Сайт цифрового продукта с демонстрацией интерфейса и сценариев.',kind:'website',icon:Code2},
- {id:'Orbit',title:'Orbit',category:'APPS',label:'Client application',description:'Приложение для клиентов, задач и ежедневного взаимодействия.',kind:'mobile',icon:PanelTop},
- {id:'Signal',title:'Signal',category:'AI',label:'AI automation',description:'AI-система для обработки запросов, данных и повторяющихся процессов.',kind:'ai',icon:Bot},
- {id:'Grid',title:'Grid',category:'SAAS',label:'Business dashboard',description:'Рабочее пространство для аналитики, показателей и контроля операций.',kind:'dashboard',icon:Box},
- {id:'Frame',title:'Frame',category:'PLUGINS',label:'Workflow plugin',description:'Инструмент для расширения существующего продукта и ускорения рабочих процессов.',kind:'plugin',icon:Plug},
+ {id:'orbit',title:'Orbit',category:'APPS',label:'Client application',description:'Приложение для клиентов, задач и ежедневного взаимодействия.',kind:'mobile',icon:PanelTop},
+ {id:'signal',title:'Signal',category:'AI',label:'AI automation',description:'AI-система для обработки запросов, данных и повторяющихся процессов.',kind:'ai',icon:Bot},
+ {id:'grid',title:'Grid',category:'SAAS',label:'Business dashboard',description:'Рабочее пространство для аналитики, показателей и контроля операций.',kind:'dashboard',icon:Box},
+ {id:'frame',title:'Frame',category:'PLUGINS',label:'Workflow plugin',description:'Инструмент для расширения существующего продукта и ускорения рабочих процессов.',kind:'plugin',icon:Plug},
 ]
 export default function MarketplacePage(){
  const[category,setCategory]=useState<Category>('ALL');const[selected,setSelected]=useState<Item|null>(null)
@@ -30,7 +30,7 @@ export default function MarketplacePage(){
     <div className={`market-card-visual market-card-visual-${item.kind}`}>
       <div className="market-card-top"><span>0{index+1}</span><Icon size={15}/></div>
       <div className="market-card-mock"><ProductMockup kind={item.kind}/></div>
-      <div className="market-3d-badge" aria-hidden="true"><div className="market-3d-face"><Icon size={22}/></div></div>
+      <div className={`market-3d-badge market-object-${item.kind}`} aria-hidden="true"><div className="market-3d-shadow"/><div className="market-3d-face"><Icon size={22}/></div></div>
       <span className="market-card-open"><ArrowUpRight size={15}/></span>
     </div>
     <div className="market-card-info"><div><small>{item.category} / {item.label}</small><h2>{item.title}</h2><p>{item.description}</p></div><span className="market-card-arrow"><ArrowUpRight size={17}/></span></div>
