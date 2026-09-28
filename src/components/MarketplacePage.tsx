@@ -25,8 +25,8 @@ export default function MarketplacePage(){
  return <main className="marketplace-page">
   <section className="marketplace-hero"><div><span className="marketplace-kicker">NEXUM / MARKETPLACE</span><h1>Готовые цифровые<br/><i>продукты и решения.</i></h1><p>Выберите направление, посмотрите концепции и откройте продукт, который можно адаптировать под вашу задачу.</p></div><div className="marketplace-hero-mark">N.</div></section>
   <section className="marketplace-catalog" id="marketplace-catalog">
-   <div className="marketplace-filters">{categories.map(c=><button key={c} className={category===c?'active':''} onClick={()=>{setCategory(c);setSelected(null)}}>{c}</button>)}</div>
-   <div className="marketplace-grid">{filtered.map((item,index)=>{const Icon=item.icon;return <button className="market-card" key={item.id} onClick={()=>setSelected(item)}>
+   <div className="marketplace-toolbar"><div className="marketplace-results">{filtered.length} PRODUCTS</div><div className="marketplace-filters">{categories.map(c=><button key={c} className={category===c?'active':''} onClick={()=>{setCategory(c);setSelected(null)}}>{c}</button>)}</div></div>
+   <div className="marketplace-grid">{filtered.map((item,index)=>{const Icon=item.icon;return <button className="market-card" key={item.id} style={{'--delay':`${Math.min(index,8)*45}ms`} as React.CSSProperties} onClick={()=>setSelected(item)}>
     <div className={`market-card-visual market-card-visual-${item.kind}`}>
       <div className="market-card-top"><span>0{index+1}</span><Icon size={15}/></div>
       <div className="market-card-mock"><ProductMockup kind={item.kind}/></div>
@@ -37,6 +37,6 @@ export default function MarketplacePage(){
    </button>})}</div>
   </section>
   <section className="marketplace-bottom-cta"><span>NEED SOMETHING CUSTOM?</span><h2>Создадим продукт<br/><i>под вашу задачу.</i></h2><a href="#contact">Обсудить проект <ArrowUpRight size={16}/></a></section>
-  {selected&&<div className="market-modal-backdrop" onClick={()=>setSelected(null)}><div className="market-modal" onClick={e=>e.stopPropagation()}><button className="market-modal-close" onClick={()=>setSelected(null)} aria-label="Закрыть"><X size={18}/></button><div className="market-modal-visual"><ProductMockup kind={selected.kind} large/></div><div className="market-modal-copy"><small>{selected.category} / {selected.label}</small><h2>{selected.title}</h2><p>{selected.description}</p><a href="#contact" onClick={()=>setSelected(null)}>Запросить похожий продукт <ArrowUpRight size={15}/></a></div></div></div>}
+  {selected&&<div className="market-modal-backdrop" role="dialog" aria-modal="true" aria-label={selected.title} onClick={()=>setSelected(null)}><div className="market-modal" onClick={e=>e.stopPropagation()}><button className="market-modal-close" onClick={()=>setSelected(null)} aria-label="Закрыть"><X size={18}/></button><div className="market-modal-visual"><ProductMockup kind={selected.kind} large/></div><div className="market-modal-copy"><div className="market-modal-meta"><span>{selected.category}</span><span>CASE / 0{items.findIndex(x=>x.id===selected.id)+1}</span></div><small>{selected.category} / {selected.label}</small><h2>{selected.title}</h2><p>{selected.description}</p><a href="#contact" onClick={()=>setSelected(null)}>Запросить похожий продукт <ArrowUpRight size={15}/></a></div></div></div>}
  </main>
 }
