@@ -3,7 +3,7 @@ import {useEffect,useState} from 'react'
 import ProductMockup from './ProductMockup'
 
 const items=[
- {title:'Gruzli',type:'Marketplace',text:'Платформа для бизнеса, диспетчеров и исполнителей.',kind:'platform' as const},
+ {title:'Atlas',type:'MARKETPLACE',text:'Цифровая платформа для управления заказами и командами.',kind:'platform' as const},
  {title:'Nexum AI',type:'AI PRODUCT',text:'Рабочее пространство для AI-ассистентов и агентов.',kind:'ai' as const},
  {title:'Forma',type:'COMMERCE',text:'Концепт цифрового магазина с editorial-подачей.',kind:'commerce' as const},
  {title:'Pulse',type:'MOBILE PRODUCT',text:'Мобильный продукт для ежедневных рабочих процессов.',kind:'mobile' as const},
