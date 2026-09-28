@@ -218,3 +218,19 @@
   .market-hero-stamp b{font-size:11px}
   .market-card-hero .market-3d-badge{right:20px;top:30px}
 }
+
+/* Three hero stories: Atlas / Forma / Nexum AI */
+.mockup-platform .browser{border-radius:18px;box-shadow:0 28px 70px rgba(25,25,35,.18),0 4px 12px rgba(25,25,35,.08)}
+.mockup-platform .product-ui{background:linear-gradient(135deg,#f8f8fb,#f0f0f4)}
+.atlas-metrics>div{background:rgba(255,255,255,.86);border-color:#e7e7ed}
+.atlas-plan{margin-top:12px;padding:15px;border:1px solid #e5e5eb;border-radius:12px;background:rgba(255,255,255,.8)}
+.atlas-track{display:grid;grid-template-columns:1.2fr 1fr 1.35fr .8fr 1fr;gap:4px;height:12px;margin:20px 0 8px}
+.atlas-track i{display:block;border-radius:99px;background:#d8d6ff}.atlas-track i:nth-child(2){background:#b9b6ff}.atlas-track i:nth-child(3){background:#8f8aff}.atlas-track i:nth-child(4){background:#6d66ef}.atlas-track i:nth-child(5){background:#4039b8}.atlas-track i:nth-child(6){background:#dedee5}
+.atlas-labels{display:flex;justify-content:space-between;font-size:7px;color:#858590;letter-spacing:.04em}.atlas-activity{background:#fff;border-color:#e5e5eb}
+.website-scene{position:relative;overflow:hidden;background:#f7f6f2}
+.website-scene:before{content:'FORMA';position:absolute;right:-18px;top:54px;font-size:130px;line-height:.75;font-weight:600;letter-spacing:-.09em;color:rgba(20,20,22,.035);pointer-events:none}
+.website-hero{position:relative;z-index:1}.website-hero h3{font-size:clamp(52px,7vw,92px);line-height:.82;letter-spacing:-.075em}.website-hero h3 i{font-style:normal;color:#77736b}.website-grid{position:relative;z-index:2}.website-accent{position:relative;z-index:2}
+.mockup-ai .browser{box-shadow:0 32px 80px rgba(72,64,180,.2),0 4px 14px rgba(30,28,50,.08)}
+.mockup-ai .product-ui{background:radial-gradient(circle at 75% 15%,rgba(124,113,255,.12),transparent 28%),linear-gradient(145deg,#fbfbff,#f0eff8)}
+.ai-main{position:relative}.ai-main:after{content:'AI';position:absolute;right:34px;bottom:12px;font-size:90px;font-weight:600;letter-spacing:-.1em;color:rgba(86,77,210,.055);pointer-events:none}.ai-message{position:relative;z-index:1}.ai-source-row span{border-color:#d9d7ef;background:#fff}.ai-suggestions span{background:rgba(255,255,255,.82);border-color:#dedced}.ai-foot{position:relative;z-index:1}
+@media(max-width:600px){.website-scene:before{font-size:80px;right:-10px}.atlas-plan{padding:12px}.atlas-labels{font-size:6px}.ai-main:after{font-size:65px;right:18px}}
