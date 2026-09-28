@@ -1,3 +1,19 @@
 import {Menu,X} from 'lucide-react';import {useState} from 'react'
-const links=[['Work','#work'],['Services','#services'],['Process','#process'],['About','#about'],['Contact','#contact']]
-export default function Header(){const[open,setOpen]=useState(false);const go=(href:string)=>{setOpen(false);const target=document.querySelector(href);if(target)target.scrollIntoView({behavior:'smooth'});else{location.hash='';setTimeout(()=>document.querySelector(href)?.scrollIntoView({behavior:'smooth'}),40)}};return <header className={open?'open':''}><a className="brand" href="#" onClick={e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}}>NEXUM<span>—</span></a><nav>{links.map(([l,h])=><button key={l} onClick={()=>go(h)}>{l}</button>)}</nav><button className="header-cta" onClick={()=>go('#contact')}>Start a project <span>↗</span></button><button className="menu-toggle" onClick={()=>setOpen(!open)} aria-label="Menu">{open?<X/>:<Menu/>}</button></header>}
+
+type Language='ru'|'en'
+type Props={language:Language;onLanguageChange:(language:Language)=>void}
+
+export default function Header({language,onLanguageChange}:Props){
+ const[open,setOpen]=useState(false)
+ const links=language==='ru'?[['Работы','#work'],['Услуги','#services'],['Процесс','#process'],['О нас','#about'],['Контакты','#contact']]:[['Work','#work'],['Services','#services'],['Process','#process'],['About','#about'],['Contact','#contact']]
+ const go=(href:string)=>{setOpen(false);const target=document.querySelector(href);if(target)target.scrollIntoView({behavior:'smooth'});else{location.hash='';setTimeout(()=>document.querySelector(href)?.scrollIntoView({behavior:'smooth'}),40)}}
+ return <header className={open?'open':''}>
+  <a className="brand" href="#" onClick={e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}}>NEXUM<span>—</span></a>
+  <nav>{links.map(([l,href])=><button key={l} onClick={()=>go(href)}>{l}</button>)}</nav>
+  <div className="header-actions">
+   <div className="language-switch" role="group" aria-label="Language"><button className={language==='ru'?'active':''} onClick={()=>onLanguageChange('ru')}>RU</button><span>/</span><button className={language==='en'?'active':''} onClick={()=>onLanguageChange('en')}>EN</button></div>
+   <button className="header-cta" onClick={()=>go('#contact')}>{language==='ru'?'Обсудить проект':'Start a project'} <span>↗</span></button>
+  </div>
+  <button className="menu-toggle" onClick={()=>setOpen(!open)} aria-label={language==='ru'?'Меню':'Menu'}>{open?<X/>:<Menu/>}</button>
+ </header>
+}
