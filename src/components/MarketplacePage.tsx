@@ -26,7 +26,7 @@ export default function MarketplacePage(){
   <section className="marketplace-hero"><div><span className="marketplace-kicker">NEXUM / MARKETPLACE</span><h1>Готовые цифровые<br/><i>продукты и решения.</i></h1><p>Выберите направление, посмотрите концепции и откройте продукт, который можно адаптировать под вашу задачу.</p></div><div className="marketplace-hero-mark">N.</div></section>
   <section className="marketplace-catalog" id="marketplace-catalog">
    <div className="marketplace-toolbar"><div className="marketplace-results">{filtered.length} PRODUCTS</div><div className="marketplace-filters">{categories.map(c=><button key={c} className={category===c?'active':''} onClick={()=>{setCategory(c);setSelected(null)}}>{c}</button>)}</div></div>
-   <div className="marketplace-grid">{filtered.map((item,index)=>{const Icon=item.icon;return <button className="market-card" key={item.id} style={{'--delay':`${Math.min(index,8)*45}ms`} as React.CSSProperties} onClick={()=>setSelected(item)}>
+   <div className="marketplace-grid">{filtered.map((item,index)=>{const Icon=item.icon;return <button className={`market-card market-card-${index % 7 === 0 ? 'feature' : index % 5 === 0 ? 'wide' : 'standard'}`} key={item.id} style={{'--delay':`${Math.min(index,8)*45}ms`} as Record<string,string>} onClick={()=>setSelected(item)}>
     <div className={`market-card-visual market-card-visual-${item.kind}`}>
       <div className="market-card-top"><span>0{index+1}</span><Icon size={15}/></div>
       <div className="market-card-mock"><ProductMockup kind={item.kind}/></div>
