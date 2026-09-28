@@ -4,5 +4,5 @@ const quotesRu='Идея становится реальностью.|Начин
 export default function AnimatedQuotes({language='ru'}:{language?:'ru'|'en'}){
  const[index,setIndex]=useState(()=>Math.floor(Math.random()*quotesRu.length));const[visible,setVisible]=useState(true)
  useEffect(()=>{let swap:number;const timer=window.setInterval(()=>{setVisible(false);swap=window.setTimeout(()=>{setIndex(i=>(i+1)%quotesRu.length);setVisible(true)},850)},3900);return()=>{window.clearInterval(timer);window.clearTimeout(swap)}},[])
- return <div className={`hero-quote ${visible?'is-visible':'is-hidden'}`} aria-live="polite"><span>{quotesRu[index]}</span></div>
+ return <span className={`hero-quote ${visible?'is-visible':'is-hidden'}`} aria-live="polite"><span>{quotesRu[index]}</span></span>
 }
