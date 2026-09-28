@@ -24,13 +24,13 @@ function Dashboard({platform}:{platform:boolean}){
   </aside>
   <main className="ui-main">
    <div className="ui-head"><div><small>{platform?'OPERATIONS / TODAY':'ANALYTICS / TODAY'}</small><h3>{platform?'Project overview':'Good morning'}</h3></div><CircleUserRound size={25}/></div>
-   <div className="metric-row">
-    <div><small>REVENUE</small><strong>$84.2k</strong><em>+12.8%</em><span className="metric-spark"><i/><i/><i/><i/><i/></span></div>
-    <div><small>PROJECTS</small><strong>28</strong><em>+4 this month</em><span className="metric-mini-bars"><i/><i/><i/><i/></span></div>
-    <div><small>ACTIVE USERS</small><strong>4,892</strong><em>+18%</em><span className="metric-ring">84%</span></div>
+   <div className="metric-row atlas-metrics">
+    <div><small>ACTIVE PROJECTS</small><strong>28</strong><em>+4 this month</em><span className="metric-spark"><i/><i/><i/><i/><i/></span></div>
+    <div><small>TEAM CAPACITY</small><strong>84%</strong><em>6 teams online</em><span className="metric-mini-bars"><i/><i/><i/><i/></span></div>
+    <div><small>ON SCHEDULE</small><strong>91%</strong><em>+6.4% this week</em><span className="metric-ring">91%</span></div>
    </div>
-   <div className="chart"><div className="chart-head"><span>Performance</span><span>Last 30 days⌄</span></div><div className="bars">{[42,64,50,78,57,88,72,96,69,82,75,91].map((h,i)=><i key={i} style={{height:h+'%'}}/>)}</div><div className="chart-axis"><span>01</span><span>10</span><span>20</span><span>30</span></div></div>
-   <div className="activity"><span>Recent activity</span><b><CheckCircle2 size={14}/> Project updated</b><b><Users size={14}/> New team member</b><b><Bell size={13}/> 3 alerts</b></div>
+   <div className="atlas-plan"><div className="chart-head"><span>Project flow</span><span>THIS WEEK / LIVE</span></div><div className="atlas-track"><i/><i/><i/><i/><i/><i/></div><div className="atlas-labels"><span>Planning</span><span>Design</span><span>Build</span><span>Review</span><span>Launch</span></div></div>
+   <div className="activity atlas-activity"><span>LIVE OPERATIONS</span><b><CheckCircle2 size={14}/> Atlas / ready for review</b><b><Users size={14}/> Team 04 / online</b><b><Bell size={13}/> 3 items need attention</b></div>
   </main>
  </>
 }
