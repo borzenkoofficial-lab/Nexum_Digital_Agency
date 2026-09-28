@@ -7,3 +7,53 @@
 
 /* Premium UI refinement */
 ::selection{background:#242522;color:#f5f4ef}.hero{overflow:hidden}.hero-visual{animation:heroReveal .8s cubic-bezier(.2,.7,.2,1) both}.section,.manifesto,.ai-section,.contact{scroll-margin-top:76px}.primary,.contact-button,.light-btn{transition:transform .2s ease,box-shadow .2s ease}.primary:hover,.contact-button:hover,.light-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(30,30,25,.14)}.service-row svg,.tech-list svg{transition:transform .2s ease}.service-row:hover svg,.tech-list div:hover svg{transform:translate(3px,-3px)}.tech-list div{transition:padding .2s ease}.tech-list div:hover{padding-left:8px}.contact{overflow:hidden}.contact:after{content:"N";position:absolute;right:3vw;bottom:-.2em;font-size:35vw;line-height:.7;color:rgba(36,37,34,.045);font-weight:600;letter-spacing:-.12em;pointer-events:none}@keyframes heroReveal{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+/* Product mockup detail pass */
+.browser-status{width:7px;height:7px;border-radius:50%;background:#b9c4bc;box-shadow:0 0 0 3px #edf0eb;margin-left:4px}
+.ui-side{position:relative}
+.side-bottom{margin-top:auto;display:grid;gap:10px}
+.ui-head{border-bottom:1px solid #e5e4de;padding-bottom:12px}
+.metric-row>div{box-shadow:0 6px 16px rgba(35,35,30,.035)}
+.metric-row em{display:block;margin-top:2px}
+.chart-axis{display:flex;justify-content:space-between;color:#aaa;font-size:5px;margin-top:4px}
+.bars i{transition:height .45s ease,opacity .2s ease}
+.chart:hover .bars i{opacity:.72}
+.activity{border-top:1px solid #e7e6df;padding-top:10px}
+.activity b{white-space:nowrap}
+.ai-online{font-size:6px;letter-spacing:.08em;color:#66766b;display:flex;gap:4px;align-items:center}
+.ai-online span{width:5px;height:5px;border-radius:50%;background:#728578}
+.ai-message{box-shadow:0 8px 20px rgba(0,0,0,.04)}
+.ai-message b{font-size:8px;font-weight:500}
+.ai-message p{margin-top:4px;color:#666}
+.prompt button{width:22px;height:22px;display:grid;place-items:center}
+.commerce-meta{display:flex;justify-content:space-between;border-top:1px solid #d7d2c7;padding-top:8px;font-size:6px;color:#888}
+.product-orb{background:#9da198;box-shadow:20px 25px 30px rgba(50,50,40,.12);position:relative}
+.product-orb:after{content:"";position:absolute;inset:18% 20%;border:1px solid rgba(255,255,255,.35);border-radius:50% 45% 50% 45%;transform:rotate(-18deg)}
+.device-scene{min-height:420px;align-items:center}
+.phone{position:relative;transform:rotate(-2deg);transition:transform .35s ease,box-shadow .35s ease}
+.device-scene:hover .phone{transform:rotate(0) translateY(-5px);box-shadow:0 28px 55px rgba(0,0,0,.2)}
+.phone-speaker{position:absolute;top:4px;left:50%;transform:translateX(-50%);height:14px;width:64px;background:#20221f;border-radius:0 0 10px 10px;z-index:3}
+.phone-screen{padding-top:21px}
+.mobile-profile{display:flex;justify-content:space-between;align-items:center;margin-top:17px;color:#555;font-size:6px;letter-spacing:.08em}
+.eyebrow{font-size:6px;color:#999;letter-spacing:.1em;margin:16px 0 4px}
+.phone-stat{border:1px solid #e1e3dc;background:#f0f2ed}
+.phone-stat>span{display:block;font-size:6px;letter-spacing:.08em;color:#777}
+.phone-stat strong{font-size:29px;margin:5px 0 7px}
+.phone-stat i{display:block;height:4px;background:#d9ddd7;border-radius:5px;overflow:hidden}
+.phone-stat i b{display:block;width:78%;height:100%;background:#66756b}
+.phone-stat small{display:block;font-size:6px;color:#7c827d;margin-top:7px}
+.phone-list{gap:5px}
+.phone-list>div{display:grid;grid-template-columns:18px 1fr 10px;align-items:center;gap:4px;padding:9px 7px;border:1px solid #e4e3dc;border-radius:7px;background:#fff;font-size:6px;color:#555}
+.phone-list>div svg{color:#68756d}
+.phone-list>div b{font-size:10px;font-weight:400;color:#999}
+.phone-nav{height:18px;align-items:center}
+.phone-nav span{width:4px;height:4px;background:#c1c3be;border-radius:50%}
+.phone-nav span.active{width:14px;border-radius:4px;background:#30332f}
+@media(max-width:600px){
+ .device-scene{min-height:360px}
+ .phone{width:155px}
+ .phone-screen{min-height:300px}
+ .side-bottom{display:none}
+ .activity b{display:none}
+ .activity span{font-size:6px}
+ .commerce-meta{font-size:5px}
+}
