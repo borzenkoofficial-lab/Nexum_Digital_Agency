@@ -1068,3 +1068,37 @@ nav button{position:relative}nav button.active{color:var(--ink)}nav button.activ
 @keyframes projectSpaceIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:700px){.cloud-service-modal{max-height:calc(100dvh - 24px);overflow:auto}.project-space{height:100dvh;overflow-y:auto}.project-space-hero-mock{min-height:260px}.project-space-cta{padding-bottom:70px}}
 @media(prefers-reduced-motion:reduce){.cloud-service-modal,.project-space{animation:none}}
+
+/* NEXUM Digital Cloud — system layer */
+.cloud-hero-system{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:42px;border-top:1px solid var(--line);max-width:760px}
+.cloud-hero-system>div{min-height:76px;padding:13px 14px 10px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:3px;position:relative}
+.cloud-hero-system>div:not(:first-child){padding-left:14px}
+.cloud-hero-system>div:last-child{border-right:0}
+.cloud-hero-system span{font-size:8px;color:var(--subtle);letter-spacing:.12em}
+.cloud-hero-system b{font-size:11px;font-weight:600;letter-spacing:.04em}
+.cloud-hero-system small{font-size:8px;color:var(--muted);letter-spacing:.02em;text-transform:none}
+.cloud-hero-system>div:after{content:'';position:absolute;left:0;top:-1px;width:0;height:1px;background:var(--accent);transition:width .35s ease}
+.cloud-hero-system>div:hover:after{width:100%}
+.capability-card,.cloud-project,.library-pill,.cloud-process-grid article{will-change:transform}
+.capability-card{position:relative}
+.capability-card:after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;box-shadow:inset 0 0 0 1px transparent;transition:box-shadow .25s ease}
+.capability-card:hover:after{box-shadow:inset 0 0 0 1px var(--accent-border)}
+.cloud-project-visual{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
+.cloud-project:hover .cloud-project-visual{transform:translateY(-4px);box-shadow:0 24px 70px rgba(20,20,30,.09)}
+.cloud-project-meta>svg{transition:transform .2s ease}
+.cloud-project:hover .cloud-project-meta>svg{transform:translate(3px,-3px);color:var(--accent)}
+.cloud-process-grid article{transition:background .25s ease,transform .25s ease}
+.cloud-process-grid article:hover{background:#fff;transform:translateY(-2px)}
+@media(max-width:900px){
+ .cloud-hero-system{max-width:none}
+}
+@media(max-width:600px){
+ .cloud-hero-system{grid-template-columns:repeat(2,1fr);margin-top:32px}
+ .cloud-hero-system>div:nth-child(2){border-right:0}
+ .cloud-hero-system>div:nth-child(3),.cloud-hero-system>div:nth-child(4){border-top:1px solid var(--line)}
+ .cloud-hero-system>div:nth-child(3){padding-left:0}
+ .cloud-hero-system>div:nth-child(4){padding-left:14px}
+}
+@media(prefers-reduced-motion:reduce){
+ .cloud-project-visual,.cloud-project-meta>svg,.cloud-process-grid article{transition:none}
+}
