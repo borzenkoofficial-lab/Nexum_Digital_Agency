@@ -1,3 +1,4 @@
+import Marketplace from './Marketplace'
 import {ArrowUpRight, Globe, Layers3, Sparkles, Workflow, X, CheckCircle2} from 'lucide-react'
 import {useEffect,useState} from 'react'
 import ProductMockup from './ProductMockup'
@@ -104,6 +105,7 @@ export default function DigitalCloud({language}:{language:Language}){
    <div className="cloud-process-grid">{['DISCOVER','DESIGN','BUILD','CONNECT','LAUNCH','EVOLVE'].map((x,i)=><article key={x}><span>0{i+1}</span><b>{x}</b><em>{['01','02','03','04','05','06'][i]}</em><p>{ru?['Задача и контекст.','UX и визуальная система.','Код и продуктовая логика.','AI, API и интеграции.','Запуск и проверка.','Развитие и оптимизация.'][i]:['Problem and context.','UX and visual system.','Code and product logic.','AI, APIs and integrations.','Launch and validation.','Evolution and optimization.'][i]}</p><i className="process-glass-line"/></article>)}</div>
   </section>
 
+  <Marketplace language={language}/>
   <section className="cloud-cta" id="contact"><div><span>07 / START</span><h2>{ru?<>Что построим<br/><i>следующим?</i></>:<>What will we build<br/><i>next?</i></>}</h2></div><a href="mailto:hello@nexum.agency">{ru?'Начать проект':'Start a project'} <ArrowUpRight/></a></section>
   {selectedService&&<div className="cloud-service-modal-backdrop" role="presentation" onMouseDown={e=>{if(e.currentTarget===e.target)setSelectedService(null)}}>
    <div className="cloud-service-modal" role="dialog" aria-modal="true" aria-label={ru?selectedService.ruTitle:selectedService.title}>
