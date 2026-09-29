@@ -1,5 +1,5 @@
 import {ArrowUpRight, Globe, Layers3, Sparkles, Workflow, X, CheckCircle2} from 'lucide-react'
-import {useState} from 'react'
+import {useEffect,useState} from 'react'
 import ProductMockup from './ProductMockup'
 import ProjectSpace from './ProjectSpace'
 import {services,works} from '../data/content'
@@ -18,6 +18,7 @@ const iconMap={website:Globe,ai:Sparkles,platform:Layers3,dashboard:Workflow}
 export default function DigitalCloud({language}:{language:Language}){
  const [selectedService,setSelectedService]=useState<(typeof services)[number]|null>(null)
  const [selectedProject,setSelectedProject]=useState<(typeof works)[number]|null>(null)
+ useEffect(()=>{const active=Boolean(selectedService||selectedProject);const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape'){setSelectedService(null);setSelectedProject(null)}};if(active)document.body.style.overflow='hidden';addEventListener('keydown',onKey);return()=>{document.body.style.overflow='';removeEventListener('keydown',onKey)}},[selectedService,selectedProject])
  const ru=language==='ru'
  const own=works
  return <div className="digital-cloud">
