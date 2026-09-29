@@ -1,6 +1,7 @@
 import {ArrowUpRight, Globe, Layers3, Sparkles, Workflow, X, CheckCircle2} from 'lucide-react'
 import {useState} from 'react'
 import ProductMockup from './ProductMockup'
+import ProjectSpace from './ProjectSpace'
 import {services,works} from '../data/content'
 
 type Language='ru'|'en'
@@ -16,6 +17,7 @@ const iconMap={website:Globe,ai:Sparkles,platform:Layers3,dashboard:Workflow}
 
 export default function DigitalCloud({language}:{language:Language}){
  const [selectedService,setSelectedService]=useState<(typeof services)[number]|null>(null)
+ const [selectedProject,setSelectedProject]=useState<(typeof works)[number]|null>(null)
  const ru=language==='ru'
  const own=works
  return <div className="digital-cloud">
@@ -54,7 +56,7 @@ export default function DigitalCloud({language}:{language:Language}){
 
   <section className="cloud-work" id="work">
    <div className="cloud-section-head"><span>03 / BUILT HERE</span><p>{ru?'Создано внутри NEXUM':'Built inside NEXUM'}</p></div>
-   <div className="cloud-work-grid">{own.map((w,i)=><a href={`#case/${w.id}`} className="cloud-project" key={w.id}><div className="cloud-project-visual"><ProductMockup kind={w.kind} large language={language}/><span>{String(i+1).padStart(2,'0')} / OWN PRODUCT</span></div><div className="cloud-project-meta"><div><small>{ru?w.ruCategory:w.category}</small><h3>{ru?w.ruTitle:w.title}</h3><p>{ru?w.ruDescription:w.description}</p></div><ArrowUpRight/></div></a>)}</div>
+   <div className="cloud-work-grid">{own.map((w,i)=><button type="button" className="cloud-project" key={w.id} onClick={()=>setSelectedProject(w)}><div className="cloud-project-visual"><ProductMockup kind={w.kind} large language={language}/><span>{String(i+1).padStart(2,'0')} / OWN PRODUCT</span></div><div className="cloud-project-meta"><div><small>{ru?w.ruCategory:w.category}</small><h3>{ru?w.ruTitle:w.title}</h3><p>{ru?w.ruDescription:w.description}</p></div><ArrowUpRight/></div></a>)}</div>
   </section>
 
   <section className="cloud-library" id="library">
