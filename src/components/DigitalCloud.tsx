@@ -76,7 +76,7 @@ export default function DigitalCloud({language}:{language:Language}){
 
   <section className="cloud-work" id="work">
    <div className="cloud-section-head"><span>03 / BUILT HERE</span><p>{ru?'Создано внутри NEXUM':'Built inside NEXUM'}</p></div>
-   <div className="cloud-work-grid cloud-project-grid">{own.map((w,i)=><button type="button" className={`cloud-project cloud-project-${i+1}`} key={w.id} onClick={()=>setSelectedProject(w)}><div className="cloud-project-visual"><div className="project-glass-index">{String(i+1).padStart(2,'0')} / OWN PRODUCT</div><ProductMockup kind={w.kind} large language={language}/><div className="project-glass-reflection"/></div><div className="cloud-project-meta"><div><small>{ru?w.ruCategory:w.category}</small><h3>{ru?w.ruTitle:w.title}</h3><p>{ru?w.ruDescription:w.description}</p></div><ArrowUpRight/></div></button>)}</div>
+   <div className="cloud-work-grid cloud-project-grid">{own.map((w,i)=><button type="button" className={`cloud-project cloud-project-${i+1}`} key={w.id} onClick={()=>setSelectedProject(w)}><div className="cloud-project-visual"><div className="project-glass-index">{String(i+1).padStart(2,'0')} / OWN PRODUCT</div><div className="project-live-pill"><span/> {ru?'LIVE PRODUCT':'LIVE PRODUCT'}</div><div className="project-orbit-dot project-orbit-dot-a"/><div className="project-orbit-dot project-orbit-dot-b"/><ProductMockup kind={w.kind} large language={language}/><div className="project-glass-reflection"/></div><div className="cloud-project-meta"><div><small>{ru?w.ruCategory:w.category}</small><h3>{ru?w.ruTitle:w.title}</h3><p>{ru?w.ruDescription:w.description}</p></div><ArrowUpRight/></div></button>)}</div>
   </section>
 
   <section className="cloud-library" id="library">
