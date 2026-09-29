@@ -1209,3 +1209,25 @@ nav button{position:relative}nav button.active{color:var(--ink)}nav button.activ
 @keyframes projectDotB{0%{translate:0 0}25%{translate:-18px 15px}50%{translate:-35px -6px}75%{translate:-10px -23px}100%{translate:0 0}}
 @media(max-width:600px){.project-live-pill{top:10px;right:10px}.project-orbit-dot{display:none}}
 @media(prefers-reduced-motion:reduce){.project-live-pill span,.project-orbit-dot{animation:none}}
+
+/* Ecosystem + process liquid glass surfaces */
+.ecosystem-glass-map{overflow:hidden;isolation:isolate;background:radial-gradient(circle at 50% 48%,rgba(255,255,255,.88),rgba(239,239,247,.52) 48%,rgba(220,220,232,.28));backdrop-filter:blur(28px) saturate(145%);-webkit-backdrop-filter:blur(28px) saturate(145%);box-shadow:0 35px 100px rgba(30,30,55,.09),inset 0 1px rgba(255,255,255,.9)}
+.ecosystem-glass-map:before{content:'';position:absolute;inset:10%;border:1px solid rgba(255,255,255,.72);border-radius:50%;box-shadow:0 0 100px rgba(115,105,255,.08);pointer-events:none}
+.ecosystem-center{z-index:3!important;background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(230,230,240,.38))!important;backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);box-shadow:0 30px 80px rgba(30,30,55,.13),inset 0 1px rgba(255,255,255,.95)!important;border-color:rgba(255,255,255,.82)!important}
+.ecosystem-center small{display:block;margin-top:8px;font-size:7px;letter-spacing:.12em;color:var(--subtle)}
+.ecosystem-node{z-index:3;background:rgba(255,255,255,.45)!important;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);border-color:rgba(255,255,255,.78)!important;box-shadow:0 20px 50px rgba(30,30,55,.09),inset 0 1px rgba(255,255,255,.9)!important;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease}
+.ecosystem-node:hover{transform:translateY(-6px) scale(1.025);box-shadow:0 30px 75px rgba(30,30,55,.14),inset 0 1px rgba(255,255,255,.95)!important}
+.ecosystem-node small{display:block;margin-top:6px;font-size:6px;letter-spacing:.08em;color:var(--subtle)}
+.eco-connector{opacity:.55;animation:ecoPulse 4s ease-in-out infinite}
+.eco-connector.c2{animation-delay:-1s}.eco-connector.c3{animation-delay:-2s}.eco-connector.c4{animation-delay:-3s}
+.ecosystem-ambient{position:absolute;border-radius:50%;filter:blur(38px);pointer-events:none;z-index:0}
+.ecosystem-ambient-a{width:180px;height:180px;left:15%;top:12%;background:rgba(120,110,255,.10);animation:ambientMove 9s ease-in-out infinite alternate}
+.ecosystem-ambient-b{width:150px;height:150px;right:15%;bottom:12%;background:rgba(80,180,255,.08);animation:ambientMove 11s ease-in-out infinite alternate-reverse}
+.cloud-process-grid article{position:relative;overflow:hidden;backdrop-filter:blur(22px) saturate(145%);-webkit-backdrop-filter:blur(22px) saturate(145%);background:linear-gradient(145deg,rgba(255,255,255,.58),rgba(240,240,247,.28));border-color:rgba(255,255,255,.72);box-shadow:0 20px 55px rgba(30,30,55,.06),inset 0 1px rgba(255,255,255,.85)}
+.cloud-process-grid article em{position:absolute;right:16px;top:13px;font-style:normal;font-size:7px;color:var(--subtle);letter-spacing:.1em}
+.process-glass-line{position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:width .45s ease}
+.cloud-process-grid article:hover .process-glass-line{width:100%}
+@keyframes ecoPulse{0%,100%{opacity:.3}50%{opacity:.9}}
+@keyframes ambientMove{0%{transform:translate3d(-10px,-6px,0) scale(.9)}100%{transform:translate3d(25px,18px,0) scale(1.12)}}
+@media(max-width:600px){.ecosystem-glass-map:before{inset:5%}.ecosystem-node small{display:none}}
+@media(prefers-reduced-motion:reduce){.eco-connector,.ecosystem-ambient{animation:none}.ecosystem-node,.process-glass-line{transition:none}}
