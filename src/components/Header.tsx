@@ -19,5 +19,6 @@ export default function Header({language,onLanguageChange}:Props){
    <button className="header-menu-trigger" onClick={()=>setCloudMenu(true)} aria-label={language==='ru'?'Открыть меню':'Open menu'}><Grid2X2/></button><button className="header-cta" onClick={()=>go('#contact')}>{language==='ru'?'Обсудить проект':'Start a project'} <span>↗</span></button>
   </div>
   <button className="menu-toggle" onClick={()=>setOpen(!open)} aria-label={language==='ru'?'Меню':'Menu'}>{open?<X/>:<Menu/>}</button>
- </header>{cloudMenu&&<CloudMenu language={language} onClose={()=>setCloudMenu(false)}/>}
+ </header>
+ {cloudMenu&&<CloudMenu language={language} onClose={()=>setCloudMenu(false)}/>}
 }
