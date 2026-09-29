@@ -4,7 +4,6 @@ import ProductMockup from './ProductMockup'
 import {useEffect} from 'react'
 type Language='ru'|'en'
 
-const ownTitles=['Nexum.dev','Nexum AI Core','Gruzli']
 const ownDetails:Record<string,{role:string;ruRole:string;features:string[];ruFeatures:string[];stack:string[]}>={
  'Nexum.dev':{role:'AI development platform',ruRole:'AI-платформа разработки',features:['AI agent loop','Real preview','File and Git tools','AI gateway'],ruFeatures:['AI-агентный цикл','Рабочий preview','Файлы и Git','AI gateway'],stack:['React','TypeScript','Node.js','AI']},
  'Nexum AI Core':{role:'AI intelligence foundation',ruRole:'AI-ядро',features:['Models and providers','Memory','Research and sources','Evaluation'],ruFeatures:['Модели и провайдеры','Память','Исследования и источники','Оценка'],stack:['Python','FastAPI','Ollama','Qwen']},
@@ -14,6 +13,7 @@ const ownDetails:Record<string,{role:string;ruRole:string;features:string[];ruFe
 export default function ProjectSpace({id,language,onClose}:{id:string;language:Language;onClose?:()=>void}){
  const ru=language==='ru'; const work=works.find(w=>w.id===id)||works[0]; const detail=ownDetails[work.title]
  const title=ru?work.ruTitle:work.title
+ useEffect(()=>{const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape')onClose?onClose():location.hash=''};document.body.style.overflow='hidden';addEventListener('keydown',onKey);return()=>{document.body.style.overflow='';removeEventListener('keydown',onKey)}},[onClose])
  return <div className="project-space">
   <div className="project-space-nav"><button onClick={()=>onClose?onClose():location.hash=''}><ArrowLeft size={16}/>{ru?'Назад':'Back'}</button><span>NEXUM / {ru?'PROJECT SPACE':'PROJECT SPACE'}</span><button onClick={()=>onClose?onClose():location.hash=''} aria-label="Close"><X size={17}/></button></div>
   <section className="project-space-hero">
