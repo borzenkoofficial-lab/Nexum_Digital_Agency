@@ -5,7 +5,7 @@ type Props={language:Language;onLanguageChange:(language:Language)=>void}
 
 export default function Header({language,onLanguageChange}:Props){
  const[open,setOpen]=useState(false)
- const links=language==='ru'?[['Работы','#work'],['Услуги','#services'],['Процесс','#process'],['О нас','#about'],['Контакты','#contact']]:[['Work','#work'],['Services','#services'],['Process','#process'],['About','#about'],['Contact','#contact']]
+ const links=language==='ru'?[['Работы','#work'],['Услуги','#services'],['Процесс','#process'],['Облако','#library'],['Экосистема','#ecosystem'],['Контакты','#contact']]:[['Work','#work'],['Services','#services'],['Process','#process'],['Cloud','#library'],['Ecosystem','#ecosystem'],['Contact','#contact']]
  const go=(href:string)=>{setOpen(false);const target=document.querySelector(href);if(target)target.scrollIntoView({behavior:'smooth'});else{location.hash='';setTimeout(()=>document.querySelector(href)?.scrollIntoView({behavior:'smooth'}),40)}}
  return <header className={open?'open':''}>
   <a className="brand" href="#" onClick={e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}}>NEXUM<span>—</span></a>
