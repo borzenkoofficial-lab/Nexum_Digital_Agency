@@ -1173,3 +1173,27 @@ nav button{position:relative}nav button.active{color:var(--ink)}nav button.activ
 @media(max-width:900px){.hero-glass-panel{min-width:140px;padding:10px 12px}.hero-glass-panel-b{right:-2%}.hero-glass-panel-c{left:4%}}
 @media(max-width:600px){.hero-glass-panel{display:none}.cloud-orbit:before{inset:12% 5%}.orbit-line-c{width:90%;left:5%}}
 @media(prefers-reduced-motion:reduce){.hero-glass-panel,.orbit-core,.orbit-chip{animation:none}}
+
+/* Product showcase glass stage */
+.cloud-project-grid{grid-template-columns:repeat(12,minmax(0,1fr));gap:22px}
+.cloud-project{position:relative;border:0;background:transparent;text-align:left;min-width:0}
+.cloud-project-1,.cloud-project-4,.cloud-project-7{grid-column:span 7}
+.cloud-project-2,.cloud-project-5,.cloud-project-8{grid-column:span 5}
+.cloud-project-3,.cloud-project-6{grid-column:span 5}
+.cloud-project-visual{position:relative;min-height:420px;border-radius:28px;padding:18px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 50% 25%,rgba(255,255,255,.9),rgba(239,239,246,.5) 55%,rgba(220,220,232,.35));isolation:isolate}
+.cloud-project-visual:after{content:'';position:absolute;inset:8%;border:1px solid rgba(255,255,255,.6);border-radius:24px;pointer-events:none}
+.project-glass-index{position:absolute;z-index:4;top:16px;left:18px;font-size:7px;letter-spacing:.13em;color:var(--subtle);padding:8px 10px;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.42);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border-radius:999px;box-shadow:inset 0 1px rgba(255,255,255,.8)}
+.project-glass-reflection{position:absolute;z-index:3;width:65%;height:28%;top:-8%;right:-8%;background:linear-gradient(130deg,rgba(255,255,255,.5),transparent 70%);filter:blur(20px);transform:rotate(12deg);pointer-events:none}
+.cloud-project-visual .browser,.cloud-project-visual .website-scene,.cloud-project-visual .plugin-panel,.cloud-project-visual .telegram-window{width:92%;transition:transform .7s cubic-bezier(.16,1,.3,1),filter .7s ease}
+.cloud-project-visual .phone{transition:transform .7s cubic-bezier(.16,1,.3,1),filter .7s ease}
+.cloud-project:hover .cloud-project-visual .browser{transform:perspective(1200px) rotateX(3deg) rotateY(-4deg) translateY(-12px) scale(1.025)}
+.cloud-project:hover .cloud-project-visual .phone{transform:perspective(1200px) rotateY(-7deg) rotateX(3deg) translateY(-12px) scale(1.025)}
+.cloud-project:hover .cloud-project-visual .website-scene,.cloud-project:hover .cloud-project-visual .plugin-panel,.cloud-project:hover .cloud-project-visual .telegram-window{transform:perspective(1200px) rotateX(3deg) rotateY(3deg) translateY(-12px) scale(1.025)}
+.cloud-project-meta{padding:17px 3px 8px}
+.cloud-project-meta h3{font-size:27px;letter-spacing:-.045em}
+.cloud-project-meta p{max-width:600px}
+.cloud-project-1 .cloud-project-visual{min-height:500px}
+.cloud-project-4 .cloud-project-visual,.cloud-project-7 .cloud-project-visual{min-height:470px}
+@media(max-width:900px){.cloud-project-1,.cloud-project-2,.cloud-project-3,.cloud-project-4,.cloud-project-5,.cloud-project-6,.cloud-project-7,.cloud-project-8{grid-column:1/-1}.cloud-project-visual,.cloud-project-1 .cloud-project-visual,.cloud-project-4 .cloud-project-visual,.cloud-project-7 .cloud-project-visual{min-height:360px}}
+@media(max-width:600px){.cloud-project-visual{min-height:270px;border-radius:20px;padding:10px}.project-glass-index{top:10px;left:10px}.cloud-project-meta h3{font-size:23px}.cloud-project-visual .browser,.cloud-project-visual .website-scene,.cloud-project-visual .plugin-panel,.cloud-project-visual .telegram-window{width:96%}}
+@media(prefers-reduced-motion:reduce){.cloud-project-visual .browser,.cloud-project-visual .phone,.cloud-project-visual .website-scene,.cloud-project-visual .plugin-panel,.cloud-project-visual .telegram-window{transition:none}}
