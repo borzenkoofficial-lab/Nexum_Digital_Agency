@@ -1,6 +1,7 @@
 import {ArrowLeft,ArrowUpRight,CheckCircle2,X} from 'lucide-react'
-import {works,services,tech} from '../data/content'
+import {works,tech} from '../data/content'
 import ProductMockup from './ProductMockup'
+import {useEffect} from 'react'
 type Language='ru'|'en'
 
 const ownTitles=['Nexum.dev','Nexum AI Core','Gruzli']
