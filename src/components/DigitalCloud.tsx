@@ -85,5 +85,13 @@ export default function DigitalCloud({language}:{language:Language}){
   </section>
 
   <section className="cloud-cta" id="contact"><div><span>07 / START</span><h2>{ru?<>Что построим<br/><i>следующим?</i></>:<>What will we build<br/><i>next?</i></>}</h2></div><a href="mailto:hello@nexum.agency">{ru?'Начать проект':'Start a project'} <ArrowUpRight/></a></section>
+  {selectedService&&<div className="cloud-service-modal-backdrop" role="presentation" onMouseDown={e=>{if(e.currentTarget===e.target)setSelectedService(null)}}>
+   <div className="cloud-service-modal" role="dialog" aria-modal="true" aria-label={ru?selectedService.ruTitle:selectedService.title}>
+    <button className="cloud-service-close" onClick={()=>setSelectedService(null)} aria-label={ru?'Закрыть':'Close'}><X size={18}/></button>
+    <div className="cloud-service-modal-visual"><ProductMockup kind={selectedService.kind} large language={language}/></div>
+    <div className="cloud-service-modal-copy"><div className="cloud-modal-meta"><span>{selectedService.n}</span><span>{ru?selectedService.ruType:selectedService.type}</span></div><h2>{ru?selectedService.ruTitle:selectedService.title}</h2><p>{ru?selectedService.ruText:selectedService.text}</p><div className="cloud-modal-tags">{(ru?selectedService.ruTags:selectedService.tags).map(tag=><b key={tag}>{tag}</b>)}</div><div className="cloud-modal-capabilities"><span><CheckCircle2 size={14}/>{ru?'Product design':'Product design'}</span><span><CheckCircle2 size={14}/>{ru?'Engineering':'Engineering'}</span><span><CheckCircle2 size={14}/>{ru?'Launch checks':'Launch checks'}</span></div><a href="#contact" onClick={()=>setSelectedService(null)}>{ru?'Обсудить решение':'Discuss this solution'} <ArrowUpRight size={14}/></a></div>
+   </div>
+  </div>}
+  {selectedProject&&<div className="project-space-backdrop" role="presentation" onMouseDown={e=>{if(e.currentTarget===e.target)setSelectedProject(null)}}><ProjectSpace id={selectedProject.id} language={language} onClose={()=>setSelectedProject(null)}/></div>}
  </div>
 }
