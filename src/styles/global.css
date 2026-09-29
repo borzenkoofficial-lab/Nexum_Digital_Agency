@@ -1151,3 +1151,25 @@ nav button{position:relative}nav button.active{color:var(--ink)}nav button.activ
 .cloud-service-tile.is-active{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 @keyframes liquidDrift{0%{transform:translate3d(-10px,-5px,0) scale(.96)}100%{transform:translate3d(25px,18px,0) scale(1.06)}}
 @media(prefers-reduced-motion:reduce){.cloud-hero:before,.cloud-capabilities:before{animation:none}.browser,.phone,.telegram-window,.plugin-panel,.website-scene,.cloud-project-visual,.cloud-service-preview{transition:none}}
+
+/* Hero liquid glass constellation */
+.cloud-orbit{isolation:isolate}
+.cloud-orbit:before{content:'';position:absolute;inset:8% 12%;border:1px solid rgba(255,255,255,.7);border-radius:50%;transform:rotate(-12deg);box-shadow:0 0 80px rgba(120,110,255,.08),inset 0 0 40px rgba(255,255,255,.45);pointer-events:none}
+.hero-glass-panel{position:absolute;z-index:3;padding:14px 16px;border:1px solid rgba(255,255,255,.78);background:linear-gradient(135deg,rgba(255,255,255,.64),rgba(242,242,249,.27));backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);border-radius:16px;box-shadow:0 22px 55px rgba(30,30,55,.11),inset 0 1px rgba(255,255,255,.9);display:flex;flex-direction:column;gap:4px;min-width:170px;animation:glassFloat 7s ease-in-out infinite}
+.hero-glass-panel small{font-size:7px;letter-spacing:.14em;color:var(--subtle)}
+.hero-glass-panel b{font-size:11px;letter-spacing:.04em;font-weight:600}
+.hero-glass-panel span{font-size:7px;letter-spacing:.08em;color:var(--muted)}
+.hero-glass-panel-a{top:10%;left:2%;transform:rotate(-4deg)}
+.hero-glass-panel-b{right:1%;top:27%;transform:rotate(4deg);animation-delay:-2.4s}
+.hero-glass-panel-c{bottom:9%;left:17%;transform:rotate(3deg);animation-delay:-4.5s;min-width:155px}
+.orbit-line-c{position:absolute;width:76%;height:44%;left:12%;top:28%;border:1px dashed rgba(80,75,110,.13);border-radius:50%;transform:rotate(17deg)}
+.orbit-core{box-shadow:0 35px 90px rgba(60,55,110,.18),inset 0 1px rgba(255,255,255,.95);border:1px solid rgba(255,255,255,.82);background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(225,225,237,.38));backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px) saturate(160%);animation:coreBreathe 5s ease-in-out infinite}
+.orbit-core b{font-size:7px;letter-spacing:.15em;color:var(--subtle);margin-top:5px}
+.orbit-chip{border-color:rgba(255,255,255,.8)!important;background:rgba(255,255,255,.48)!important;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);box-shadow:0 12px 30px rgba(30,30,50,.09),inset 0 1px rgba(255,255,255,.85);animation:chipFloat 4.5s ease-in-out infinite}
+.chip-b{animation-delay:-1s}.chip-c{animation-delay:-2s}.chip-d{animation-delay:-3s}.chip-e{animation-delay:-4s}
+@keyframes glassFloat{0%,100%{translate:0 0}50%{translate:0 -9px}}
+@keyframes coreBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+@keyframes chipFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+@media(max-width:900px){.hero-glass-panel{min-width:140px;padding:10px 12px}.hero-glass-panel-b{right:-2%}.hero-glass-panel-c{left:4%}}
+@media(max-width:600px){.hero-glass-panel{display:none}.cloud-orbit:before{inset:12% 5%}.orbit-line-c{width:90%;left:5%}}
+@media(prefers-reduced-motion:reduce){.hero-glass-panel,.orbit-core,.orbit-chip{animation:none}}
