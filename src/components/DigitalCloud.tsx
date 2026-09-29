@@ -56,7 +56,7 @@ export default function DigitalCloud({language}:{language:Language}){
 
   <section className="cloud-work" id="work">
    <div className="cloud-section-head"><span>03 / BUILT HERE</span><p>{ru?'Создано внутри NEXUM':'Built inside NEXUM'}</p></div>
-   <div className="cloud-work-grid">{own.map((w,i)=><button type="button" className="cloud-project" key={w.id} onClick={()=>setSelectedProject(w)}><div className="cloud-project-visual"><ProductMockup kind={w.kind} large language={language}/><span>{String(i+1).padStart(2,'0')} / OWN PRODUCT</span></div><div className="cloud-project-meta"><div><small>{ru?w.ruCategory:w.category}</small><h3>{ru?w.ruTitle:w.title}</h3><p>{ru?w.ruDescription:w.description}</p></div><ArrowUpRight/></div></a>)}</div>
+   <div className="cloud-work-grid">{own.map((w,i)=><button type="button" className="cloud-project" key={w.id} onClick={()=>setSelectedProject(w)}><div className="cloud-project-visual"><ProductMockup kind={w.kind} large language={language}/><span>{String(i+1).padStart(2,'0')} / OWN PRODUCT</span></div><div className="cloud-project-meta"><div><small>{ru?w.ruCategory:w.category}</small><h3>{ru?w.ruTitle:w.title}</h3><p>{ru?w.ruDescription:w.description}</p></div><ArrowUpRight/></div></button>)}</div>
   </section>
 
   <section className="cloud-library" id="library">
