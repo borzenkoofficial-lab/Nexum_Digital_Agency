@@ -1102,3 +1102,27 @@ nav button{position:relative}nav button.active{color:var(--ink)}nav button.activ
 @media(prefers-reduced-motion:reduce){
  .cloud-project-visual,.cloud-project-meta>svg,.cloud-process-grid article{transition:none}
 }
+
+/* Live service wall */
+.cloud-service-stage{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);gap:24px;align-items:stretch}
+.cloud-service-preview{position:sticky;top:92px;height:fit-content;border:1px solid var(--line);border-radius:20px;padding:18px;background:linear-gradient(145deg,#fafafd,#eeeef3);box-shadow:0 20px 60px rgba(20,20,30,.05);overflow:hidden}
+.cloud-service-preview-top{display:flex;justify-content:space-between;gap:12px;margin-bottom:16px;font-size:8px;letter-spacing:.13em;color:var(--subtle)}
+.cloud-service-preview .browser-scene{height:360px}
+.cloud-service-preview-copy{padding:18px 2px 4px}
+.cloud-service-preview-copy small{font-size:8px;color:var(--accent);letter-spacing:.13em}
+.cloud-service-preview-copy h3{font-size:30px;line-height:.95;letter-spacing:-.055em;font-weight:500;margin:7px 0 0}
+.cloud-service-tile{position:relative}
+.cloud-service-tile:after{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:transparent;transition:background .25s ease}
+.cloud-service-tile.is-active{padding-left:14px;background:linear-gradient(90deg,rgba(99,91,255,.06),transparent 55%)}
+.cloud-service-tile.is-active:after{background:var(--accent)}
+@media(max-width:900px){
+ .cloud-service-stage{grid-template-columns:1fr}
+ .cloud-service-preview{position:relative;top:auto;order:-1}
+ .cloud-service-preview .browser-scene{height:300px}
+}
+@media(max-width:600px){
+ .cloud-service-preview{padding:12px;border-radius:16px}
+ .cloud-service-preview .browser-scene{height:240px}
+ .cloud-service-preview-copy h3{font-size:25px}
+}
+@media(prefers-reduced-motion:reduce){.cloud-service-tile:after{transition:none}}
