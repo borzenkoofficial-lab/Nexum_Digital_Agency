@@ -1,4 +1,5 @@
-import {ArrowUpRight, Bot, Box, Code2, Globe, Layers3, Sparkles, Workflow} from 'lucide-react'
+import {ArrowUpRight, Bot, Box, Globe, Layers3, Sparkles, Workflow, X, CheckCircle2} from 'lucide-react'
+import {useState} from 'react'
 import ProductMockup from './ProductMockup'
 import {services,works} from '../data/content'
 
@@ -13,7 +14,7 @@ const capabilities=[
 
 const iconMap={website:Globe,ai:Sparkles,platform:Layers3,dashboard:Workflow}
 
-export default function DigitalCloud({language}:{language:Language}){
+export default function DigitalCloud({language}:{language:Language}){\n const [selectedService,setSelectedService]=useState<(typeof services)[number]|null>(null)
  const ru=language==='ru'
  const own=works.filter(w=>['Nexum.dev','Nexum AI Core','Gruzli'].includes(w.title))
  return <div className="digital-cloud">
@@ -47,7 +48,7 @@ export default function DigitalCloud({language}:{language:Language}){
 
   <section className="cloud-services">
    <div className="cloud-section-head"><span>02 / SERVICES</span><p>{ru?'Библиотека разработки':'Development library'}</p></div>
-   <div className="cloud-service-wall">{services.map((s,i)=><article key={s.n} className="cloud-service-tile"><span>{s.n}</span><div><small>{ru?s.ruType:s.type}</small><h3>{ru?s.ruTitle:s.title}</h3><p>{ru?s.ruText:s.text}</p><div>{(ru?s.ruTags:s.tags).map(tag=><b key={tag}>{tag}</b>)}</div></div><ArrowUpRight size={18}/></article>)}</div>
+   <div className="cloud-service-wall">{services.map((s,i)=><button type="button" key={s.n} className="cloud-service-tile" onClick={()=>setSelectedService(s)}><span>{s.n}</span><div><small>{ru?s.ruType:s.type}</small><h3>{ru?s.ruTitle:s.title}</h3><p>{ru?s.ruText:s.text}</p><div>{(ru?s.ruTags:s.tags).map(tag=><b key={tag}>{tag}</b>)}</div></div><ArrowUpRight size={18}/></button>)}</div>
   </section>
 
   <section className="cloud-work" id="work">
