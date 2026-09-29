@@ -26,6 +26,8 @@ export default function DigitalCloud({language}:{language:Language}){
  const introTitle=ru ? 'Мы собираем' : 'We build'
  const introEmphasis=ru ? 'цифровую инфраструктуру' : 'digital infrastructure'
  const introSuffix=ru ? ' вокруг задачи бизнеса.' : ' around the business problem.'
+  const [activeServiceIndex,setActiveServiceIndex]=useState(0)
+  const activeService=services[activeServiceIndex]
  return <div className="digital-cloud">
   <section className="cloud-hero" id="top">
    <div className="cloud-hero-copy">
@@ -63,7 +65,10 @@ export default function DigitalCloud({language}:{language:Language}){
 
   <section className="cloud-services">
    <div className="cloud-section-head"><span>02 / SERVICES</span><p>{ru?'Библиотека разработки':'Development library'}</p></div>
-   <div className="cloud-service-wall">{services.map((s,i)=><button type="button" key={s.n} className="cloud-service-tile" onClick={()=>setSelectedService(s)}><span>{s.n}</span><div><small>{ru?s.ruType:s.type}</small><h3>{ru?s.ruTitle:s.title}</h3><p>{ru?s.ruText:s.text}</p><div>{(ru?s.ruTags:s.tags).map(tag=><b key={tag}>{tag}</b>)}</div></div><ArrowUpRight size={18}/></button>)}</div>
+   <div className="cloud-service-stage">
+ <div className="cloud-service-wall">{services.map((s,i)=><button type="button" key={s.n} className={`cloud-service-tile ${activeServiceIndex===i?'is-active':''}`} onMouseEnter={()=>setActiveServiceIndex(i)} onFocus={()=>setActiveServiceIndex(i)} onClick={()=>setSelectedService(s)}><span>{s.n}</span><div><small>{ru?s.ruType:s.type}</small><h3>{ru?s.ruTitle:s.title}</h3><p>{ru?s.ruText:s.text}</p><div>{(ru?s.ruTags:s.tags).map(tag=><b key={tag}>{tag}</b>)}</div></div><ArrowUpRight size={18}/></button>)}</div>
+ <div className="cloud-service-preview" aria-live="polite"><div className="cloud-service-preview-top"><span>{activeService.n} / PREVIEW</span><span>{ru?'Живой модуль':'Live module'}</span></div><ProductMockup kind={activeService.kind} large language={language}/><div className="cloud-service-preview-copy"><small>{ru?activeService.ruType:activeService.type}</small><h3>{ru?activeService.ruTitle:activeService.title}</h3></div></div>
+</div>
   </section>
 
   <section className="cloud-work" id="work">
