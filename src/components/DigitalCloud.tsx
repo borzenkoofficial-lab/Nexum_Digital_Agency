@@ -1,4 +1,4 @@
-import {ArrowUpRight, Bot, Box, Globe, Layers3, Sparkles, Workflow, X, CheckCircle2} from 'lucide-react'
+import {ArrowUpRight, Globe, Layers3, Sparkles, Workflow, X, CheckCircle2} from 'lucide-react'
 import {useState} from 'react'
 import ProductMockup from './ProductMockup'
 import {services,works} from '../data/content'
