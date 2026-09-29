@@ -14,9 +14,10 @@ const capabilities=[
 
 const iconMap={website:Globe,ai:Sparkles,platform:Layers3,dashboard:Workflow}
 
-export default function DigitalCloud({language}:{language:Language}){\n const [selectedService,setSelectedService]=useState<(typeof services)[number]|null>(null)
+export default function DigitalCloud({language}:{language:Language}){
+ const [selectedService,setSelectedService]=useState<(typeof services)[number]|null>(null)
  const ru=language==='ru'
- const own=works.filter(w=>['Nexum.dev','Nexum AI Core','Gruzli'].includes(w.title))
+ const own=works
  return <div className="digital-cloud">
   <section className="cloud-hero" id="top">
    <div className="cloud-hero-copy">
@@ -56,8 +57,15 @@ export default function DigitalCloud({language}:{language:Language}){\n const [s
    <div className="cloud-work-grid">{own.map((w,i)=><a href={`#case/${w.id}`} className="cloud-project" key={w.id}><div className="cloud-project-visual"><ProductMockup kind={w.kind} large language={language}/><span>{String(i+1).padStart(2,'0')} / OWN PRODUCT</span></div><div className="cloud-project-meta"><div><small>{ru?w.ruCategory:w.category}</small><h3>{ru?w.ruTitle:w.title}</h3><p>{ru?w.ruDescription:w.description}</p></div><ArrowUpRight/></div></a>)}</div>
   </section>
 
+  <section className="cloud-library" id="library">
+   <div className="cloud-section-head"><span>04 / LIBRARY</span><p>{ru?'Всё, что можем собрать':'Everything we can build'}</p></div>
+   <div className="library-grid">
+    {['WEB','MOBILE','AI','SAAS','CRM','MARKETPLACE','ECOMMERCE','DASHBOARD','TELEGRAM','API','AUTOMATION','INTERNAL TOOLS'].map((x,i)=><button key={x} className="library-pill" onClick={()=>document.querySelector('#contact')?.scrollIntoView({behavior:'smooth'})}><span>0{String(i+1).padStart(2,'0')}</span><b>{x}</b><ArrowUpRight size={14}/></button>)}
+   </div>
+  </section>
+
   <section className="cloud-map" id="ecosystem">
-   <div className="cloud-section-head"><span>04 / ECOSYSTEM</span><p>{ru?'Одна система':'One system'}</p></div>
+   <div className="cloud-section-head"><span>05 / ECOSYSTEM</span><p>{ru?'Одна система':'One system'}</p></div>
    <div className="ecosystem-map">
     <div className="ecosystem-center"><b>NEXUM</b><span>{ru?'ТЕХНОЛОГИЧЕСКАЯ ЭКОСИСТЕМА':'TECHNOLOGY ECOSYSTEM'}</span></div>
     <div className="ecosystem-node node-core"><strong>CORE</strong><span>{ru?'Intelligence':'Intelligence'}</span></div>
@@ -69,10 +77,10 @@ export default function DigitalCloud({language}:{language:Language}){\n const [s
   </section>
 
   <section className="cloud-process" id="process">
-   <div className="cloud-section-head"><span>05 / PROCESS</span><p>{ru?'Как работает облако':'How the cloud works'}</p></div>
+   <div className="cloud-section-head"><span>06 / PROCESS</span><p>{ru?'Как работает облако':'How the cloud works'}</p></div>
    <div className="cloud-process-grid">{['DISCOVER','DESIGN','BUILD','CONNECT','LAUNCH','EVOLVE'].map((x,i)=><article key={x}><span>0{i+1}</span><b>{x}</b><p>{ru?['Задача и контекст.','UX и визуальная система.','Код и продуктовая логика.','AI, API и интеграции.','Запуск и проверка.','Развитие и оптимизация.'][i]:['Problem and context.','UX and visual system.','Code and product logic.','AI, APIs and integrations.','Launch and validation.','Evolution and optimization.'][i]}</p></article>)}</div>
   </section>
 
-  <section className="cloud-cta" id="contact"><div><span>06 / START</span><h2>{ru?<>Что построим<br/><i>следующим?</i></>:<>What will we build<br/><i>next?</i></>}</h2></div><a href="mailto:hello@nexum.agency">{ru?'Начать проект':'Start a project'} <ArrowUpRight/></a></section>
+  <section className="cloud-cta" id="contact"><div><span>07 / START</span><h2>{ru?<>Что построим<br/><i>следующим?</i></>:<>What will we build<br/><i>next?</i></>}</h2></div><a href="mailto:hello@nexum.agency">{ru?'Начать проект':'Start a project'} <ArrowUpRight/></a></section>
  </div>
 }
