@@ -1,0 +1,3 @@
+import Marketplace from './Marketplace'
+type Language='ru'|'en'
+export default function MarketplacePage({language}:{language:Language}){return <main className="subpage"><section className="subpage-hero"><small>03 / MARKETPLACE</small><h1>{language==='ru'?<>Соберите свой<br/><i>digital product.</i></>:<>Build your<br/><i>digital product.</i></>}</h1><p>{language==='ru'?'Выберите основу, добавьте модули и получите ориентир по проекту. Финальная смета формируется после обсуждения задачи.':'Choose a base, add modules and get an indicative project estimate. Final scope is defined after the brief.'}</p></section><Marketplace language={language}/></main>}
