@@ -43,9 +43,12 @@ export default function DigitalCloud({language}:{language:Language}){
     </div>
    </div>
    <div className="cloud-orbit" aria-hidden="true">
-    <div className="orbit-core"><span>N.</span><small>NEXUM</small></div>
-    <div className="orbit-line orbit-line-a"/><div className="orbit-line orbit-line-b"/>
+    <div className="hero-glass-panel hero-glass-panel-a"><small>01 / CORE</small><b>INTELLIGENCE</b><span>AI · MEMORY · MODELS</span></div>
+    <div className="hero-glass-panel hero-glass-panel-b"><small>02 / DEV</small><b>BUILD SYSTEM</b><span>CODE · PREVIEW · DEPLOY</span></div>
+    <div className="orbit-core"><span>N.</span><small>NEXUM</small><b>01—04</b></div>
+    <div className="orbit-line orbit-line-a"/><div className="orbit-line orbit-line-b"/><div className="orbit-line orbit-line-c"/>
     <span className="orbit-chip chip-a">AI</span><span className="orbit-chip chip-b">WEB</span><span className="orbit-chip chip-c">APP</span><span className="orbit-chip chip-d">SAAS</span><span className="orbit-chip chip-e">DATA</span>
+    <div className="hero-glass-panel hero-glass-panel-c"><small>LIVE SYSTEM</small><b>04 PRODUCTS</b><span>CONNECTED / 24.09</span></div>
    </div>
   </section>
 
