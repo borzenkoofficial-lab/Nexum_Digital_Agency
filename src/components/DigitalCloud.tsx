@@ -88,19 +88,20 @@ export default function DigitalCloud({language}:{language:Language}){
 
   <section className="cloud-map" id="ecosystem">
    <div className="cloud-section-head"><span>05 / ECOSYSTEM</span><p>{ru?'Одна система':'One system'}</p></div>
-   <div className="ecosystem-map">
-    <div className="ecosystem-center"><b>NEXUM</b><span>{ru?'ТЕХНОЛОГИЧЕСКАЯ ЭКОСИСТЕМА':'TECHNOLOGY ECOSYSTEM'}</span></div>
-    <div className="ecosystem-node node-core"><strong>CORE</strong><span>{ru?'Intelligence':'Intelligence'}</span></div>
-    <div className="ecosystem-node node-dev"><strong>DEV</strong><span>{ru?'Build':'Build'}</span></div>
-    <div className="ecosystem-node node-digital"><strong>DIGITAL</strong><span>{ru?'Develop':'Develop'}</span></div>
-    <div className="ecosystem-node node-gruzli"><strong>GRUZLI</strong><span>{ru?'Product':'Product'}</span></div>
+   <div className="ecosystem-map ecosystem-glass-map">
+    <div className="ecosystem-ambient ecosystem-ambient-a"/><div className="ecosystem-ambient ecosystem-ambient-b"/>
+    <div className="ecosystem-center"><b>NEXUM</b><span>{ru?'ТЕХНОЛОГИЧЕСКАЯ ЭКОСИСТЕМА':'TECHNOLOGY ECOSYSTEM'}</span><small>CORE / DEV / DIGITAL / PRODUCT</small></div>
+    <div className="ecosystem-node node-core"><strong>CORE</strong><span>Intelligence</span><small>AI · MEMORY · MODELS</small></div>
+    <div className="ecosystem-node node-dev"><strong>DEV</strong><span>Build</span><small>CODE · PREVIEW · DEPLOY</small></div>
+    <div className="ecosystem-node node-digital"><strong>DIGITAL</strong><span>Develop</span><small>DESIGN · SYSTEMS · WEB</small></div>
+    <div className="ecosystem-node node-gruzli"><strong>GRUZLI</strong><span>Product</span><small>MARKETPLACE · CRM · PWA</small></div>
     <i className="eco-connector c1"/><i className="eco-connector c2"/><i className="eco-connector c3"/><i className="eco-connector c4"/>
    </div>
   </section>
 
   <section className="cloud-process" id="process">
    <div className="cloud-section-head"><span>06 / PROCESS</span><p>{ru?'Как работает облако':'How the cloud works'}</p></div>
-   <div className="cloud-process-grid">{['DISCOVER','DESIGN','BUILD','CONNECT','LAUNCH','EVOLVE'].map((x,i)=><article key={x}><span>0{i+1}</span><b>{x}</b><p>{ru?['Задача и контекст.','UX и визуальная система.','Код и продуктовая логика.','AI, API и интеграции.','Запуск и проверка.','Развитие и оптимизация.'][i]:['Problem and context.','UX and visual system.','Code and product logic.','AI, APIs and integrations.','Launch and validation.','Evolution and optimization.'][i]}</p></article>)}</div>
+   <div className="cloud-process-grid">{['DISCOVER','DESIGN','BUILD','CONNECT','LAUNCH','EVOLVE'].map((x,i)=><article key={x}><span>0{i+1}</span><b>{x}</b><em>{['01','02','03','04','05','06'][i]}</em><p>{ru?['Задача и контекст.','UX и визуальная система.','Код и продуктовая логика.','AI, API и интеграции.','Запуск и проверка.','Развитие и оптимизация.'][i]:['Problem and context.','UX and visual system.','Code and product logic.','AI, APIs and integrations.','Launch and validation.','Evolution and optimization.'][i]}</p><i className="process-glass-line"/></article>)}</div>
   </section>
 
   <section className="cloud-cta" id="contact"><div><span>07 / START</span><h2>{ru?<>Что построим<br/><i>следующим?</i></>:<>What will we build<br/><i>next?</i></>}</h2></div><a href="mailto:hello@nexum.agency">{ru?'Начать проект':'Start a project'} <ArrowUpRight/></a></section>
