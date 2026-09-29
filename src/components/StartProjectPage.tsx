@@ -1,5 +1,6 @@
 import {ArrowLeft,ArrowRight,Check,Paperclip,Send,ShieldCheck,Sparkles} from 'lucide-react'
 import {useState} from 'react'
+import QuoteRail from './QuoteRail'
 type Language='ru'|'en'
 type FormState={direction:string;stage:string;budget:string;timeline:string;contact:string;company:string;brief:string;features:string[];source:string;files:string[]}
 const directions={ru:['Сайт / digital experience','Web-приложение / SaaS','AI-система / AI-агент','CRM / Dashboard','Marketplace / платформа','Мобильное приложение','Автоматизация / интеграции','Поддержка и развитие','Не знаю — нужна консультация'],en:['Website / digital experience','Web app / SaaS','AI system / AI agent','CRM / Dashboard','Marketplace / platform','Mobile application','Automation / integrations','Support & development','Not sure — advise me']}
@@ -28,6 +29,7 @@ export default function StartProjectPage({language}:{language:Language}){
     <div className="brief-privacy"><ShieldCheck size={14}/>{ru?'Контактные данные используются только для связи по проекту.':'Contact details are used only for project communication.'}</div>
    </form>
   </section>
+  <QuoteRail language={language} section="PROJECT SIGNAL"/>
  </main>
 }
 function Field({title,required,children}:{title:string;required?:boolean;children:React.ReactNode}){return <label className="brief-field"><span>{title}{required&&<em> *</em>}</span>{children}</label>}
