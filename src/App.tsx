@@ -7,9 +7,11 @@ import PortfolioPage from './components/PortfolioPage'
 import MarketplacePage from './components/MarketplacePage'
 import StartProjectPage from './components/StartProjectPage'
 import NexumOS from './components/NexumOS'
+import NexumOS from './components/NexumOS'
 export type Language='ru'|'en'
 function App(){
  const[path,setPath]=useState(location.hash)
+ const[osOpen,setOsOpen]=useState(false)
  const[osOpen,setOsOpen]=useState(false)
  const[language,setLanguage]=useState<Language>(()=>{try{return localStorage.getItem('nexum-language')==='en'?'en':'ru'}catch{return'ru'}})
  useEffect(()=>{const onHash=()=>setPath(location.hash);addEventListener('hashchange',onHash);return()=>removeEventListener('hashchange',onHash)},[])
