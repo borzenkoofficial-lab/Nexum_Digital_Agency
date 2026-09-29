@@ -827,3 +827,33 @@ footer{padding:25px 5vw;display:grid;grid-template-columns:1fr 2fr auto;align-it
 .marketplace-top h2 .hero-quote{display:block;width:100%;min-width:0;height:1.08em;margin:.08em 0 0;overflow:hidden;white-space:nowrap;}
 .marketplace-top h2 .hero-quote span{font-size:.78em;letter-spacing:-.045em;}
 @media(max-width:600px){.marketplace-top h2 .hero-quote{height:1.15em}.marketplace-top h2 .hero-quote span{font-size:.62em;letter-spacing:-.04em}}
+
+
+/* UI polish: editorial interaction layer */
+.service-row{position:relative;overflow:hidden;transition:background .25s ease,padding .25s ease,transform .25s ease;border-top:1px solid var(--line)}
+.service-row:before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.service-row:hover{background:linear-gradient(90deg,rgba(99,91,255,.045),transparent 42%);padding-left:12px}
+.service-row:hover:before{transform:scaleY(1)}
+.service-row h3{transition:transform .25s ease,color .25s ease}
+.service-row:hover h3{transform:translateX(3px);color:var(--accent)}
+.service-row>svg{transition:transform .25s ease,color .25s ease}
+.service-row:hover>svg{transform:translate(3px,-3px);color:var(--accent)}
+.work-card{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.work-card:hover{transform:translateY(-4px)}
+.work-card .work-visual{transition:box-shadow .35s ease,border-color .35s ease}
+.work-card:hover .work-visual{box-shadow:0 22px 55px rgba(20,20,30,.08);border-color:var(--line-strong)}
+.marketplace-stage{transition:border-color .25s ease,box-shadow .35s ease}
+.marketplace-stage:hover{border-color:#dcdce4;box-shadow:0 20px 60px rgba(25,25,35,.055)}
+.marketplace-copy a,.contact-links a{transition:color .2s ease,border-color .2s ease,transform .2s ease}
+.marketplace-copy a:hover{color:var(--accent);border-color:var(--accent);transform:translateX(2px)}
+.marketplace-bottom{min-height:18px}
+.market-dots button:focus-visible,.market-arrow:focus-visible,.marketplace-button:focus-visible,.service-row:focus-visible,.contact-button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:600px){
+ .service-row:hover{padding-left:8px}
+ .service-row:before{width:1px}
+ .work-card:hover{transform:none}
+ .marketplace-stage:hover{box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .service-row,.service-row:before,.service-row h3,.service-row>svg,.work-card,.work-card .work-visual,.marketplace-stage,.marketplace-copy a{transition:none}
+}
