@@ -25,7 +25,7 @@ export default function DigitalCloud({language}:{language:Language}){
   <section className="cloud-hero" id="top">
    <div className="cloud-hero-copy">
     <div className="cloud-eyebrow"><span>NEXUM / DIGITAL</span><i>{ru?'DIGITAL DEVELOPMENT CLOUD':'DIGITAL DEVELOPMENT CLOUD'}</i></div>
-    <h1>{ru?<>Не сайт агентства.<br/><em>Цифровое облако.</em></>:<>Not an agency site.<br/><em>A digital cloud.</em>}</h1>
+    <h1>{ru ? <>Не сайт агентства.<br/><em>Цифровое облако.</em></> : <>Not an agency site.<br/><em>A digital cloud.</em>}</h1>
     <p>{ru?'Пространство, где собраны разработка, AI, автоматизация, проекты и технологии NEXUM — от первого экрана до работающей системы.':'A digital space bringing development, AI, automation, projects and NEXUM technology together — from the first screen to a working system.'}</p>
     <div className="cloud-hero-actions"><a href="#services" className="cloud-primary">{ru?'Исследовать облако':'Explore the cloud'} <ArrowUpRight size={17}/></a><a href="#contact" className="cloud-secondary">{ru?'Начать проект':'Start a project'}</a></div>
    </div>
