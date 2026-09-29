@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react'
 import Header from './components/Header'
-import CaseStudy from './components/CaseStudy'
+import ProjectSpace from './components/ProjectSpace'
 import MarketplacePage from './components/MarketplacePage'
 import DigitalCloud from './components/DigitalCloud'
 
@@ -13,7 +13,7 @@ function App(){
  useEffect(()=>{try{localStorage.setItem('nexum-language',language)}catch{}},[language])
  const cloud=path===''||path==='#'||path==='#top'||path.startsWith('#services')||path.startsWith('#work')||path.startsWith('#process')||path.startsWith('#about')||path.startsWith('#contact')||path.startsWith('#ecosystem')
  if(path==='#marketplace') return <><Header language={language} onLanguageChange={setLanguage}/><MarketplacePage language={language}/></>
- if(path.startsWith('#case/')) return <><Header language={language} onLanguageChange={setLanguage}/><CaseStudy id={path.split('/')[1]} language={language}/></>
+ if(path.startsWith('#case/')) return <><Header language={language} onLanguageChange={setLanguage}/><ProjectSpace id={path.split('/')[1]} language={language}/></>
  return cloud?<><Header language={language} onLanguageChange={setLanguage}/><DigitalCloud language={language}/></>:<><Header language={language} onLanguageChange={setLanguage}/><DigitalCloud language={language}/></>
 }
 export default App
