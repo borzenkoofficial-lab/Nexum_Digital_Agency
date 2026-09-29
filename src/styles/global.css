@@ -980,3 +980,28 @@ footer{padding:25px 5vw;display:grid;grid-template-columns:1fr 2fr auto;align-it
  .contact-links{gap:12px}
 }
 @media(prefers-reduced-motion:reduce){.ai-section .light-btn,.contact-button,.contact-links a{transition:none}}
+
+/* Services — product studio presentation */
+.service-list{margin-top:48px;border-top:1px solid var(--line)}
+.service-row{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:28px;align-items:start;padding:30px 8px 30px 0}
+.service-number{font-size:10px;letter-spacing:.12em;color:var(--subtle);padding-top:7px}
+.service-main{min-width:0}
+.service-heading{display:flex;align-items:baseline;justify-content:space-between;gap:24px}
+.service-heading h3{margin:0;font-size:clamp(30px,4vw,56px);line-height:.96;letter-spacing:-.055em;font-weight:500}
+.service-type{font-size:9px;letter-spacing:.13em;color:var(--accent);white-space:nowrap}
+.service-main p{max-width:690px;margin:15px 0 17px;color:var(--muted);font-size:13px;line-height:1.55}
+.service-tags{display:flex;flex-wrap:wrap;gap:7px}
+.service-tags span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:6px 9px;color:var(--subtle);background:rgba(255,255,255,.5)}
+.service-arrow{margin-top:6px;color:var(--subtle)}
+.service-row:hover .service-tags span{border-color:var(--accent-border);color:var(--accent)}
+@media(max-width:700px){
+ .service-list{margin-top:34px}
+ .service-row{grid-template-columns:34px minmax(0,1fr) auto;gap:10px;padding:23px 0}
+ .service-heading{display:block}
+ .service-heading h3{font-size:30px}
+ .service-type{display:block;margin-top:8px;font-size:8px}
+ .service-main p{font-size:12px;margin:12px 0 14px;max-width:100%}
+ .service-tags{gap:5px}
+ .service-tags span{font-size:8px;padding:5px 7px}
+ .service-arrow{width:17px;height:17px}
+}
