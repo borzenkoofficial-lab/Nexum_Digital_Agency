@@ -33,6 +33,12 @@ export default function DigitalCloud({language}:{language:Language}){
     <h1>{heroTitle}<br/><em>{heroEmphasis}</em></h1>
     <p>{ru?'Пространство, где собраны разработка, AI, автоматизация, проекты и технологии NEXUM — от первого экрана до работающей системы.':'A digital space bringing development, AI, automation, projects and NEXUM technology together — from the first screen to a working system.'}</p>
     <div className="cloud-hero-actions"><a href="#services" className="cloud-primary">{ru?'Исследовать облако':'Explore the cloud'} <ArrowUpRight size={17}/></a><a href="#contact" className="cloud-secondary">{ru?'Начать проект':'Start a project'}</a></div>
+    <div className="cloud-hero-system" aria-label={ru?'Система NEXUM':'NEXUM system'}>
+      <div><span>01</span><b>CORE</b><small>{ru?'Интеллект':'Intelligence'}</small></div>
+      <div><span>02</span><b>DEV</b><small>{ru?'Разработка':'Build'}</small></div>
+      <div><span>03</span><b>DIGITAL</b><small>{ru?'Продукты':'Products'}</small></div>
+      <div><span>04</span><b>PRODUCT</b><small>{ru?'Запуск':'Launch'}</small></div>
+    </div>
    </div>
    <div className="cloud-orbit" aria-hidden="true">
     <div className="orbit-core"><span>N.</span><small>NEXUM</small></div>
