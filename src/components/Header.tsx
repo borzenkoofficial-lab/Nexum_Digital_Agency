@@ -11,7 +11,8 @@ export default function Header({language,onLanguageChange}:Props){
  useEffect(()=>{const ids=links.map(([,href])=>href);const observer=new IntersectionObserver(entries=>{const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(visible)setActive('#'+visible.target.id)},{rootMargin:'-25% 0px -55% 0px',threshold:[0,.2,.5]});ids.forEach(h=>{const el=document.querySelector(h);if(el)observer.observe(el)});return()=>observer.disconnect()},[language])
  const links=language==='ru'?[['Работы','#work'],['Услуги','#services'],['Процесс','#process'],['Облако','#library'],['Экосистема','#ecosystem'],['Контакты','#contact']]:[['Work','#work'],['Services','#services'],['Process','#process'],['Cloud','#library'],['Ecosystem','#ecosystem'],['Contact','#contact']]
  const go=(href:string)=>{setOpen(false);const target=document.querySelector(href);if(target)target.scrollIntoView({behavior:'smooth'});else{location.hash='';setTimeout(()=>document.querySelector(href)?.scrollIntoView({behavior:'smooth'}),40)}}
- return <header className={open?'open':''}>
+ return <>
+  <header className={open?'open':''}>
   <a className="brand" href="#" onClick={e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}}>NEXUM<span>—</span></a>
   <nav>{links.map(([l,href])=><button key={l} onClick={()=>go(href)} className={active===href?'active':''}>{l}</button>)}</nav>
   <div className="header-actions">
@@ -20,5 +21,6 @@ export default function Header({language,onLanguageChange}:Props){
   </div>
   <button className="menu-toggle" onClick={()=>setOpen(!open)} aria-label={language==='ru'?'Меню':'Menu'}>{open?<X/>:<Menu/>}</button>
  </header>
- {cloudMenu&&<CloudMenu language={language} onClose={()=>setCloudMenu(false)}/>}
+ {cloudMenu&&<CloudMenu language={language} onClose={()=>setCloudMenu(false)}/>} 
+ </>
 }
