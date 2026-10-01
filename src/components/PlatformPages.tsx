@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ArrowRight, ArrowUpRight, BarChart3, Bell, Check, CircleHelp, Clock3, Code2, CreditCard, FileText, Filter, Heart, Layers3, LockKeyhole, MapPin, MessageCircle, PackageCheck, Palette, Search, ShieldCheck, ShoppingBag, Sparkles, Star, UserRound, Users, WandSparkles, X, Zap } from 'lucide-react'
 import { works } from '../data/content'
+import StartProjectPage from './StartProjectPage'
 
 export type Language = 'ru' | 'en'
 type Service = { id:string; category:string; ruCategory:string; title:string; ruTitle:string; description:string; ruDescription:string; from:number; timeline:string; icon:typeof Code2; tags:string[] }
@@ -41,7 +42,7 @@ const experts = [
 ]
 
 function go(hash:string){ location.hash = hash.startsWith('#') ? hash : '#'+hash }
-function t(ru:boolean,a:string,b:string){ return ru ? a : b }
+function t<T>(ru:boolean,a:T,b:T){ return ru ? a : b }
 function money(value:number,ru:boolean){ return ru ? value.toLocaleString('ru-RU')+' ₽' : '€'+Math.max(1,Math.round(value/90)).toLocaleString('en-US') }
 
 function Visual({tone='blue',label='NEXUM',sub='DIGITAL SYSTEM'}:{tone?:string;label?:string;sub?:string}){
@@ -174,7 +175,7 @@ export default function PlatformRouter({language}:{language:Language}){
  if(path==='#dashboard/freelancer')return <DashboardPage language={language} role="freelancer"/>
  if(path==='#dashboard/company')return <DashboardPage language={language} role="company"/>
  if(path==='#profile'||path==='#settings')return <DashboardPage language={language} role="client"/>
- if(path==='#start')return <BusinessPage language={language}/>
+ if(path==='#start')return <StartProjectPage language={language}/>
  if(path.startsWith('#service/'))return <ServiceDetailPage language={language} id={decodeURIComponent(path.split('/')[1]||'')}/>
  return <main className="nxp-auth-page"><div className="nxp-auth-card"><small>404</small><h1>Not found</h1><button className="nxp-button nxp-button-dark" onClick={()=>go('#')}>NEXUM <ArrowRight/></button></div></main>
 }
