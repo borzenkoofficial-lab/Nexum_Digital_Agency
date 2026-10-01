@@ -178,7 +178,43 @@ function ServiceDetailPage({language,id}:{language:Language;id:string}){
  const item=marketItem||services.find(x=>x.id===id)
  const rating=marketItem?.rating??4.9
  if(!item)return <main className="nxp-auth-page"><div className="nxp-auth-card"><h1>404</h1><p>Service not found.</p><button className="nxp-button nxp-button-dark" onClick={()=>go('#marketplace')}>Marketplace <ArrowRight/></button></div></main>
- return <main className="nxp-page nxp-service-detail"><div className="nxp-breadcrumb"><button onClick={()=>go('#marketplace')}>Marketplace</button><span>/</span><b>{ru?item.ruCategory:item.category}</b></div><section className="nxp-service-hero"><div><small>{ru?item.ruCategory:item.category}</small><h1>{ru?item.ruTitle:item.title}</h1><p>{ru?item.ruDescription:item.description}</p><div className="nxp-tag-row">{item.tags.map(x=><span key={x}>{x}</span>)}</div><div className="nxp-detail-actions"><button className="nxp-button nxp-button-dark" onClick={()=>setOpen(true)}>{t(ru,'Заказать','Order')} <ArrowUpRight/></button><button className="nxp-button nxp-button-light" onClick={()=>go('#experts')}>{t(ru,'Найти исполнителя','Find an expert')} <Users size={16}/></button></div></div><Visual tone={marketItem?.kind==='agent'?'violet':'blue'} label={item.category} sub={item.title}/></section><section className="nxp-detail-grid"><div><small>01 / INCLUDED</small><h2>{t(ru,'Что входит','What is included')}</h2><div className="nxp-check-list">{['Discovery','UX / structure','Production build','QA / launch'].map(x=><span key={x}><Check size={15}/>{x}</span>)}</div></div><div><small>02 / DELIVERY</small><h2>{t(ru,'Срок и стоимость','Timeline & price')}</h2><div className="nxp-detail-stat"><b>{money(item.from,ru)}</b><span>{t(ru,'ориентир «от»','indicative starting point')}</span></div><div className="nxp-detail-stat"><b>{item.timeline}</b><span>{t(ru,'типовой срок','typical timeline')}</span></div></div></section><section className="nxp-detail-grid"><div><small>03 / FLOW</small><h2>{t(ru,'Как проходит заказ','Order flow')}</h2><div className="nxp-step-list">{[t(ru,'Выбираете пакет','Choose a package'),t(ru,'Описываете задачу','Describe the task'),t(ru,'Добавляете материалы','Attach files'),t(ru,'Получаете scope','Receive scope'),t(ru,'Работаете в чате','Work in chat'),t(ru,'Подтверждаете результат','Confirm delivery')].map((x,i)=><div key={x}><span>0{i+1}</span><b>{x}</b></div>)}</div></div><div><small>04 / TRUST</small><h2>{t(ru,'Доверие','Trust')}</h2><div className="nxp-review-box"><Star size={17} fill="currentColor"/><b>{rating}</b><span>{t(ru,'Средний рейтинг','Average rating')}</span></div></div></section>{open&&<OrderModal item={item} language={language} onClose={()=>setOpen(false)}/>}</main>
+ return <main className="nxp-page nxp-service-detail"><div className="nxp-breadcrumb"><button onClick={()=>go('#marketplace')}>Marketplace</button><span>/</span><b>{ru?item.ruCategory:item.category}</b></div><section className="nxp-service-hero"><div><small>{ru?item.ruCategory:item.category}</small><h1>{ru?item.ruTitle:item.title}</h1><p>{ru?item.ruDescription:item.description}</p><div className="nxp-tag-row">{item.tags.map(x=><span key={x}>{x}</span>)}</div><div className="nxp-detail-actions"><button className="nxp-button nxp-button-dark" onClick={()=>setOpen(true)}>{t(ru,'Заказать','Order')} <ArrowUpRight/></button><button className="nxp-button nxp-button-light" onClick={()=>go('#experts')}>{t(ru,'Найти исполнителя','Find an expert')} <Users size={16}/></button></div></div><Visual tone={marketItem?.kind==='agent'?'violet':'blue'} label={item.category} sub={item.title}/></section><section className="nxp-detail-grid"><div><small>01 / INCLUDED</small><h2>{t(ru,'Что входит','What is included')}</h2><div className="nxp-check-list">{['Discovery','UX / structure','Production build','QA / launch'].map(x=><span key={x}><Check size={15}/>{x}</span>)}</div></div><div><small>02 / DELIVERY</small><h2>{t(ru,'Срок и стоимость','Timeline & price')}</h2><div className="nxp-detail-stat"><b>{money(item.from,ru)}</b><span>{t(ru,'ориентир «от»','indicative starting point')}</span></div><div className="nxp-detail-stat"><b>{item.timeline}</b><span>{t(ru,'типовой срок','typical timeline')}</span></div></div></section><section className="nxp-detail-grid"><div><small>03 / FLOW</small><h2>{t(ru,'Как проходит заказ','Order flow')}</h2><div className="nxp-step-list">{[t(ru,'Выбираете пакет','Choose a package'),t(ru,'Описываете задачу','Describe the task'),t(ru,'Добавляете материалы','Attach files'),t(ru,'Получаете scope','Receive scope'),t(ru,'Работаете в чате','Work in chat'),t(ru,'Подтверждаете результат','Confirm delivery')].map((x,i)=><div key={x}><span>0{i+1}</span><b>{x}</b></div>)}</div></div><div><small>04 / TRUST</small><h2>{t(ru,'Доверие','Trust')}</h2><div className="nxp-review-box"><Star size={17} fill="currentColor"/><b>{rating}</b><span>{t(ru,'Средний рейтинг','Average rating')}</span></div></div></section>
+<section className="nx2-service-extra">
+ <div className="nx2-panel">
+  <small>05 / DELIVERY</small>
+  <h2>{t(ru,<>Из задачи<br/><em>в результат.</em></>,<>From brief<br/><em>to outcome.</em></>)}</h2>
+  <div className="nx2-list">
+   {[t(ru,'Discovery и уточнение задачи','Discovery and scoping'),t(ru,'UX / структура решения','UX and solution structure'),t(ru,'Разработка и интеграции','Production and integrations'),t(ru,'QA, запуск и передача','QA, launch and handover')].map((x,i)=><div key={x}><b>0{i+1}</b><span>{x}</span></div>)}
+  </div>
+ </div>
+ <div className="nx2-panel">
+  <small>06 / FAQ</small>
+  <h2>{t(ru,'Вопросы','Questions')}</h2>
+  <div className="nx2-faq">
+   <details open><summary>{t(ru,'Можно начать с индивидуального запроса?','Can I start with a custom brief?')}</summary><p>{t(ru,'Да. Если готовый пакет не подходит, опишите задачу — scope формируется после первичного разбора.','Yes. If a package does not fit, submit a brief and scope is shaped after discovery.')}</p></details>
+   <details><summary>{t(ru,'Можно подключить AI и интеграции?','Can AI and integrations be included?')}</summary><p>{t(ru,'Да. AI, API, CRM, платежи и другие модули добавляются в состав решения по задаче.','Yes. AI, APIs, CRM, payments and other modules can be included according to the brief.')}</p></details>
+   <details><summary>{t(ru,'Как формируется финальная цена?','How is the final price formed?')}</summary><p>{t(ru,'Цена «от» — ориентир. Финальная оценка зависит от сценариев, объёма интерфейса, интеграций и требований.','The starting price is indicative. Final scope depends on workflows, interface depth, integrations and requirements.')}</p></details>
+  </div>
+ </div>
+</section>
+<section className="nx2-service-extra">
+ <div className="nx2-panel">
+  <small>07 / REVIEWS</small><h2>{t(ru,'Опыт клиентов','Client experience')}</h2>
+  <div className="nx2-review"><strong>4.9 / 5 · {t(ru,'средняя оценка','average rating')}</strong><span>{t(ru,'Отзывы подключаются к профилю исполнителя и истории заказов.','Reviews will connect to the expert profile and order history.')}</span></div>
+  <div className="nx2-review"><strong>{t(ru,'Проверенный delivery flow','Verified delivery flow')}</strong><span>{t(ru,'Заказ → чат → результат → подтверждение → отзыв.','Order → chat → delivery → confirmation → review.')}</span></div>
+ </div>
+ <div className="nx2-panel">
+  <small>08 / RELATED</small><h2>{t(ru,'Похожие решения','Related solutions')}</h2>
+  <div className="nx2-list">
+   {services.filter(s=>s.id!==item.id).slice(0,4).map(s=><button key={s.id} onClick={()=>go('#service/'+s.id)}><b>{ru?s.ruTitle:s.title}</b><span>{money(s.from,ru)} ↗</span></button>)}
+  </div>
+ </div>
+</section>
+<section className="nx2-service-cta">
+ <div><small>09 / NEXT STEP</small><h2>{t(ru,<>Готовы начать<br/><em>заказ?</em></>,<>Ready to<br/><em>start?</em></>)}</h2></div>
+ <button className="nxp-button nxp-button-dark" onClick={()=>setOpen(true)}>{t(ru,'Заказать услугу','Order this service')} <ArrowUpRight/></button>
+</section>
+</main>
 }
 
 function OrderModal({item,language,onClose}:{item:Service|Item;language:Language;onClose:()=>void}){
