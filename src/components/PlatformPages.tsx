@@ -72,7 +72,8 @@ function Home({language}:{language:Language}){
 
 function ServicesCatalog({language}:{language:Language}){
  const ru=language==='ru'
- const [category,setCategory]=useState('ALL')
+ const initialCategory=new URLSearchParams(location.hash.split('?')[1]||'').get('category')||'ALL'
+ const [category,setCategory]=useState(initialCategory)
  const [query,setQuery]=useState('')
  const [sort,setSort]=useState('popular')
  const visible=useMemo(()=>{
@@ -150,7 +151,7 @@ function AboutPage({language}:{language:Language}){
 
 function SupportPage({language}:{language:Language}){
  const ru=language==='ru'
- return <main className="nxp-page"><Hero eyebrow="10 / SUPPORT" title={t(ru,<>Поддержка.<br/><em>Без лишнего пути.</em></>,<>Support.<br/><em>Without the detour.</em></>)} copy={t(ru,'FAQ, документы, обращения и уведомления в одном контуре.','FAQ, documents, requests and notifications in one layer.')}/><section className="nxp-section"><div className="nxp-support-grid"><button><CircleHelp/><div><b>FAQ</b><span>{t(ru,'Ответы на типовые вопросы','Common answers')}</span></div><ArrowUpRight/></button><button><FileText/><div><b>{t(ru,'Документы','Documents')}</b><span>{t(ru,'Условия, NDA, политика','Terms, NDA, policy')}</span></div><ArrowUpRight/></button><button><MessageCircle/><div><b>{t(ru,'Поддержка','Support')}</b><span>{t(ru,'Создать обращение','Create a request')}</span></div><ArrowUpRight/></button><button><Bell/><div><b>{t(ru,'Уведомления','Notifications')}</b><span>{t(ru,'Статусы заказов и сообщений','Orders and messages')}</span></div><ArrowUpRight/></button></div></section></main>
+ return <main className="nxp-page"><Hero eyebrow="10 / SUPPORT" title={t(ru,<>Поддержка.<br/><em>Без лишнего пути.</em></>,<>Support.<br/><em>Without the detour.</em></>)} copy={t(ru,'FAQ, документы, обращения и уведомления в одном контуре.','FAQ, documents, requests and notifications in one layer.')}/><section className="nxp-section"><div className="nxp-support-grid"><button onClick={()=>go("#journal")}><CircleHelp/><div><b>FAQ</b><span>{t(ru,'Ответы на типовые вопросы','Common answers')}</span></div><ArrowUpRight/></button><button onClick={()=>go("#business")}><FileText/><div><b>{t(ru,'Документы','Documents')}</b><span>{t(ru,'Условия, NDA, политика','Terms, NDA, policy')}</span></div><ArrowUpRight/></button><button onClick={()=>go("#start")}><MessageCircle/><div><b>{t(ru,'Поддержка','Support')}</b><span>{t(ru,'Создать обращение','Create a request')}</span></div><ArrowUpRight/></button><button onClick={()=>go("#dashboard/client")}><Bell/><div><b>{t(ru,'Уведомления','Notifications')}</b><span>{t(ru,'Статусы заказов и сообщений','Orders and messages')}</span></div><ArrowUpRight/></button></div></section></main>
 }
 
 function AuthPage({language,mode}:{language:Language;mode:'login'|'register'|'forgot'|'reset'}){
