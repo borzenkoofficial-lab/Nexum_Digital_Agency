@@ -1,11 +1,19 @@
-import {Menu,X,Grid2X2} from 'lucide-react';import {useEffect,useState} from 'react'
-import CloudMenu from './CloudMenu'
-type Language='ru'|'en'
-type Props={language:Language;onLanguageChange:(language:Language)=>void}
-export default function Header({language,onLanguageChange}:Props){
- const[open,setOpen]=useState(false),[cloudMenu,setCloudMenu]=useState(false),[path,setPath]=useState(location.hash)
- const links=language==='ru'?[['Главная','#top'],['Услуги','#services'],['Портфолио','#work'],['Marketplace','#marketplace']]:[['Home','#top'],['Services','#services'],['Portfolio','#work'],['Marketplace','#marketplace']]
- useEffect(()=>{const f=()=>setPath(location.hash);addEventListener('hashchange',f);return()=>removeEventListener('hashchange',f)},[])
- const go=(href:string)=>{setOpen(false);if(href==='#top'){location.hash='';window.scrollTo({top:0,behavior:'smooth'})}else location.hash=href.slice(1)}
- return <><header className={open?'open':''}><a className="brand" href="#" onClick={e=>{e.preventDefault();go('#top')}}>NEXUM<span>—</span></a><nav>{links.map(([l,href])=><button key={l} className={path===href?'active':''} onClick={()=>go(href)}>{l}</button>)}</nav><div className="header-actions"><div className="language-switch" role="group" aria-label="Language"><button className={language==='ru'?'active':''} onClick={()=>onLanguageChange('ru')}>RU</button><span>/</span><button className={language==='en'?'active':''} onClick={()=>onLanguageChange('en')}>EN</button></div><button className="header-menu-trigger" onClick={()=>setCloudMenu(true)} aria-label={language==='ru'?'Открыть меню':'Open menu'}><Grid2X2/></button><button className="header-cta" onClick={()=>go('#start')}>{language==='ru'?'Заказать проект':'Start a project'} <span>↗</span></button></div><button className="menu-toggle" onClick={()=>setOpen(!open)} aria-label={language==='ru'?'Меню':'Menu'}>{open?<X/>:<Menu/>}</button></header>{cloudMenu&&<CloudMenu language={language} onClose={()=>setCloudMenu(false)}/>}</>
+import { Menu, X, Search, Command, ChevronDown } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import type { Language } from './PlatformPages'
+
+type Props = { language:Language; onLanguageChange:(language:Language)=>void; onOpenOS?:()=>void }
+
+const nav = {
+  ru:[['Услуги','#services'],['Marketplace','#marketplace'],['AI','#ai'],['Проекты','#work'],['Для бизнеса','#business']],
+  en:[['Services','#services'],['Marketplace','#marketplace'],['AI','#ai'],['Projects','#work'],['For business','#business']]
+}
+
+export default function Header({language,onLanguageChange,onOpenOS}:Props){
+ const [open,setOpen]=useState(false),[search,setSearch]=useState(false),[query,setQuery]=useState('')
+ const links=nav[language==='ru'?'ru':'en']
+ useEffect(()=>{const f=(e:KeyboardEvent)=>{if(e.key==='Escape'){setOpen(false);setSearch(false)}if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();setSearch(true)}};addEventListener('keydown',f);return()=>removeEventListener('keydown',f)},[])
+ const go=(href:string)=>{setOpen(false);location.hash=href}
+ const submit=(e:React.FormEvent)=>{e.preventDefault();setSearch(false);location.hash='#marketplace?search='+encodeURIComponent(query)}
+ return <><header className={open?'nxp-site-header open':''}><a className="nxp-brand" href="#" onClick={e=>{e.preventDefault();go('#')}}>NEXUM</a><nav className="nxp-main-nav">{links.map(([label,href])=><button key={href} onClick={()=>go(href)}>{label}</button>)}<button className="nxp-nav-more" onClick={()=>setOpen(v=>!v)} aria-label="More"><ChevronDown size={14}/></button></nav><div className="nxp-header-actions"><button className="nxp-header-search" onClick={()=>setSearch(true)}><Search size={16}/><span>{language==='ru'?'Поиск':'Search'}</span><kbd>⌘K</kbd></button>{onOpenOS&&<button className="nxp-os-trigger" onClick={onOpenOS}><Command size={15}/><span>NEXUM OS</span></button>}<div className="nxp-language"><button className={language==='ru'?'active':''} onClick={()=>onLanguageChange('ru')}>RU</button><span>/</span><button className={language==='en'?'active':''} onClick={()=>onLanguageChange('en')}>EN</button></div><button className="nxp-login-link" onClick={()=>go('#login')}>{language==='ru'?'Войти':'Log in'}</button><button className="nxp-header-cta" onClick={()=>go('#start')}>{language==='ru'?'Начать':'Get started'} <span>↗</span></button><button className="nxp-mobile-toggle" onClick={()=>setOpen(v=>!v)}>{open?<X/>:<Menu/>}</button></div></header>{open&&<div className="nxp-mobile-nav"><div>{links.map(([label,href])=><button key={href} onClick={()=>go(href)}>{label}<span>↗</span></button>)}</div><div className="nxp-mobile-secondary"><button onClick={()=>go('#experts')}>{language==='ru'?'Исполнители':'Experts'}</button><button onClick={()=>go('#pricing')}>{language==='ru'?'Цены':'Pricing'}</button><button onClick={()=>go('#journal')}>{language==='ru'?'Блог':'Knowledge'}</button><button onClick={()=>go('#support')}>{language==='ru'?'Поддержка':'Support'}</button></div></div>}{search&&<div className="nxp-search-layer" onMouseDown={e=>e.currentTarget===e.target&&setSearch(false)}><form className="nxp-global-search" onSubmit={submit}><div><Search size={19}/><input autoFocus value={query} onChange={e=>setQuery(e.target.value)} placeholder={language==='ru'?'Искать услуги, проекты, AI, специалистов…':'Search services, projects, AI, experts…'}/><kbd>ESC</kbd></div><p>{language==='ru'?'Поиск ведёт в Marketplace и будущий глобальный индекс NEXUM.':'Search feeds the Marketplace and the future NEXUM global index.'}</p><button className="nxp-button nxp-button-dark" type="submit">{language==='ru'?'Найти':'Search'} <Search size={15}/></button></form></div>}</>
 }
