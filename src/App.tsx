@@ -1,27 +1,19 @@
 import {useEffect,useState} from 'react'
-import {Command} from 'lucide-react'
 import Header from './components/Header'
-import ProjectSpace from './components/ProjectSpace'
-import DigitalCloud from './components/DigitalCloud'
-import ServicesPage from './components/ServicesPage'
-import PortfolioPage from './components/PortfolioPage'
-import MarketplacePage from './components/MarketplacePage'
-import StartProjectPage from './components/StartProjectPage'
+import PlatformRouter, { type Language } from './components/PlatformPages'
 import NexumOS from './components/NexumOS'
-export type Language='ru'|'en'
-function App(){
- const[path,setPath]=useState(location.hash)
- const[osOpen,setOsOpen]=useState(false)
- const[language,setLanguage]=useState<Language>(()=>{try{return localStorage.getItem('nexum-language')==='en'?'en':'ru'}catch{return'ru'}})
+import ProjectSpace from './components/ProjectSpace'
+
+export default function App(){
+ const [path,setPath]=useState(location.hash)
+ const [osOpen,setOsOpen]=useState(false)
+ const [language,setLanguage]=useState<Language>(()=>{try{return localStorage.getItem('nexum-language')==='en'?'en':'ru'}catch{return'ru'}})
  useEffect(()=>{const onHash=()=>setPath(location.hash);addEventListener('hashchange',onHash);return()=>removeEventListener('hashchange',onHash)},[])
  useEffect(()=>{try{localStorage.setItem('nexum-language',language)}catch{}},[language])
- useEffect(()=>{if(path==='#ecosystem'||path==='#process'){requestAnimationFrame(()=>document.getElementById(path.slice(1))?.scrollIntoView({behavior:'smooth'}))}},[path])
- let page=<DigitalCloud language={language}/>
- if(path==='#services')page=<ServicesPage language={language}/>
- else if(path==='#work')page=<PortfolioPage language={language}/>
- else if(path==='#marketplace')page=<MarketplacePage language={language}/>
- else if(path==='#start')page=<StartProjectPage language={language}/>
- else if(path.startsWith('#case/'))page=<ProjectSpace id={path.split('/')[1]} language={language}/>
- return <><Header language={language} onLanguageChange={setLanguage}/><button className="nexum-os-launcher" onClick={()=>setOsOpen(true)} aria-label="Open NEXUM OS"><Command size={16}/><span>NEXUM OS</span></button>{page}{osOpen&&<NexumOS language={language} onClose={()=>setOsOpen(false)}/>}</>
+ useEffect(()=>{window.scrollTo({top:0,behavior:'auto'})},[path])
+ const purePath=path.split('?')[0]
+ const isAuth=purePath==='#login'||purePath==='#register'||purePath==='#forgot-password'||purePath==='#reset-password'
+ const isDashboard=purePath.startsWith('#dashboard')||purePath==='#profile'||purePath==='#settings'
+ const isCase=purePath.startsWith('#case/')
+ return <><>{!isAuth&&!isDashboard&&<Header language={language} onLanguageChange={setLanguage} onOpenOS={()=>setOsOpen(true)}/>}</>{isCase?<ProjectSpace id={decodeURIComponent(purePath.split('/')[1]||'01')} language={language}/>:<PlatformRouter language={language}/>} {!isAuth&&!isDashboard&&<footer className="nxp-footer"><div><b>NEXUM</b><span>Digital services & technology.</span></div><div><strong>Products</strong><button onClick={()=>location.hash='#ai'}>AI</button><button onClick={()=>location.hash='#marketplace'}>Marketplace</button><button onClick={()=>location.hash='#services'}>Services</button><button onClick={()=>location.hash='#work'}>Projects</button></div><div><strong>Company</strong><button onClick={()=>location.hash='#about'}>About</button><button onClick={()=>location.hash='#business'}>For Business</button><button onClick={()=>location.hash='#experts'}>Experts</button><button onClick={()=>location.hash='#start'}>Contact</button></div><div><strong>Resources</strong><button onClick={()=>location.hash='#journal'}>Knowledge</button><button onClick={()=>location.hash='#support'}>Support</button><button onClick={()=>location.hash='#pricing'}>Pricing</button></div><div><strong>Legal</strong><span>Privacy</span><span>Terms</span><span>Cookies</span></div><div className="nxp-footer-bottom"><span>© 2026 NEXUM Digital</span><span>AI / DEV / DIGITAL / MARKET</span></div></footer>}{osOpen&&<NexumOS language={language} onClose={()=>setOsOpen(false)}/>}</>
 }
-export default App
