@@ -134,12 +134,14 @@ function Home({language}:{language:Language}){
     action={<button className="nxp-outline-link" onClick={()=>go('#services')}>{t(ru,'Все услуги','All services')} <ArrowUpRight/></button>}
    />
    <div className="nxp-category-grid">
-    {categories.map(([key,label,Icon],i)=>
-     <button key={key} className="nxp-category-card" onClick={()=>go('#services?category='+encodeURIComponent(key))}>
-      <span>0{i+1}</span><Icon size={20}/><strong>{ru?label:key}</strong>
-      <p>{services.filter(s=>s.category===key).length} {t(ru,'направления','directions')}</p><ArrowUpRight/>
+    {categories.map(([key,label,Icon],i)=>{
+     const sample=services.find(s=>s.category===key) || services[0]
+     return <button key={key} className="nxp-category-card" onClick={()=>go('#services?category='+encodeURIComponent(key))}>
+      <div className="nxp-category-visual"><Visual tone={key==='AI'?'violet':key==='DESIGN'?'green':key==='3D / CREATIVE'?'violet':'blue'} label={key} sub={ru?label:key}/></div>
+      <div className="nxp-category-content"><span>0{i+1}</span><Icon size={18}/><strong>{ru?label:key}</strong><p>{services.filter(s=>s.category===key).length} {t(ru,'направления','directions')}</p></div>
+      <ArrowUpRight/>
      </button>
-    )}
+    })}
    </div>
   </section>
   <section className="nxp-dark-section">
@@ -205,13 +207,15 @@ function Home({language}:{language:Language}){
    </div>
   </section>
   <section className="nxp-business-band">
-   <div><small>05 / FOR BUSINESS</small><h2>{t(ru,<>Цифровая команда<br/><em>по запросу.</em></>,<>A digital team<br/><em>on demand.</em></>)}</h2><p>{t(ru,'Корпоративные системы, AI, автоматизация, приложения и поддержка — в одном контуре.','Corporate systems, AI, automation, apps and support in one operating layer.')}</p></div>
+   <div className="nxp-business-copy"><small>05 / FOR BUSINESS</small><h2>{t(ru,<>Цифровая команда<br/><em>по запросу.</em></>,<>A digital team<br/><em>on demand.</em></>)}</h2><p>{t(ru,'Корпоративные системы, AI, автоматизация, приложения и поддержка — в одном контуре.','Corporate systems, AI, automation, apps and support in one operating layer.')}</p><div className="nxp-business-pills"><span>AI</span><span>CRM</span><span>WEB</span><span>AUTOMATION</span></div></div>
+   <div className="nxp-business-visual"><ProductStage label={ru?'BUSINESS SYSTEM':'BUSINESS SYSTEM'} tone="blue"/><GlassOrb label="B2B" tone="green"/></div>
    <button onClick={()=>go('#business')} className="nxp-button nxp-button-light">{t(ru,'Для бизнеса','For business')} <ArrowUpRight/></button>
   </section>
   <section className="nxp-cta-section">
-   <small>06 / START</small><h2>{t(ru,<>Есть задача?<br/><em>Запускаем.</em></>,<>Have a brief?<br/><em>Let's build.</em></>)}</h2>
+   <div className="nxp-cta-visual"><div className="nxp-cta-glow"/><GlassOrb label="N" tone="violet"/><div className="nxp-cta-orbit"/></div>
+   <div className="nxp-cta-copy"><small>06 / START</small><h2>{t(ru,<>Есть задача?<br/><em>Запускаем.</em></>,<>Have a brief?<br/><em>Let's build.</em></>)}</h2>
    <p>{t(ru,'Начните с решения или свободного описания задачи для AI.','Start from a solution or free-form AI brief.')}</p>
-   <div><button className="nxp-button nxp-button-dark" onClick={()=>go('#start')}>{t(ru,'Начать проект','Start a project')} <ArrowUpRight/></button><button className="nxp-button nxp-button-light" onClick={()=>go('#ai')}><Sparkles/> AI</button></div>
+   <div><button className="nxp-button nxp-button-dark" onClick={()=>go('#start')}>{t(ru,'Начать проект','Start a project')} <ArrowUpRight/></button><button className="nxp-button nxp-button-light" onClick={()=>go('#ai')}><Sparkles/> AI</button></div></div>
   </section>
  </main>
 }
