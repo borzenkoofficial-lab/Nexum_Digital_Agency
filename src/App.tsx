@@ -36,9 +36,12 @@ function ProductVisual(){
 
 function SectionTitle({eyebrow,title,text}:{eyebrow:string;title:string;text?:string}){return <div className="section-title"><span>{eyebrow}</span><h2>{title}</h2>{text&&<p>{text}</p>}</div>}
 
-function ServiceGrid(){return <div className="service-grid">{services.map(([tag,title,text])=><button className="service-card" key={tag} onClick={()=>go('start')}><span>{tag}</span><div><h3>{title}</h3><p>{text}</p></div><b>↗</b></button>)}</div>}
+function ServiceGrid(){
+ const [active,setActive]=useState<string|null>(null)
+ return <div className="service-grid">{services.map(([tag,title,text])=><button className={'service-card '+(active===tag?'selected':'')} key={tag} onClick={()=>setActive(active===tag?null:tag)}><span>{tag}</span><div><h3>{title}</h3><p>{text}</p>{active===tag&&<small className="service-more">Strategy · UX · Production · Launch</small>}</div><b>{active===tag?'−':'↗'}</b></button>)}</div>}
 
-function ProjectGrid(){return <div className="project-grid">{projects.map(([name,type,text],i)=><button className={'project-card p'+i} key={name} onClick={()=>go('portfolio')}><div className="project-art"><div className="art-orb"/><div className="art-window"><small>{type}</small><strong>{name}</strong><span>{text}</span></div></div><div className="project-info"><span>{type}</span><h3>{name}</h3><b>View case →</b></div></button>)}</div>}
+function ProjectGrid(){
+ return <div className="project-grid">{projects.map(([name,type,text],i)=><button className={'project-card p'+i} key={name} onClick={()=>go('portfolio')}><div className="project-art"><div className="art-orb"/><div className="art-grid"/><div className="art-window"><small>{type}</small><strong>{name}</strong><span>{text}</span></div><span className="case-index">0{i+1}</span></div><div className="project-info"><span>{type}</span><h3>{name}</h3><b>View case →</b></div></button>)}</div>
 
 function Reviews(){const data=[['01','Основатель продукта','“Команда быстро превратила сложную идею в понятный продуктовый интерфейс.”'],['02','Product lead','“Сильная связка стратегии, дизайна и разработки без лишней бюрократии.”'],['03','Founder','“Нам было важно получить не картинку, а систему, которую можно развивать.”']];return <div className="review-grid">{data.map(([n,role,text])=><article className="review" key={n}><span>{n}</span><div><div className="stars">★★★★★</div><p>{text}</p><small>{role}</small></div></article>)}</div>}
 
