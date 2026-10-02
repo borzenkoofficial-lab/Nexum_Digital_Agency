@@ -59,7 +59,15 @@ function DigitalGlobe(){
  </div>
 }
 function Visual({tone='blue',label='NEXUM',sub='DIGITAL SYSTEM'}:{tone?:string;label?:string;sub?:string}){
- return <div className={'nxp-visual nxp-tone-'+tone}><div className="nxp-visual-grid"/><div className="nxp-visual-orbit nxp-orbit-a"/><div className="nxp-visual-orbit nxp-orbit-b"/><div className="nxp-visual-panel"><span>{label}</span><b>{sub}</b><i/><i/><i/></div><div className="nxp-visual-code"><span>01</span><span>AI</span><span>WEB</span></div></div>
+ return <div className={'nxp-visual nxp-tone-'+tone}>
+  <div className="nxp-liquid-glass nxp-glass-a"/><div className="nxp-liquid-glass nxp-glass-b"/>
+  <div className="nxp-visual-grid"/><div className="nxp-visual-orbit nxp-orbit-a"/><div className="nxp-visual-orbit nxp-orbit-b"/>
+  <div className="nxp-visual-3d-orb"><i/><i/><i/><i/><i/><i/></div>
+  <div className="nxp-visual-ring nxp-ring-a"/><div className="nxp-visual-ring nxp-ring-b"/>
+  <div className="nxp-visual-panel"><span>{label}</span><b>{sub}</b><i/><i/><i/></div>
+  <div className="nxp-visual-code"><span>01</span><span>AI</span><span>WEB</span></div>
+  <div className="nxp-visual-cursor">↗</div>
+ </div>
 }
 function Head({eyebrow,title,copy,action}:{eyebrow:string;title:React.ReactNode;copy?:React.ReactNode;action?:React.ReactNode}){
  return <div className="nxp-section-head"><div><small>{eyebrow}</small><h2>{title}</h2>{copy&&<p>{copy}</p>}</div>{action}</div>
