@@ -411,3 +411,31 @@ body{margin:0;overflow-x:hidden}
 .nxp-footer{position:relative;overflow:hidden;background:rgba(247,248,250,.9)!important;border-top:1px solid rgba(20,24,32,.07)!important}
 .nxp-footer:before{content:'';position:absolute;width:360px;height:220px;right:5%;top:-90px;border-radius:50%;background:rgba(125,120,255,.09);filter:blur(55px);pointer-events:none}
 .nxp-footer>*{position:relative;z-index:1}
+
+/* Reusable 3D product stage */
+.nxp-spatial-intro{display:grid;grid-template-columns:minmax(420px,1.05fr) minmax(300px,.95fr);gap:clamp(40px,7vw,120px);align-items:center;margin-bottom:clamp(44px,7vw,96px)}
+.nxp-spatial-copy{max-width:680px}
+.nxp-spatial-copy small{font-size:11px;letter-spacing:.14em;font-weight:700;opacity:.55}
+.nxp-spatial-copy h2{font-size:clamp(42px,5.2vw,86px);line-height:.94;letter-spacing:-.055em;margin:18px 0}
+.nxp-spatial-copy h2 em{font-style:normal;opacity:.42}
+.nxp-spatial-copy p{max-width:560px;font-size:18px;line-height:1.55;opacity:.66;margin:0 0 28px}
+.nxp-product-stage{position:relative;min-height:460px;perspective:1200px;isolation:isolate}
+.nxp-stage-backdrop{position:absolute;inset:12% 8%;border-radius:42px;background:radial-gradient(circle at 50% 50%,rgba(118,125,255,.18),transparent 64%);filter:blur(5px);transform:translateZ(-80px);animation:nxpStagePulse 7s ease-in-out infinite alternate}
+.nxp-stage-card{position:absolute;left:8%;top:12%;width:78%;height:66%;border:1px solid rgba(255,255,255,.82);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(235,239,250,.48));box-shadow:0 35px 80px rgba(39,44,75,.13),inset 0 1px rgba(255,255,255,.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);transform:rotateX(5deg) rotateY(-10deg) translateZ(25px);transform-style:preserve-3d;animation:nxpProductFloat 8s ease-in-out infinite}
+.nxp-stage-top{height:44px;display:flex;align-items:center;gap:6px;padding:0 16px;border-bottom:1px solid rgba(30,35,55,.07)}
+.nxp-stage-top>span{width:7px;height:7px;border-radius:50%;background:rgba(30,35,55,.16)}
+.nxp-stage-top small{margin-left:auto;font-size:9px;letter-spacing:.12em;opacity:.5}
+.nxp-stage-body{display:grid;grid-template-columns:18% 1fr;height:calc(100% - 44px);padding:16px;gap:14px}
+.nxp-stage-sidebar{border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(190,198,220,.28))}
+.nxp-stage-content{position:relative;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:12px}
+.nxp-stage-content i{display:block;border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.8),rgba(175,187,218,.3));border:1px solid rgba(255,255,255,.72);box-shadow:inset 0 1px rgba(255,255,255,.9)}
+.nxp-glass-orb{position:absolute;right:2%;bottom:6%;width:105px;height:105px;border-radius:50%;transform-style:preserve-3d;filter:drop-shadow(0 25px 25px rgba(40,45,80,.16));animation:nxpOrbFloat 6s ease-in-out infinite;z-index:3}
+.nxp-glass-orb:before{content:'';position:absolute;inset:5%;border-radius:50%;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.98),rgba(195,210,255,.42) 28%,rgba(89,104,255,.15) 68%,rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.9);box-shadow:inset -12px -14px 25px rgba(60,70,150,.08),inset 10px 8px 18px rgba(255,255,255,.8)}
+.nxp-glass-orb span{position:absolute;inset:22%;border:1px solid rgba(255,255,255,.7);border-radius:50%;transform:rotateX(68deg) rotateZ(20deg)}
+.nxp-glass-orb i{position:absolute;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 16px rgba(120,135,255,.65);top:24%;left:65%}
+.nxp-glass-orb b{position:absolute;inset:0;display:grid;place-items:center;font-size:11px;letter-spacing:.08em}
+.nxp-stage-ring{position:absolute;right:-1%;bottom:2%;width:170px;height:55px;border:1px solid rgba(110,120,255,.22);border-radius:50%;transform:rotate(-12deg);animation:nxpRingSpin 12s linear infinite}
+@keyframes nxpProductFloat{0%,100%{transform:rotateX(5deg) rotateY(-10deg) translate3d(0,0,25px)}50%{transform:rotateX(2deg) rotateY(-5deg) translate3d(0,-10px,40px)}}
+@keyframes nxpStagePulse{from{transform:translateZ(-80px) scale(.94);opacity:.5}to{transform:translateZ(-80px) scale(1.06);opacity:1}}
+@media(max-width:900px){.nxp-spatial-intro{grid-template-columns:1fr;gap:26px}.nxp-product-stage{min-height:360px}.nxp-stage-card{left:3%;width:90%}.nxp-glass-orb{right:0;bottom:0;width:82px;height:82px}}
+@media(prefers-reduced-motion:reduce){.nxp-stage-card,.nxp-stage-backdrop,.nxp-glass-orb,.nxp-stage-ring{animation:none}}
