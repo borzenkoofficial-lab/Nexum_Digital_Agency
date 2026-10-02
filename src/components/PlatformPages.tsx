@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, ArrowUpRight, BarChart3, Bell, Check, CircleHelp, Clock3, Code2, CreditCard, FileText, Filter, Heart, Layers3, LockKeyhole, MapPin, MessageCircle, PackageCheck, Palette, Search, ShieldCheck, ShoppingBag, Sparkles, Star, UserRound, Users, WandSparkles, X, Zap } from 'lucide-react'
-import { works } from '../data/content'
 import StartProjectPage from './StartProjectPage'
 import ShowcaseGallery from './ShowcaseGallery'
 
@@ -197,21 +196,10 @@ function Home({language}:{language:Language}){
    </div>
   </section>
 
-  <section className="nxp-home-work">
-   <div className="nxp-home-work-head">
-    <div><small>03 / SELECTED WORK</small><h2>{t(ru,<>Продукты, которые<br/><em>можно показать.</em></>,<>Products worth<br/><em>showing.</em></>)}</h2></div>
-    <button className="nxp-outline-link" onClick={()=>go('#work')}>{t(ru,'Все проекты','All projects')} <ArrowUpRight/></button>
-   </div>
-   <div className="nxp-home-work-grid">
-    {works.slice(0,3).map((w,i)=>
-     <button key={w.id} className="nxp-home-work-card" onClick={()=>go('#case/'+w.id)}>
-      <Visual tone={i===1?'violet':i===2?'green':'blue'} label={w.category} sub={ru?w.ruTitle:w.title}/>
-      <div className="nxp-home-work-info"><small>{ru?w.ruCategory:w.category}</small><h3>{ru?w.ruTitle:w.title}</h3><p>{ru?w.ruDescription:w.description}</p><span>{t(ru,'Открыть проект','Open project')} <ArrowUpRight size={15}/></span></div>
-     </button>
-    )}
-   </div>
+  <section className="nxp-home-solutions">
+   <div className="nxp-home-solutions-head"><div><small>03 / SOLUTIONS</small><h2>{t(ru,<>Направления,<br/><em>которые можно запустить.</em></>,<>Solutions<br/><em>you can launch.</em></>)}</h2></div><button className="nxp-outline-link" onClick={()=>go('#solutions')}>{t(ru,'Все решения','Explore solutions')} <ArrowUpRight/></button></div>
+   <div className="nxp-home-solutions-grid">{services.slice(0,3).map((item,i)=><button key={item.id} onClick={()=>go('#service/'+item.id)}><div className={'nxp-home-solution-art tone-'+(i===1?'violet':i===2?'green':'blue')}><span>{String(i+1).padStart(2,'0')}</span><b>{item.category}</b><i/></div><small>{ru?item.ruCategory:item.category}</small><h3>{ru?item.ruTitle:item.title}</h3><p>{ru?item.ruDescription:item.description}</p><span>{t(ru,'Открыть решение','Open solution')} <ArrowUpRight/></span></button>)}</div>
   </section>
-
   <section className="nxp-home-business">
    <div className="nxp-home-business-copy">
     <small>04 / BUSINESS</small>
@@ -370,54 +358,6 @@ function ExpertsPage({language}:{language:Language}){
  return <main className="nxp-page nxp-experts-page"><div className="nxp-page-scene"><Visual tone="green" label="EXPERTS" sub="CREATIVE NETWORK"/></div><Hero eyebrow="05 / EXPERTS" title={t(ru,<>Специалисты.<br/><em>Студии. Команды.</em></>,<>Experts.<br/><em>Studios. Teams.</em></>)} copy={t(ru,'Подготовленный UX-контур будущего expert marketplace: профили, специализации, рейтинги, портфолио и история заказов.','The prepared UX layer for an expert marketplace: profiles, ratings, portfolios and order history.')}/><section className="nxp-section"><div className="nxp-toolbar"><div className="nxp-searchbox"><Search size={17}/><input placeholder={t(ru,'Поиск специалиста','Search an expert')}/></div><button className="nxp-filter-button"><Filter size={15}/>{t(ru,'Фильтры','Filters')}</button></div><div className="nxp-experts-large">{experts.map(e=><article key={e.name}><div className="nxp-expert-avatar">{e.initials}</div><div className="nxp-expert-large-body"><div className="nxp-list-row"><div><small>VERIFIED</small><h3>{e.name}</h3><p>{e.role}</p></div><span className="nxp-rating"><Star size={13} fill="currentColor"/> {e.rating}</span></div><div className="nxp-expert-stats"><span><Users size={14}/> {e.jobs} {t(ru,'проектов','projects')}</span><span><MapPin size={14}/> {e.location}</span><span><ShieldCheck size={14}/> {t(ru,'Верифицирован','Verified')}</span></div></div><button className="nxp-round-link" onClick={()=>go('#service/ai')}><ArrowUpRight/></button></article>)}</div></section></main>
 }
 
-function ProjectsPage({language}:{language:Language}){
- const ru=language==='ru',[filter,setFilter]=useState('ALL'),filters=['ALL','WEB','MOBILE','AI','DESIGN','3D','BRANDING','MARKETING']
- const visible=filter==='ALL'?works:works.filter(w=>filter==='AI'?w.kind==='ai':filter==='MOBILE'?w.kind==='mobile':filter==='WEB'?['platform','commerce'].includes(w.kind):filter==='DESIGN'?w.kind==='dashboard':true)
- return <main className="nxp-page nxp-projects-page"><div className="nxp-page-scene"><Visual tone="blue" label="PROJECTS" sub="PRODUCT SPACE"/></div><Hero eyebrow="06 / PROJECTS" title={t(ru,<>Проекты.<br/><em>Не просто макеты.</em></>,<>Projects.<br/><em>Beyond mockups.</em></>)} copy={t(ru,'Каждый кейс можно открыть как отдельный Product Space.','Each case opens as its own Product Space.')}/><section className="nxp-section"><div className="nxp-filter-row nxp-filter-pills">{filters.map(x=><button key={x} className={filter===x?'active':''} onClick={()=>setFilter(x)}>{ru&&x==='ALL'?'ВСЕ':x}</button>)}</div><div className="nxp-project-grid">{visible.map((w,i)=><button key={w.id} className="nxp-project-card" onClick={()=>go('#case/'+w.id)}><Visual tone={i%3===1?'violet':i%3===2?'green':'blue'} label={w.category} sub={w.title}/><div><small>{ru?w.ruCategory:w.category}</small><h3>{ru?w.ruTitle:w.title}</h3><p>{ru?w.ruDescription:w.description}</p><span>{t(ru,'Открыть','Open')} <ArrowUpRight/></span></div></button>)}</div></section></main>
-}
-
-function ProjectCasePage({language,id}:{language:Language;id:string}){
- const ru=language==='ru'
- const project=works.find(w=>w.id===id)
- if(!project)return <main className="nxp-project-case"><section className="nxp-case-empty"><small>PROJECT / 404</small><h1>{t(ru,'Проект не найден.','Project not found.')}</h1><p>{t(ru,'Вернитесь в проекты и выберите другой кейс.','Return to projects and choose another case.')}</p><button className="nxp-button nxp-button-dark" onClick={()=>go('#work')}>{t(ru,'Все проекты','All projects')} <ArrowRight/></button></section></main>
- const tone=project.kind==='ai'?'violet':project.kind==='dashboard'||project.kind==='mobile'?'green':'blue'
- const next=works[(works.findIndex(w=>w.id===project.id)+1)%works.length]
- const bullets=ru
-  ? ['Продуктовая логика и сценарии','Интерфейс и визуальная система','Адаптивный production-ready слой','Проверка взаимодействий и edge cases']
-  : ['Product logic and user flows','Interface and visual system','Responsive production-ready layer','Interaction and edge-case validation']
- return <main className="nxp-project-case">
-  <section className="nxp-case-hero">
-   <div className="nxp-case-nav"><button onClick={()=>go('#work')}>← {t(ru,'Проекты','Projects')}</button><span>PROJECT / {project.id}</span><button onClick={()=>go('#start')}>{t(ru,'Начать проект','Start a project')} <ArrowUpRight size={14}/></button></div>
-   <div className="nxp-case-hero-grid">
-    <div className="nxp-case-copy">
-     <small>{ru?project.ruCategory:project.category}</small>
-     <h1>{ru?project.ruTitle:project.title}</h1>
-     <p>{ru?project.ruDescription:project.description}</p>
-     <div className="nxp-case-tags"><span>{project.kind.toUpperCase()}</span><span>NEXUM DIGITAL</span><span>{t(ru,'PRODUCT SPACE','PRODUCT SPACE')}</span></div>
-    </div>
-    <div className="nxp-case-hero-visual"><div className="nxp-case-glow"/><WebsitePreview project={project} language={language}/><div className="nxp-case-floating"><small>OUTCOME</small><b>{ru?project.ruResult:project.result}</b></div></div>
-   </div>
-  </section>
-  <section className="nxp-case-overview">
-   <div className="nxp-case-section-label"><small>01 / OVERVIEW</small><span>{t(ru,'Что мы собирали','What we built')}</span></div>
-   <div className="nxp-case-overview-copy"><h2>{t(ru,<>Не просто экран.<br/><em>Рабочий продукт.</em></>,<>Not just a screen.<br/><em>A working product.</em></>)}</h2><p>{ru?project.ruDescription:project.description}</p><div className="nxp-case-result"><small>RESULT</small><b>{ru?project.ruResult:project.result}</b></div></div>
-  </section>
-  <section className="nxp-case-showcase">
-   <div className="nxp-case-showcase-main"><WebsitePreview project={project} language={language}/></div>
-   <div className="nxp-case-showcase-side"><small>02 / SYSTEM</small><h2>{t(ru,<>Система,<br/><em>а не декорация.</em></>,<>A system,<br/><em>not decoration.</em></>)}</h2><p>{t(ru,'Каждый слой проекта строится вокруг реального сценария: от первого действия пользователя до понятного результата.','Every layer is built around a real scenario — from the first user action to a clear outcome.')}</p><div className="nxp-case-bullets">{bullets.map((x,i)=><div key={x}><b>0{i+1}</b><span>{x}</span><Check size={14}/></div>)}</div></div>
-  </section>
-  <section className="nxp-case-process">
-   <div><small>03 / PROCESS</small><h2>{t(ru,<>От идеи<br/><em>до работающей системы.</em></>,<>From idea<br/><em>to working system.</em></>)}</h2></div>
-   <div className="nxp-case-process-grid">{[['01','DISCOVER',ru?'Задача, аудитория и ограничения':'Problem, audience and constraints'],['02','DESIGN',ru?'Сценарии, UX и визуальный язык':'Flows, UX and visual language'],['03','BUILD',ru?'Интерфейс, данные и интеграции':'Interface, data and integrations'],['04','LAUNCH',ru?'Проверка, запуск и развитие':'Validation, launch and iteration']].map(([n,title,desc])=><article key={n}><b>{n}</b><strong>{title}</strong><span>{desc}</span></article>)}</div>
-  </section>
-  <section className="nxp-case-next">
-   <div><small>04 / NEXT PROJECT</small><h2>{t(ru,'Следующий кейс.','Next case.')}</h2><p>{ru?next.ruDescription:next.description}</p></div>
-   <button onClick={()=>go('#case/'+next.id)}><span>{ru?next.ruTitle:next.title}</span><ArrowUpRight/></button>
-  </section>
-  <section className="nxp-case-cta"><small>05 / START</small><h2>{t(ru,<>Есть похожая задача?<br/><em>Давайте соберём её.</em></>,<>Have a similar brief?<br/><em>Let's build it.</em></>)}</h2><div><button className="nxp-button nxp-button-dark" onClick={()=>go('#start')}>{t(ru,'Обсудить проект','Discuss a project')} <ArrowUpRight/></button><button className="nxp-button nxp-button-light" onClick={()=>go('#work')}>{t(ru,'Вернуться к проектам','Back to projects')} <ArrowRight/></button></div></section>
- </main>
-}
-
 function PricingPage({language}:{language:Language}){
  const ru=language==='ru',plans=[['START',50000,t(ru,'Для быстрых задач и первых версий.','For quick launches and first versions.')],['PRODUCT',250000,t(ru,'Для приложений, SaaS, AI и сложных систем.','For apps, SaaS, AI and complex systems.')],['BUSINESS',700000,t(ru,'Для внутренних платформ и B2B.','For internal platforms and B2B.')]]
  return <main className="nxp-page nxp-pricing-page"><div className="nxp-page-scene"><Visual tone="violet" label="PRICING" sub="DELIVERY MODEL"/></div><Hero eyebrow="07 / PRICING" title={t(ru,<>Прозрачная рамка.<br/><em>Точная смета — после brief.</em></>,<>A clear frame.<br/><em>Exact scope after the brief.</em></>)} copy={t(ru,'Ориентир по уровню проекта. Финальная стоимость зависит от сценариев, интеграций и глубины продукта.','Useful ranges, with final scope based on workflows, integrations and product depth.')}/><section className="nxp-section"><div className="nxp-pricing-grid">{plans.map((p,i)=><article className={i===1?'featured':''} key={p[0]}><small>{p[0]}</small><h3>Digital product</h3><p>{p[2]}</p><strong>{t(ru,'от','from')} {money(p[1] as number,ru)}</strong><div>{['Discovery','UX / structure','Production','QA / launch'].map(x=><span key={x}><Check size={14}/>{x}</span>)}</div><button className="nxp-button nxp-button-dark" onClick={()=>go('#start')}>{t(ru,'Обсудить','Discuss')} <ArrowUpRight/></button></article>)}</div></section></main>
@@ -512,7 +452,6 @@ export default function PlatformRouter({language}:{language:Language}){
  if(path==='#services')return <ServicesCatalog language={language}/>
  if(path==='#solutions'||path==='#marketplace')return <SolutionsPage language={language}/>
  if(path==='#ai')return <AIPage language={language}/>
- if(path==='#work'||path==='#projects')return <ProjectsPage language={language}/>
  if(path==='#experts')return <ExpertsPage language={language}/>
  if(path==='#business')return <BusinessPage language={language}/>
  if(path==='#pricing')return <PricingPage language={language}/>
@@ -528,7 +467,6 @@ export default function PlatformRouter({language}:{language:Language}){
  if(path==='#dashboard/company')return <DashboardPage language={language} role="company"/>
  if(path==='#profile'||path==='#settings')return <DashboardPage language={language} role="client"/>
  if(path==='#start')return <StartProjectPage language={language}/>
- if(path.startsWith('#case/'))return <ProjectCasePage language={language} id={decodeURIComponent(path.split('/')[1]||'')}/>
  if(path.startsWith('#service/'))return <ServiceDetailPage language={language} id={decodeURIComponent(path.split('/')[1]||'')}/>
  return <main className="nxp-auth-page"><div className="nxp-auth-card"><small>404</small><h1>Not found</h1><button className="nxp-button nxp-button-dark" onClick={()=>go('#')}>NEXUM <ArrowRight/></button></div></main>
 }
