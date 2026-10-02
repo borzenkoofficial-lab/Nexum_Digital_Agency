@@ -289,3 +289,22 @@ body{background:var(--nx-canvas);color:var(--nx-ink)}
 @media(prefers-reduced-motion:reduce){
  .nx-showcase-window,.nx-showcase-orbit,.nx-showcase-preview:after{animation:none!important}
 }
+
+/* Homepage visual continuity: light liquid-glass canvas, no hard dark bands */
+body{background:#f7f8fa}
+.nxp-page{background:#f7f8fa}
+.nxp-hero{background:linear-gradient(180deg,#fff 0%,#fbfcfd 72%,#f7f8fa 100%)}
+.nxp-section{background:transparent}
+.nxp-section:nth-of-type(even){background:linear-gradient(180deg,rgba(255,255,255,.52),rgba(247,248,250,.78))}
+.nxp-trust-rail{background:rgba(247,248,250,.86)!important;border-color:rgba(20,24,32,.08)!important}
+.nxp-dark-section{background:linear-gradient(135deg,#f3f4f8 0%,#eef0f6 48%,#f8f9fb 100%);color:var(--nx-ink);border-top:1px solid rgba(20,24,32,.06);border-bottom:1px solid rgba(20,24,32,.06);position:relative;overflow:hidden}
+.nxp-dark-section:before{content:'';position:absolute;inset:-25%;background:radial-gradient(circle at 72% 40%,rgba(132,128,255,.16),transparent 25%),radial-gradient(circle at 18% 70%,rgba(110,190,255,.12),transparent 24%);filter:blur(18px);pointer-events:none}
+.nxp-dark-section>*{position:relative;z-index:1}
+.nxp-dark-section .nxp-section-head p,.nxp-dark-section .nxp-section-head small{color:var(--nx-muted)}
+.nxp-dark-section .nxp-outline-link{color:var(--nx-muted)}
+.nxp-ai-command{border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.52);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);box-shadow:0 30px 80px rgba(30,35,55,.10),inset 0 1px rgba(255,255,255,.8)}
+.nxp-ai-command-head{color:#6f7480}
+.nxp-ai-prompt{background:rgba(255,255,255,.58);border-color:rgba(255,255,255,.8);box-shadow:inset 0 1px rgba(255,255,255,.75)}
+.nxp-ai-results article{border-color:rgba(20,24,32,.08);background:rgba(255,255,255,.38)}
+.nxp-business-band{background:linear-gradient(135deg,#eeeaff,#f5f6fb 58%,#edf7fb);border-top:1px solid rgba(20,24,32,.05);border-bottom:1px solid rgba(20,24,32,.05)}
+.nxp-cta-section{background:linear-gradient(180deg,#f7f8fa 0%,#fff 100%)}
