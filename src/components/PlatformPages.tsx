@@ -293,11 +293,63 @@ function AIPage({language}:{language:Language}){
 }
 
 function BusinessPage({language}:{language:Language}){
- const ru=language==='ru',[sent,setSent]=useState(false),[form,setForm]=useState({company:'',name:'',email:'',task:'',budget:'',timeline:''})
+ const ru=language==='ru'
+ const capabilities=ru
+  ? ['AI и автоматизация','Корпоративные web-системы','CRM и аналитика','Внутренние платформы','Интеграции','Поддержка и развитие']
+  : ['AI & automation','Corporate web systems','CRM & analytics','Internal platforms','Integrations','Support & growth']
+ const [sent,setSent]=useState(false)
+ const [form,setForm]=useState({name:'',email:'',task:''})
  const up=(k:string,v:string)=>setForm(f=>({...f,[k]:v}))
- return <main className="nxp-page nxp-business-page"><div className="nxp-page-scene"><Visual tone="blue" label="BUSINESS" sub="DIGITAL INFRA"/></div><Hero eyebrow="04 / FOR BUSINESS" title={t(ru,<>Цифровая инфраструктура<br/><em>для бизнеса.</em></>,<>Digital infrastructure<br/><em>for business.</em></>)} copy={t(ru,'Корпоративные системы, AI, автоматизация, приложения и поддержка — в одном delivery-контуре.','Corporate systems, AI, automation, apps and support in one delivery layer.')}/><section className="nxp-b2b-grid"><div className="nxp-b2b-capabilities">{(ru?['Корпоративные системы','AI automation','CRM и аналитика','Web и mobile','Интеграции','Внутренние платформы']:['Corporate systems','AI automation','CRM & analytics','Web & mobile','Integrations','Internal platforms']).map((x,i)=><div key={x}><span>0{i+1}</span><b>{x}</b><ArrowUpRight/></div>)}</div><form className="nxp-business-form" onSubmit={e=>{e.preventDefault();setSent(true)}}>{sent?<SuccessState language={language}/>:<><div className="nxp-form-head"><small>PROJECT INTAKE</small><h3>{t(ru,'Обсудить проект','Discuss a project')}</h3></div><Field label={t(ru,'Компания','Company')}><input value={form.company} onChange={e=>up('company',e.target.value)} required/></Field><div className="nxp-two-col"><Field label={t(ru,'Имя','Name')}><input value={form.name} onChange={e=>up('name',e.target.value)} required/></Field><Field label="Email"><input type="email" value={form.email} onChange={e=>up('email',e.target.value)} required/></Field></div><Field label={t(ru,'Задача','Task')}><textarea value={form.task} onChange={e=>up('task',e.target.value)} rows={5} required/></Field><div className="nxp-two-col"><Field label={t(ru,'Бюджет','Budget')}><select value={form.budget} onChange={e=>up('budget',e.target.value)}><option value="">—</option><option>{t(ru,'до 300 тыс. ₽','under €3k')}</option><option>{t(ru,'300–700 тыс. ₽','€3k–8k')}</option><option>{t(ru,'700 тыс. – 1.5 млн ₽','€8k–17k')}</option><option>{t(ru,'1.5 млн ₽ +','€17k+')}</option></select></Field><Field label={t(ru,'Срок','Timeline')}><select value={form.timeline} onChange={e=>up('timeline',e.target.value)}><option value="">—</option><option>1–2 months</option><option>2–3 months</option><option>3–6 months</option></select></Field></div><button className="nxp-button nxp-button-dark">{t(ru,'Отправить запрос','Send request')} <ArrowUpRight/></button><p className="nxp-form-note"><ShieldCheck size={13}/> {t(ru,'Конфиденциальность и NDA при необходимости.','Confidential handling and NDA available.')}</p></>}</form></section></main>
-}
+ return <main className="nxp-page nxp-business-page-v2">
+  <section className="nxp-business-v2-hero">
+   <div className="nxp-business-v2-copy">
+    <small>04 / NEXUM FOR BUSINESS</small>
+    <h1>{t(ru,<>Цифровая система<br/><em>для вашего бизнеса.</em></>,<>A digital system<br/><em>built for business.</em></>)}</h1>
+    <p>{t(ru,'Не набор подрядчиков. Один технологический контур: стратегия, дизайн, разработка, AI и автоматизация.', 'One technology layer: strategy, design, development, AI and automation.')}</p>
+    <div className="nxp-business-v2-actions">
+     <button className="nxp-button nxp-button-dark" onClick={()=>document.getElementById('business-contact')?.scrollIntoView({behavior:'smooth'})}>{t(ru,'Обсудить задачу','Discuss a project')} <ArrowUpRight/></button>
+     <button className="nxp-outline-link" onClick={()=>go('#work')}>{t(ru,'Смотреть проекты','View projects')} <ArrowUpRight/></button>
+    </div>
+   </div>
+   <div className="nxp-business-v2-stage">
+    <ProductStage label="NEXUM BUSINESS" tone="blue"/>
+    <GlassOrb label="AI" tone="violet"/>
+    <div className="nxp-business-v2-float"><small>OPERATING LAYER</small><b>WEB · AI · CRM</b><span>ONE SYSTEM</span></div>
+   </div>
+  </section>
 
+  <section className="nxp-business-v2-capabilities nxp-section">
+   <div className="nxp-business-v2-section-head"><small>01 / CAPABILITIES</small><h2>{t(ru,<>Всё необходимое.<br/><em>В одном контуре.</em></>,<>Everything needed.<br/><em>One operating layer.</em></>)}</h2></div>
+   <div className="nxp-business-v2-grid">
+    {capabilities.map((x,i)=><article key={x}><span>0{i+1}</span><b>{x}</b><p>{t(ru,'Подбираем архитектуру и команду под конкретную задачу бизнеса.','Architecture and team shaped around the actual business need.')}</p><ArrowUpRight/></article>)}
+   </div>
+  </section>
+
+  <section className="nxp-business-v2-flow">
+   <div><small>02 / DELIVERY</small><h2>{t(ru,<>От задачи<br/><em>до работающей системы.</em></>,<>From brief<br/><em>to a working system.</em></>)}</h2></div>
+   <div className="nxp-business-v2-steps">
+    <article><b>01</b><strong>DISCOVER</strong><span>{t(ru,'Разбираем бизнес-процесс и формируем результат.','Frame the business process and outcome.')}</span></article>
+    <article><b>02</b><strong>BUILD</strong><span>{t(ru,'Проектируем и собираем digital-продукт.','Design and build the digital product.')}</span></article>
+    <article><b>03</b><strong>OPERATE</strong><span>{t(ru,'Запускаем, измеряем и развиваем систему.','Launch, measure and evolve the system.')}</span></article>
+   </div>
+  </section>
+
+  <section className="nxp-business-v2-contact nxp-section" id="business-contact">
+   <div className="nxp-business-v2-contact-art"><div className="nxp-business-v2-glow"/><GlassOrb label="N" tone="green"/><div className="nxp-business-v2-ring"/></div>
+   <div className="nxp-business-v2-form-wrap">
+    <small>03 / PROJECT INTAKE</small>
+    <h2>{t(ru,<>Расскажите,<br/><em>что нужно бизнесу.</em></>,<>Tell us what<br/><em>your business needs.</em></>)}</h2>
+    {sent?<SuccessState language={language}/>:<form className="nxp-business-v2-form" onSubmit={e=>{e.preventDefault();setSent(true)}}>
+     <Field label={t(ru,'Имя','Name')}><input value={form.name} onChange={e=>up('name',e.target.value)} required/></Field>
+     <Field label="Email"><input type="email" value={form.email} onChange={e=>up('email',e.target.value)} required/></Field>
+     <Field label={t(ru,'Задача','Brief')}><textarea rows={5} value={form.task} onChange={e=>up('task',e.target.value)} required/></Field>
+     <button className="nxp-button nxp-button-dark">{t(ru,'Отправить запрос','Send request')} <ArrowUpRight/></button>
+     <p className="nxp-form-note"><ShieldCheck size={13}/> {t(ru,'Конфиденциально. NDA при необходимости.','Confidential. NDA available.')}</p>
+    </form>}
+   </div>
+  </section>
+ </main>
+}
 function ExpertsPage({language}:{language:Language}){
  const ru=language==='ru'
  return <main className="nxp-page nxp-experts-page"><div className="nxp-page-scene"><Visual tone="green" label="EXPERTS" sub="CREATIVE NETWORK"/></div><Hero eyebrow="05 / EXPERTS" title={t(ru,<>Специалисты.<br/><em>Студии. Команды.</em></>,<>Experts.<br/><em>Studios. Teams.</em></>)} copy={t(ru,'Подготовленный UX-контур будущего expert marketplace: профили, специализации, рейтинги, портфолио и история заказов.','The prepared UX layer for an expert marketplace: profiles, ratings, portfolios and order history.')}/><section className="nxp-section"><div className="nxp-toolbar"><div className="nxp-searchbox"><Search size={17}/><input placeholder={t(ru,'Поиск специалиста','Search an expert')}/></div><button className="nxp-filter-button"><Filter size={15}/>{t(ru,'Фильтры','Filters')}</button></div><div className="nxp-experts-large">{experts.map(e=><article key={e.name}><div className="nxp-expert-avatar">{e.initials}</div><div className="nxp-expert-large-body"><div className="nxp-list-row"><div><small>VERIFIED</small><h3>{e.name}</h3><p>{e.role}</p></div><span className="nxp-rating"><Star size={13} fill="currentColor"/> {e.rating}</span></div><div className="nxp-expert-stats"><span><Users size={14}/> {e.jobs} {t(ru,'проектов','projects')}</span><span><MapPin size={14}/> {e.location}</span><span><ShieldCheck size={14}/> {t(ru,'Верифицирован','Verified')}</span></div></div><button className="nxp-round-link" onClick={()=>go('#service/ai')}><ArrowUpRight/></button></article>)}</div></section></main>
