@@ -344,3 +344,65 @@ body{background:#f7f8fa}
  .nxp-page-hero:after,.nxp-section:after{animation:none}
  .nxp-pricing-grid article,.nxp-knowledge-grid article,.nxp-support-grid button,.nxp-experts-large article{transition:none}
 }
+
+/* Global layout hardening + shared spatial mockup stage */
+*,*::before,*::after{box-sizing:border-box}
+html,body,#root{width:100%;min-width:0}
+body{margin:0;overflow-x:hidden}
+.nxp-page,.nxp-page>*{min-width:0}
+.nxp-section,.nxp-page-hero,.nxp-service-hero,.nxp-detail-grid,.nx2-service-extra,.nxp-b2b-grid,.nxp-ai-workspace{width:100%;max-width:none}
+.nxp-section{padding-left:max(28px,6vw);padding-right:max(28px,6vw)}
+.nxp-page-hero{padding-left:max(28px,6vw);padding-right:max(28px,6vw)}
+.nxp-service-hero{padding-left:max(28px,6vw);padding-right:max(28px,6vw)}
+.nxp-detail-grid,.nx2-service-extra{padding-left:max(28px,6vw);padding-right:max(28px,6vw)}
+.nxp-b2b-grid,.nxp-ai-workspace{margin-left:auto;margin-right:auto;max-width:1800px}
+.nxp-market-cards,.nxp-project-grid,.nxp-pricing-grid,.nxp-knowledge-grid,.nxp-experts-large,.nxp-support-grid{width:100%;min-width:0}
+.nxp-market-card,.nxp-project-card,.nxp-pricing-grid article,.nxp-knowledge-grid article,.nxp-experts-large article,.nxp-support-grid button{min-width:0}
+.nxp-market-card .nxp-visual,.nxp-project-card .nxp-visual{width:100%;max-width:none}
+.nxp-visual{contain:layout paint;min-width:0}
+.nxp-visual *{max-width:100%}
+
+/* Distinct 3D scene presets */
+.nxp-visual:after{content:'';position:absolute;inset:auto -15% -35% 30%;height:55%;background:radial-gradient(circle,rgba(111,105,255,.18),transparent 68%);filter:blur(24px);z-index:0;animation:nxpSceneGlow 9s ease-in-out infinite alternate;pointer-events:none}
+.nxp-tone-violet .nxp-visual-3d-orb{background:radial-gradient(circle at 28% 24%,#fff,rgba(196,183,255,.85) 30%,rgba(115,85,235,.35) 68%,transparent 73%)}
+.nxp-tone-green .nxp-visual-3d-orb{background:radial-gradient(circle at 28% 24%,#fff,rgba(178,245,220,.82) 30%,rgba(50,175,130,.28) 68%,transparent 73%)}
+.nxp-tone-blue .nxp-visual-3d-orb{background:radial-gradient(circle at 28% 24%,#fff,rgba(182,214,255,.85) 30%,rgba(65,105,235,.3) 68%,transparent 73%)}
+
+/* Hero scenes are larger and spatial, not just cards */
+.nxp-hero{min-height:clamp(620px,76vh,900px);display:grid;align-items:center}
+.nxp-hero .nxp-globe-scene{transform:perspective(1200px) rotateY(-3deg);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.nxp-hero:hover .nxp-globe-scene{transform:perspective(1200px) rotateY(1deg) translateY(-5px)}
+
+/* Glass navigation / controls */
+.nxp-button,.nxp-filter-button,.nxp-filter-row button,.nxp-toolbar select,.nxp-market-toolbar select,.nxp-searchbox{transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.nxp-button-light,.nxp-filter-button,.nxp-toolbar select,.nxp-market-toolbar select,.nxp-searchbox{background:rgba(255,255,255,.58)!important;border-color:rgba(255,255,255,.82)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:inset 0 1px rgba(255,255,255,.9),0 10px 30px rgba(35,40,65,.05)}
+.nxp-button-light:hover,.nxp-filter-button:hover,.nxp-searchbox:hover{transform:translateY(-2px);box-shadow:inset 0 1px rgba(255,255,255,.9),0 16px 35px rgba(35,40,65,.1)}
+
+/* Prevent routed-page drift */
+.nxp-catalog-page,.nxp-service-detail{overflow-x:clip}
+.nxp-catalog-page .nxp-section,.nxp-service-detail .nxp-section{width:100%}
+.nxp-service-detail .nxp-detail-actions,.nxp-service-detail .nxp-tag-row{min-width:0;flex-wrap:wrap}
+.nx2-service-cta{margin-left:max(28px,6vw);margin-right:max(28px,6vw)}
+
+/* Glass depth on utility pages */
+.nxp-role-grid button,.nxp-oauth-row button{background:rgba(255,255,255,.5);border-color:rgba(255,255,255,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.nxp-notification-popover{background:rgba(255,255,255,.72)!important;border-color:rgba(255,255,255,.9)!important;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 25px 70px rgba(35,40,65,.15)!important}
+
+/* Shared responsive geometry */
+@media(min-width:1440px){
+ .nxp-section,.nxp-page-hero,.nxp-service-hero,.nxp-detail-grid,.nx2-service-extra{padding-left:clamp(72px,6vw,150px);padding-right:clamp(72px,6vw,150px)}
+ .nxp-hero{padding-left:clamp(72px,6vw,150px);padding-right:clamp(72px,6vw,150px)}
+}
+@media(min-width:1900px){
+ .nxp-section,.nxp-page-hero,.nxp-service-hero,.nxp-detail-grid,.nx2-service-extra,.nxp-hero{padding-left:clamp(96px,7vw,180px);padding-right:clamp(96px,7vw,180px)}
+}
+@media(max-width:800px){
+ .nxp-section,.nxp-page-hero,.nxp-service-hero,.nxp-detail-grid,.nx2-service-extra,.nxp-hero{padding-left:18px;padding-right:18px}
+ .nxp-hero{min-height:auto}
+ .nx2-service-cta{margin-left:18px;margin-right:18px}
+ .nxp-button,.nxp-filter-button{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ .nxp-hero .nxp-globe-scene,.nxp-button,.nxp-filter-button,.nxp-searchbox{transition:none}
+}
+@keyframes nxpSceneGlow{from{transform:translate3d(-4%,2%,0) scale(.92);opacity:.65}to{transform:translate3d(4%,-4%,0) scale(1.08);opacity:1}}
