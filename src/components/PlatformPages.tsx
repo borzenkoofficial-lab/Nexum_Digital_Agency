@@ -94,7 +94,108 @@ function MiniGame() {
 }
 
 function Portfolio({language}:{language:Language}){const r=ru(language);return <main className="nx-portfolio"><section className="pf-hero"><div><small>04 / PORTFOLIO LAB</small><h1>{r?<>Сначала<br/><em>показываем.</em></>:<>See it<br/><em>in motion.</em>}</h1><p>{r?'Не статичные картинки. Здесь можно потрогать подход NEXUM: сайты, AI-интерфейсы, Telegram-боты и интерактивные продукты.':'Not static screenshots. Explore NEXUM through animated sites, AI interfaces, Telegram bots and interactive products.'}</p></div><div className="pf-score"><span>BUILD QUALITY</span><strong>LIVE</strong><small>{r?'Интерактивные демо':'Interactive demos'}</small></div></section><section className="pf-grid">{portfolioItems.map(item=><article key={item.id} className="pf-card"><DemoSite type={item.type}/><div className="pf-card-copy"><div><small>{item.kind} / DEMO</small><h2>{r?item.ru:item.title}</h2><p>{r?item.ruDesc:item.desc}</p></div><button onClick={()=>location.hash='#portfolio/'+item.id}>Open <ArrowUpRight size={15}/></button></div></article>)}</section><section className="pf-game"><div><small>05 / INTERACTIVE LAB</small><h2>{r?<>Проверьте<br/><em>сайт в игре.</em></>:<>Test the<br/><em>experience.</em>}</h2><p>{r?'Арканоид — маленькая демонстрация того, что мы делаем не только красивую оболочку. Здесь есть реальное состояние, анимация, управление и игровой цикл.':'Arkanoid is a small proof that the interface is not just a screenshot: it has state, animation, input and a real game loop.'}</p></div><Arkanoid language={language}/></section></main>}
-function Arkanoid({language}:{language:Language}){const canvasRef=useRef<HTMLCanvasElement>(null);const [score,setScore]=useState(0);const [running,setRunning]=useState(false);const gameRef=useRef<{running:boolean;score:number}>({running:false,score:0});useEffect(()=>{const canvas=canvasRef.current;if(!canvas)return;const ctx=canvas.getContext('2d');if(!ctx)return;const W=360,H=260;let x=180,y=220,vx=3,vy=-3,paddle=180,raf=0;const bricks=Array.from({length:28},()=>true);const keys={left:false,right:false};const onKey=(e:KeyboardEvent,down:boolean)=>{if(e.key==='ArrowLeft')keys.left=down;if(e.key==='ArrowRight')keys.right=down};const onMove=(e:PointerEvent)=>{const rect=canvas.getBoundingClientRect();paddle=Math.max(34,Math.min(W-34,((e.clientX-rect.left)/rect.width)*W))};const draw=()=>{ctx.fillStyle='#101114';ctx.fillRect(0,0,W,H);for(let i=0;i<bricks.length;i++){if(!bricks[i])continue;const col=i%7,row=Math.floor(i/7),bx=12+col*50,by=22+row*22;ctx.fillStyle=row%2?'#b6adff':'#fff';ctx.fillRect(bx,by,43,15)}ctx.fillStyle='#fff';ctx.fillRect(paddle-32,H-20,64,7);ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fill()};const loop=()=>{draw();if(gameRef.current.running){if(keys.left)paddle-=6;if(keys.right)paddle+=6;paddle=Math.max(34,Math.min(W-34,paddle));x+=vx;y+=vy;if(x<5||x>W-5)vx=-vx;if(y<5)vy=-vy;if(y>H-30&&x>paddle-38&&x<paddle+38)vy=-Math.abs(vy);for(let i=0;i<bricks.length;i++){if(!bricks[i])continue;const col=i%7,row=Math.floor(i/7),bx=12+col*50,by=22+row*22;if(x>bx&&x<bx+43&&y>by&&y<by+15){bricks[i]=false;vy=-vy;gameRef.current.score+=1;setScore(gameRef.current.score);break}}if(y>H+10){gameRef.current.running=false;setRunning(false)}if(gameRef.current.score===bricks.length){gameRef.current.running=false;setRunning(false)}}raf=requestAnimationFrame(loop)};draw();addEventListener('keydown',e=>onKey(e,true));addEventListener('keyup',e=>onKey(e,false));canvas.addEventListener('pointermove',onMove);return()=>{cancelAnimationFrame(raf);removeEventListener('keydown',e=>onKey(e,true));removeEventListener('keyup',e=>onKey(e,false));canvas.removeEventListener('pointermove',onMove)}},[]);const start=()=>{gameRef.current.running=true;setRunning(true)};return <div className="pf-game-box"><div className="pf-game-head"><span>ARKANOID / NEXUM</span><b>{String(score).padStart(2,'0')}</b></div><canvas ref={canvasRef} width="360" height="260"/><div className="pf-game-controls"><span>{language==='ru'?'← → или ведите пальцем':'← → or move your finger'}</span><button type="button" onClick={start}>{running?(language==='ru'?'ИГРА ИДЁТ':'RUNNING'):(language==='ru'?'ИГРАТЬ':'PLAY')} <ArrowRight size={14}/></button></div></div>}
+function Arkanoid({language}:{language:Language}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [score,setScore] = useState(0);
+  const [running,setRunning] = useState(false);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const width = 360;
+    const height = 260;
+    let ballX = 180;
+    let ballY = 220;
+    let velocityX = 3;
+    let velocityY = -3;
+    let paddleX = 180;
+    let frame = 0;
+    let active = false;
+    let points = 0;
+    const bricks = Array.from({length:28}, () => true);
+    const keys = {left:false,right:false};
+    const keyDown = (event:KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') keys.left = true;
+      if (event.key === 'ArrowRight') keys.right = true;
+    };
+    const keyUp = (event:KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') keys.left = false;
+      if (event.key === 'ArrowRight') keys.right = false;
+    };
+    const pointerMove = (event:PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      paddleX = Math.max(34, Math.min(width - 34, ((event.clientX - rect.left) / rect.width) * width));
+    };
+    const draw = () => {
+      ctx.fillStyle = '#101114';
+      ctx.fillRect(0,0,width,height);
+      bricks.forEach((brick,index) => {
+        if (!brick) return;
+        const column = index % 7;
+        const row = Math.floor(index / 7);
+        const brickX = 12 + column * 50;
+        const brickY = 22 + row * 22;
+        ctx.fillStyle = row % 2 ? '#b6adff' : '#ffffff';
+        ctx.fillRect(brickX,brickY,43,15);
+      });
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(paddleX - 32,height - 20,64,7);
+      ctx.beginPath();
+      ctx.arc(ballX,ballY,5,0,Math.PI * 2);
+      ctx.fill();
+    };
+    const loop = () => {
+      if (active) {
+        if (keys.left) paddleX -= 6;
+        if (keys.right) paddleX += 6;
+        paddleX = Math.max(34, Math.min(width - 34, paddleX));
+        ballX += velocityX;
+        ballY += velocityY;
+        if (ballX < 5 || ballX > width - 5) velocityX *= -1;
+        if (ballY < 5) velocityY *= -1;
+        if (ballY > height - 30 && ballX > paddleX - 38 && ballX < paddleX + 38) velocityY = -Math.abs(velocityY);
+        bricks.forEach((brick,index) => {
+          if (!brick) return;
+          const column = index % 7;
+          const row = Math.floor(index / 7);
+          const brickX = 12 + column * 50;
+          const brickY = 22 + row * 22;
+          if (ballX > brickX && ballX < brickX + 43 && ballY > brickY && ballY < brickY + 15) {
+            bricks[index] = false;
+            velocityY *= -1;
+            points += 1;
+            setScore(points);
+          }
+        });
+        if (ballY > height + 10 || points >= bricks.length) {
+          active = false;
+          setRunning(false);
+        }
+      }
+      draw();
+      frame = requestAnimationFrame(loop);
+    };
+    draw();
+    loop();
+    const startGame = () => { active = true; setRunning(true); };
+    (canvas as HTMLCanvasElement & {startGame?:()=>void}).startGame = startGame;
+    window.addEventListener('keydown',keyDown);
+    window.addEventListener('keyup',keyUp);
+    canvas.addEventListener('pointermove',pointerMove);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('keydown',keyDown);
+      window.removeEventListener('keyup',keyUp);
+      canvas.removeEventListener('pointermove',pointerMove);
+    };
+  },[]);
+  const start = () => {
+    const canvas = canvasRef.current as (HTMLCanvasElement & {startGame?:()=>void}) | null;
+    if (canvas?.startGame) canvas.startGame();
+  };
+  return <div className="pf-game-box"><div className="pf-game-head"><span>ARKANOID / NEXUM</span><b>{String(score).padStart(2,'0')}</b></div><canvas ref={canvasRef} width={360} height={260} /><div className="pf-game-controls"><span>{language === 'ru' ? '← → или ведите пальцем' : '← → or move your finger'}</span><button type="button" onClick={start}>{running ? (language === 'ru' ? 'ИГРА ИДЁТ' : 'RUNNING') : (language === 'ru' ? 'ИГРАТЬ' : 'PLAY')} <ArrowRight size={14} /></button></div></div>;
+}
 function PortfolioDetail({language,id}:{language:Language;id:string}){const r=ru(language),item=portfolioItems.find(x=>x.id===id);if(!item)return <NotFound language={language}/>;return <main className="nx-detail pf-detail"><button onClick={()=>go('#portfolio')} className="nx-back">← {r?'Портфолио':'Portfolio'}</button><div className="nx-detail-grid"><div><small>{item.kind} / INTERACTIVE CASE</small><h1>{r?item.ru:item.title}</h1><p>{r?item.ruDesc:item.desc}</p><button className="nx-btn dark" onClick={()=>go('#start')}>{r?'Сделать похожий':'Build something similar'} <ArrowUpRight/></button></div><DemoSite type={item.type}/></div></main>}
 \nfunction NotFound({language}:{language:Language}){return <main className="nx-auth"><div className="nx-auth-card"><small>404</small><h1>{ru(language)?'Не найдено':'Not found'}</h1><button className="nx-btn dark" onClick={()=>go('#')}>NEXUM <ArrowRight/></button></div></main>}
 export default function PlatformRouter({language}:{language:Language}){const p=(location.hash||'#').split('?')[0];if(p==='#'||p==='')return <Home language={language}/>;if(p==='#services')return <Services language={language}/>;if(p==='#projects')return <Projects language={language}/>;if(p==='#reviews')return <Reviews language={language}/>;if(p==='#portfolio')return <Portfolio language={language}/>;if(p.startsWith('#portfolio/'))return <PortfolioDetail language={language} id={p.split('/')[1]||''}/>;if(p==='#start')return <Start language={language}/>;if(p==='#login'||p==='#register')return <Auth language={language} mode={p==='#login'?'login':'register'}/>;if(p.startsWith('#service/'))return <ServicePage language={language} id={p.split('/')[1]||''}/>;if(p.startsWith('#project/'))return <ProjectPage language={language} id={p.split('/')[1]||''}/>;return <NotFound language={language}/>}
