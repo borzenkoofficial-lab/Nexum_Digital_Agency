@@ -272,3 +272,20 @@ body{background:var(--nx-canvas);color:var(--nx-ink)}
  .nxp-liquid-glass,.nxp-visual-3d-orb,.nxp-visual-ring,.nxp-visual-cursor{animation:none!important}
  .nxp-visual:hover .nxp-visual-panel,.nxp-visual:hover .nxp-visual-3d-orb{transform:translateZ(55px)}
 }
+
+/* Richer 3D showcase cards */
+.nx-showcase-preview{perspective:1100px;transform-style:preserve-3d}
+.nx-showcase-preview:after{content:'';position:absolute;inset:-20%;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.65),transparent 24%),radial-gradient(circle at 80% 75%,rgba(110,105,255,.16),transparent 28%);filter:blur(10px);animation:nxpAmbient 10s ease-in-out infinite alternate;pointer-events:none}
+.nx-showcase-window{transform-style:preserve-3d;animation:nxpWindowFloat 8s ease-in-out infinite}
+.nx-showcase-orbit.one{animation:nxpOrbit 15s linear infinite}
+.nx-showcase-orbit.two{animation:nxpOrbit 20s linear reverse infinite}
+.nx-showcase-ui-main,.nx-showcase-ui-side{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.nx-showcase-card{perspective:1000px}
+.nx-showcase-card:hover .nx-showcase-window{transform:perspective(900px) rotateX(0deg) rotateY(-1deg) translateZ(18px) scale(1.015)}
+.nx-showcase-card:hover .nx-showcase-orbit.one{transform:rotate(-8deg) scale(1.08)}
+@keyframes nxpWindowFloat{0%,100%{transform:perspective(900px) rotateX(3deg) rotateY(-5deg) translate3d(0,0,0)}50%{transform:perspective(900px) rotateX(5deg) rotateY(-2deg) translate3d(0,-7px,18px)}}
+@keyframes nxpOrbit{from{rotate:0deg}to{rotate:360deg}}
+@keyframes nxpAmbient{from{transform:translate3d(-2%,0,0) scale(1)}to{transform:translate3d(3%,-2%,0) scale(1.08)}}
+@media(prefers-reduced-motion:reduce){
+ .nx-showcase-window,.nx-showcase-orbit,.nx-showcase-preview:after{animation:none!important}
+}
