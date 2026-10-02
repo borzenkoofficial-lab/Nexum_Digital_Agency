@@ -308,3 +308,39 @@ body{background:#f7f8fa}
 .nxp-ai-results article{border-color:rgba(20,24,32,.08);background:rgba(255,255,255,.38)}
 .nxp-business-band{background:linear-gradient(135deg,#eeeaff,#f5f6fb 58%,#edf7fb);border-top:1px solid rgba(20,24,32,.05);border-bottom:1px solid rgba(20,24,32,.05)}
 .nxp-cta-section{background:linear-gradient(180deg,#f7f8fa 0%,#fff 100%)}
+
+/* Global 3D / liquid-glass treatment for every routed surface */
+.nxp-page{position:relative;isolation:isolate;overflow:clip}
+.nxp-page:before{content:'';position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 82% 8%,rgba(126,118,255,.09),transparent 22%),radial-gradient(circle at 8% 48%,rgba(92,185,255,.07),transparent 20%);pointer-events:none}
+.nxp-page-hero,.nxp-section,.nxp-ai-workspace,.nxp-b2b-grid,.nxp-auth-page,.nxp-service-hero,.nxp-detail-grid,.nx2-service-extra,.nx2-service-cta{position:relative}
+.nxp-page-hero:after,.nxp-section:after{content:'';position:absolute;z-index:-1;width:220px;height:220px;border-radius:50%;background:rgba(125,120,255,.08);filter:blur(55px);right:5%;top:18%;animation:nxpSectionOrb 12s ease-in-out infinite alternate;pointer-events:none}
+.nxp-ai-workspace,.nxp-business-form,.nxp-pricing-grid article,.nxp-knowledge-grid article,.nxp-support-grid button,.nxp-experts-large article,.nxp-auth-card,.nx2-panel,.nx2-service-cta{border:1px solid rgba(255,255,255,.72);background:rgba(255,255,255,.52);backdrop-filter:blur(22px) saturate(145%);-webkit-backdrop-filter:blur(22px) saturate(145%);box-shadow:0 24px 70px rgba(35,40,65,.09),inset 0 1px rgba(255,255,255,.85)}
+.nxp-ai-workspace,.nxp-business-form,.nxp-auth-card,.nx2-panel{transform-style:preserve-3d}
+.nxp-pricing-grid article,.nxp-knowledge-grid article,.nxp-support-grid button,.nxp-experts-large article{transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease}
+.nxp-pricing-grid article:hover,.nxp-knowledge-grid article:hover,.nxp-support-grid button:hover,.nxp-experts-large article:hover{transform:translateY(-7px) perspective(900px) rotateX(1deg) rotateY(-1deg);box-shadow:0 30px 80px rgba(35,40,65,.14),inset 0 1px rgba(255,255,255,.9)}
+.nxp-ai-workspace:before,.nxp-business-form:before,.nxp-auth-card:before,.nx2-panel:before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(125deg,rgba(255,255,255,.42),transparent 35%,rgba(255,255,255,.12) 72%);pointer-events:none}
+.nxp-b2b-capabilities>div{background:rgba(255,255,255,.42)!important;border-color:rgba(255,255,255,.72)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:transform .35s ease,box-shadow .35s ease}
+.nxp-b2b-capabilities>div:hover{transform:translate3d(7px,-5px,20px);box-shadow:0 20px 45px rgba(35,40,65,.1)}
+.nxp-expert-avatar{box-shadow:0 12px 28px rgba(40,45,70,.12);transform:translateZ(25px)}
+.nxp-pricing-grid article:before{content:'';position:absolute;inset:10px;border:1px solid rgba(255,255,255,.38);border-radius:inherit;pointer-events:none}
+.nxp-auth-page{background:radial-gradient(circle at 75% 25%,rgba(126,118,255,.13),transparent 25%),linear-gradient(135deg,#f7f8fb,#eef1f7 55%,#fafbfd)}
+.nxp-auth-card{position:relative;overflow:hidden}
+.nxp-detail-grid>div{background:rgba(255,255,255,.38);border:1px solid rgba(255,255,255,.7);border-radius:24px;padding:34px;box-shadow:0 22px 55px rgba(35,40,65,.07);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.nxp-service-hero>div:first-child{position:relative;z-index:2}
+.nxp-service-hero>.nxp-visual{transform:perspective(1000px) rotateY(-4deg) rotateX(2deg);transition:transform .6s ease}
+.nxp-service-hero>.nxp-visual:hover{transform:perspective(1000px) rotateY(0) rotateX(0) translateY(-8px) scale(1.02)}
+.nxp-dashboard{background:linear-gradient(135deg,#f5f6f9,#eef0f5)}
+.nxp-dashboard-main{background:rgba(255,255,255,.42);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nxp-dashboard-metrics article,.nxp-dashboard-panel,.nxp-dashboard-split>button,.nxp-tab-panel{background:rgba(255,255,255,.58)!important;border:1px solid rgba(255,255,255,.75)!important;box-shadow:0 20px 55px rgba(35,40,65,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.nxp-dashboard-metrics article,.nxp-dashboard-split>button{transition:transform .35s ease,box-shadow .35s ease}
+.nxp-dashboard-metrics article:hover,.nxp-dashboard-split>button:hover{transform:translateY(-5px);box-shadow:0 28px 65px rgba(35,40,65,.13)}
+@keyframes nxpSectionOrb{from{transform:translate3d(-15px,-8px,0) scale(.9)}to{transform:translate3d(15px,12px,0) scale(1.12)}}
+@media(max-width:800px){
+ .nxp-page-hero:after,.nxp-section:after{width:140px;height:140px}
+ .nxp-detail-grid>div{padding:24px;border-radius:20px}
+ .nxp-service-hero>.nxp-visual{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .nxp-page-hero:after,.nxp-section:after{animation:none}
+ .nxp-pricing-grid article,.nxp-knowledge-grid article,.nxp-support-grid button,.nxp-experts-large article{transition:none}
+}
