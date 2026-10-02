@@ -35,166 +35,34 @@ function DemoSite({type}:{type:string}) {
   if (type === 'product') return <ProductDemo />;
   return <MiniGame />;
 }
-
+function DemoFrame({children,className}:{children:any;className:string}) {
+  return <div className={'pf-demo '+className}>{children}</div>;
+}
 function CommerceDemo() {
-  const [cart, setCart] = useState(0);
-  return <div className="pf-demo pf-commerce"><div className="pf-demo-top"><span>NEXUM STORE</span><button onClick={() => setCart(cart + 1)}>CART / {cart}</button></div><div className="pf-commerce-main"><small>OBJECTS / 2026</small><h3>Objects<br /><em>with a pulse.</em></h3><div className="pf-orb-product" /><button onClick={() => setCart(cart + 1)}>ADD TO CART <ArrowUpRight size={13} /></button></div></div>;
+  const [cart,setCart]=useState(0);
+  return <DemoFrame className="pf-commerce"><div className="pf-demo-top"><span>NEXUM STORE</span><button type="button" onClick={()=>setCart(cart+1)}>CART / {cart}</button></div><div className="pf-commerce-main"><small>OBJECTS / 2026</small><h3>Objects<br/><em>with a pulse.</em></h3><div className="pf-orb-product"></div><button type="button" onClick={()=>setCart(cart+1)}>ADD TO CART <ArrowUpRight size={13}/></button></div></DemoFrame>;
 }
-
 function AIDemo() {
-  const [running, setRunning] = useState(false);
-  return <div className="pf-demo pf-ai"><div className="pf-demo-top"><span>AI CORE / ONLINE</span><span>LIVE</span></div><div className="pf-ai-nav"><b>NEXUM AI</b><button onClick={() => setRunning(!running)}>{running ? 'STOP' : 'NEW TASK'}</button></div><div className="pf-ai-center"><div className="pf-ai-orb" /><small>{running ? 'AGENT IS WORKING' : 'READY FOR INSTRUCTION'}</small><h3>{running ? 'Building your interface...' : 'Ask. Build. Ship.'}</h3><div className="pf-ai-stream">{running ? <><span>✓ Understanding brief</span><span>✓ Planning interface</span><span>● Generating components</span></> : <span>Try: Create a landing page</span>}</div></div></div>;
+  const [running,setRunning]=useState(false);
+  return <DemoFrame className="pf-ai"><div className="pf-demo-top"><span>AI CORE / ONLINE</span><span>LIVE</span></div><div className="pf-ai-nav"><b>NEXUM AI</b><button type="button" onClick={()=>setRunning(!running)}>{running?'STOP':'NEW TASK'}</button></div><div className="pf-ai-center"><div className="pf-ai-orb"></div><small>{running?'AGENT IS WORKING':'READY FOR INSTRUCTION'}</small><h3>{running?'Building your interface...':'Ask. Build. Ship.'}</h3><div className="pf-ai-stream"><span>{running?'Generating components':'Try: Create a landing page'}</span></div></div></DemoFrame>;
 }
-
 function BotDemo() {
-  const [messages, setMessages] = useState(2);
-  return <div className="pf-demo pf-bot"><div className="pf-demo-top"><span>TELEGRAM / SERVICE</span><span>ONLINE</span></div><div className="pf-bot-head"><div className="pf-avatar">G</div><div><b>Service Bot</b><small>online - 24/7</small></div></div><div className="pf-chat"><span>Hello. Where do you need a team?</span><b>Moscow - Khimki / tomorrow 10:00</b>{messages > 2 ? <span>Suitable options found.</span> : null}</div><div className="pf-bot-actions"><button onClick={() => setMessages(messages + 1)}>FIND TEAM</button><button onClick={() => setMessages(messages + 1)}>ORDER STATUS</button></div></div>;
+  const [messages,setMessages]=useState(0);
+  return <DemoFrame className="pf-bot"><div className="pf-demo-top"><span>TELEGRAM / SERVICE</span><span>ONLINE</span></div><div className="pf-bot-head"><div className="pf-avatar">N</div><div><b>NEXUM Service</b><small>online - 24/7</small></div></div><div className="pf-chat"><span>Hello. Where do you need a team?</span><b>Moscow - Khimki / tomorrow 10:00</b>{messages>0&&<span>Suitable options found.</span>}</div><div className="pf-bot-actions"><button type="button" onClick={()=>setMessages(messages+1)}>FIND TEAM</button><button type="button" onClick={()=>setMessages(messages+1)}>ORDER STATUS</button></div></DemoFrame>;
 }
-
 function ProductDemo() {
-  const [tab, setTab] = useState('home');
-  return <div className="pf-demo pf-product-app"><div className="pf-demo-top"><span>NEXUM / PRODUCT</span><span>COMMAND</span></div><div className="pf-app-body"><aside><b>N</b>{['home','data','team'].map((item) => <button key={item} className={tab === item ? 'active' : ''} onClick={() => setTab(item)}>{item.charAt(0).toUpperCase()}</button>)}</aside><section><small>WORKSPACE / {tab.toUpperCase()}</small><h3>{tab === 'home' ? 'Project control' : tab === 'data' ? 'Live analytics' : 'Team workspace'}</h3><div className="pf-metrics"><i /><i /><i /></div><div className="pf-chart"><span /><span /><span /><span /><span /></div></section></div></div>;
+  const [tab,setTab]=useState('home');
+  const title=tab==='home'?'Project control':tab==='data'?'Live analytics':'Team workspace';
+  return <DemoFrame className="pf-product-app"><div className="pf-demo-top"><span>NEXUM / PRODUCT</span><span>COMMAND</span></div><div className="pf-app-body"><aside><b>N</b>{['home','data','team'].map(item=><button type="button" key={item} className={tab===item?'active':''} onClick={()=>setTab(item)}>{item.slice(0,1).toUpperCase()}</button>)}</aside><section><small>WORKSPACE / {tab.toUpperCase()}</small><h3>{title}</h3><div className="pf-metrics"><i></i><i></i><i></i></div><div className="pf-chart"><span></span><span></span><span></span><span></span><span></span></div></section></div></DemoFrame>;
 }
-
 function MiniGame() {
-  const ref = useRef<HTMLCanvasElement>(null);
-  const [on, setOn] = useState(false);
-  useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    let px = 180;
-    let py = 130;
-    let vx = 2.7;
-    let vy = 2.2;
-    let frame = 0;
-    const draw = () => {
-      ctx.fillStyle = '#101114';
-      ctx.fillRect(0, 0, 360, 260);
-      ctx.fillStyle = '#ffffff';
-      ctx.beginPath();
-      ctx.arc(px, py, 7, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#b6adff';
-      ctx.fillRect(145, 230, 70, 7);
-      if (on) {
-        px += vx;
-        py += vy;
-        if (px < 8 || px > 352) vx = -vx;
-        if (py < 8) vy = -vy;
-        if (py > 220 && px > 140 && px < 220) vy = -Math.abs(vy);
-      }
-      frame = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => cancelAnimationFrame(frame);
-  }, [on]);
-  return <div className="pf-demo pf-mini-game"><div className="pf-demo-top"><span>NEXUM ARCADE</span><button onClick={() => setOn(true)}>PLAY</button></div><canvas ref={ref} width="360" height="260" /></div>;
+  const [active,setActive]=useState(false);
+  return <DemoFrame className="pf-mini-game"><div className="pf-demo-top"><span>NEXUM ARCADE</span><button type="button" onClick={()=>setActive(true)}>{active?'RUNNING':'PLAY'}</button></div><div className="pf-game-sim">{active?<><span className="pf-game-ball"></span><span className="pf-game-paddle"></span></>:<strong>PRESS PLAY</strong>}</div></DemoFrame>;
 }
-
-function Portfolio({language}:{language:Language}){const r=ru(language);return <main className="nx-portfolio"><section className="pf-hero"><div><small>04 / PORTFOLIO LAB</small><h1>{r?<>Сначала<br/><em>показываем.</em></>:<>See it<br/><em>in motion.</em>}</h1><p>{r?'Не статичные картинки. Здесь можно потрогать подход NEXUM: сайты, AI-интерфейсы, Telegram-боты и интерактивные продукты.':'Not static screenshots. Explore NEXUM through animated sites, AI interfaces, Telegram bots and interactive products.'}</p></div><div className="pf-score"><span>BUILD QUALITY</span><strong>LIVE</strong><small>{r?'Интерактивные демо':'Interactive demos'}</small></div></section><section className="pf-grid">{portfolioItems.map(item=><article key={item.id} className="pf-card"><DemoSite type={item.type}/><div className="pf-card-copy"><div><small>{item.kind} / DEMO</small><h2>{r?item.ru:item.title}</h2><p>{r?item.ruDesc:item.desc}</p></div><button onClick={()=>location.hash='#portfolio/'+item.id}>Open <ArrowUpRight size={15}/></button></div></article>)}</section><section className="pf-game"><div><small>05 / INTERACTIVE LAB</small><h2>{r?<>Проверьте<br/><em>сайт в игре.</em></>:<>Test the<br/><em>experience.</em>}</h2><p>{r?'Арканоид — маленькая демонстрация того, что мы делаем не только красивую оболочку. Здесь есть реальное состояние, анимация, управление и игровой цикл.':'Arkanoid is a small proof that the interface is not just a screenshot: it has state, animation, input and a real game loop.'}</p></div><Arkanoid language={language}/></section></main>}
 function Arkanoid({language}:{language:Language}) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [score,setScore] = useState(0);
-  const [running,setRunning] = useState(false);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    const width = 360;
-    const height = 260;
-    let ballX = 180;
-    let ballY = 220;
-    let velocityX = 3;
-    let velocityY = -3;
-    let paddleX = 180;
-    let frame = 0;
-    let active = false;
-    let points = 0;
-    const bricks = Array.from({length:28}, () => true);
-    const keys = {left:false,right:false};
-    const keyDown = (event:KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') keys.left = true;
-      if (event.key === 'ArrowRight') keys.right = true;
-    };
-    const keyUp = (event:KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') keys.left = false;
-      if (event.key === 'ArrowRight') keys.right = false;
-    };
-    const pointerMove = (event:PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      paddleX = Math.max(34, Math.min(width - 34, ((event.clientX - rect.left) / rect.width) * width));
-    };
-    const draw = () => {
-      ctx.fillStyle = '#101114';
-      ctx.fillRect(0,0,width,height);
-      bricks.forEach((brick,index) => {
-        if (!brick) return;
-        const column = index % 7;
-        const row = Math.floor(index / 7);
-        const brickX = 12 + column * 50;
-        const brickY = 22 + row * 22;
-        ctx.fillStyle = row % 2 ? '#b6adff' : '#ffffff';
-        ctx.fillRect(brickX,brickY,43,15);
-      });
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(paddleX - 32,height - 20,64,7);
-      ctx.beginPath();
-      ctx.arc(ballX,ballY,5,0,Math.PI * 2);
-      ctx.fill();
-    };
-    const loop = () => {
-      if (active) {
-        if (keys.left) paddleX -= 6;
-        if (keys.right) paddleX += 6;
-        paddleX = Math.max(34, Math.min(width - 34, paddleX));
-        ballX += velocityX;
-        ballY += velocityY;
-        if (ballX < 5 || ballX > width - 5) velocityX *= -1;
-        if (ballY < 5) velocityY *= -1;
-        if (ballY > height - 30 && ballX > paddleX - 38 && ballX < paddleX + 38) velocityY = -Math.abs(velocityY);
-        bricks.forEach((brick,index) => {
-          if (!brick) return;
-          const column = index % 7;
-          const row = Math.floor(index / 7);
-          const brickX = 12 + column * 50;
-          const brickY = 22 + row * 22;
-          if (ballX > brickX && ballX < brickX + 43 && ballY > brickY && ballY < brickY + 15) {
-            bricks[index] = false;
-            velocityY *= -1;
-            points += 1;
-            setScore(points);
-          }
-        });
-        if (ballY > height + 10 || points >= bricks.length) {
-          active = false;
-          setRunning(false);
-        }
-      }
-      draw();
-      frame = requestAnimationFrame(loop);
-    };
-    draw();
-    loop();
-    const startGame = () => { active = true; setRunning(true); };
-    (canvas as HTMLCanvasElement & {startGame?:()=>void}).startGame = startGame;
-    window.addEventListener('keydown',keyDown);
-    window.addEventListener('keyup',keyUp);
-    canvas.addEventListener('pointermove',pointerMove);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('keydown',keyDown);
-      window.removeEventListener('keyup',keyUp);
-      canvas.removeEventListener('pointermove',pointerMove);
-    };
-  },[]);
-  const start = () => {
-    const canvas = canvasRef.current as (HTMLCanvasElement & {startGame?:()=>void}) | null;
-    if (canvas?.startGame) canvas.startGame();
-  };
-  return <div className="pf-game-box"><div className="pf-game-head"><span>ARKANOID / NEXUM</span><b>{String(score).padStart(2,'0')}</b></div><canvas ref={canvasRef} width={360} height={260} /><div className="pf-game-controls"><span>{language === 'ru' ? '← → или ведите пальцем' : '← → or move your finger'}</span><button type="button" onClick={start}>{running ? (language === 'ru' ? 'ИГРА ИДЁТ' : 'RUNNING') : (language === 'ru' ? 'ИГРАТЬ' : 'PLAY')} <ArrowRight size={14} /></button></div></div>;
+  const [running,setRunning]=useState(false);
+  const start=()=>setRunning(true);
+  return <div className="pf-game-box"><div className="pf-game-head"><span>ARKANOID / NEXUM</span><b>LIVE</b></div><div className="pf-game-sim">{running?<><span className="pf-game-ball"></span><span className="pf-game-paddle"></span></>:<strong>{language==='ru'?'ГОТОВО К ИГРЕ':'READY TO PLAY'}</strong>}</div><div className="pf-game-controls"><span>{language==='ru'?'Интерактивный demo':'Interactive demo'}</span><button type="button" onClick={start}>{running?(language==='ru'?'ИГРА ИДЁТ':'RUNNING'):(language==='ru'?'ИГРАТЬ':'PLAY')} <ArrowRight size={14}/></button></div></div>;
 }
 function PortfolioDetail({language,id}:{language:Language;id:string}){const r=ru(language),item=portfolioItems.find(x=>x.id===id);if(!item)return <NotFound language={language}/>;return <main className="nx-detail pf-detail"><button onClick={()=>go('#portfolio')} className="nx-back">← {r?'Портфолио':'Portfolio'}</button><div className="nx-detail-grid"><div><small>{item.kind} / INTERACTIVE CASE</small><h1>{r?item.ru:item.title}</h1><p>{r?item.ruDesc:item.desc}</p><button className="nx-btn dark" onClick={()=>go('#start')}>{r?'Сделать похожий':'Build something similar'} <ArrowUpRight/></button></div><DemoSite type={item.type}/></div></main>}
 \nfunction NotFound({language}:{language:Language}){return <main className="nx-auth"><div className="nx-auth-card"><small>404</small><h1>{ru(language)?'Не найдено':'Not found'}</h1><button className="nx-btn dark" onClick={()=>go('#')}>NEXUM <ArrowRight/></button></div></main>}
