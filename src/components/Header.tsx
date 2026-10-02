@@ -2,7 +2,7 @@ import {Menu,X,ArrowUpRight} from 'lucide-react'
 import {useState} from 'react'
 export type Language='ru'|'en'
 type Props={language:Language;onLanguageChange:(l:Language)=>void}
-const nav={ru:[['Услуги','#services'],['Проекты','#projects'],['Отзывы','#reviews']],en:[['Services','#services'],['Projects','#projects'],['Reviews','#reviews']]} as const
+const nav={ru:[['Услуги','#services'],['Проекты','#projects'],['Отзывы','#reviews'],['Портфолио','#portfolio']],en:[['Services','#services'],['Projects','#projects'],['Reviews','#reviews']]} as const
 export default function Header({language,onLanguageChange}:Props){
  const [open,setOpen]=useState(false), links=nav[language]
  const go=(h:string)=>{setOpen(false);location.hash=h}
