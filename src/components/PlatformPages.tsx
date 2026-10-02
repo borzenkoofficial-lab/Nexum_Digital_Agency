@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, ArrowUpRight, BarChart3, Bell, Check, CircleHelp, Clock3, Code2, CreditCard, FileText, Filter, Heart, Layers3, LockKeyhole, MapPin, MessageCircle, PackageCheck, Palette, Search, ShieldCheck, ShoppingBag, Sparkles, Star, UserRound, Users, WandSparkles, X, Zap } from 'lucide-react'
 import { works } from '../data/content'
 import StartProjectPage from './StartProjectPage'
@@ -72,6 +72,28 @@ function Field({label,children}:{label:string;children:React.ReactNode}){ return
 
 function Home({language}:{language:Language}){
  const ru=language==='ru'
+ const [liveNote,setLiveNote]=useState(0)
+ const liveNotes=ru?[
+  ['FIELD NOTE','Хороший сайт не должен кричать. Он должен тихо заставить нажать ещё одну кнопку.'],
+  ['NEXUM OBSERVATION','Если интерфейс требует инструкции на 14 страниц — это уже не интерфейс.'],
+  ['DESIGN RULE','Мы любим стекло. Но ещё больше любим, когда за ним действительно что-то происходит.'],
+  ['CLIENT MODE','«Сделайте красиво» — отличный бриф. Правда, только первые 7 секунд.'],
+  ['ENGINEERING NOTE','Кнопка «Сделать всё» существует. Мы просто пока не нашли её в Figma.'],
+  ['AI NOTE','AI уже умеет много. Поэтому мы сначала спрашиваем, зачем ему это делать.'],
+  ['PRODUCT THOUGHT','Сначала смысл. Потом пиксели. Потом тот самый пиксель, который почему-то двигали 40 минут.'],
+  ['NEXUM AFTER HOURS','Если всё работает с первого раза — кто-нибудь обязательно скажет: «А давайте ещё чуть-чуть улучшим».']
+ ]:[
+  ['FIELD NOTE','A good website should not shout. It should quietly make you click one more thing.'],
+  ['NEXUM OBSERVATION','If an interface needs a 14-page manual, it is probably not an interface anymore.'],
+  ['DESIGN RULE','We like glass. We like it even more when something useful is actually happening behind it.'],
+  ['CLIENT MODE','“Make it beautiful” is a great brief. For about seven seconds.'],
+  ['ENGINEERING NOTE','There is a “Do Everything” button. We just have not found it in Figma yet.'],
+  ['AI NOTE','AI can do a lot. That is why we first ask why it should do it.'],
+  ['PRODUCT THOUGHT','Meaning first. Pixels second. Then the one pixel someone moves for 40 minutes.'],
+  ['NEXUM AFTER HOURS','If everything works on the first try, someone will inevitably say: “Let’s improve it a little.”']
+ ]
+ useEffect(()=>{const id=window.setInterval(()=>setLiveNote(v=>(v+1)%liveNotes.length),4200);return()=>window.clearInterval(id)},[liveNotes.length])
+ const currentNote=liveNotes[liveNote]
  return <main className="nxp-page nxp-home-redesign">
   <section className="nxp-home-hero">
    <div className="nxp-home-hero-copy">
@@ -91,6 +113,11 @@ function Home({language}:{language:Language}){
      <span><b>3D</b><small>{t(ru,'опыт','experience')}</small></span>
      <span><b>AUTO</b><small>{t(ru,'автоматизация','automation')}</small></span>
     </div>
+    <button className="nxp-live-note" onClick={()=>setLiveNote(v=>(v+1)%liveNotes.length)} aria-label={t(ru,'Следующая заметка NEXUM','Next NEXUM note')}>
+     <span className="nxp-live-note-top"><i><span className="nxp-live-dot"/> LIVE</i><b>{currentNote[0]}</b><small>{String(liveNote+1).padStart(2,'0')} / {String(liveNotes.length).padStart(2,'0')}</small></span>
+     <strong key={liveNote}>{currentNote[1]}</strong>
+     <span className="nxp-live-note-hint">{t(ru,'Нажмите — следующая мысль','Tap for the next thought')} <ArrowRight size={13}/></span>
+    </button>
    </div>
    <div className="nxp-home-hero-stage">
     <div className="nxp-home-stage-glow"/>
@@ -117,6 +144,11 @@ function Home({language}:{language:Language}){
      <small>AI / AUTOMATION</small>
      <b>24 / 7</b>
      <span>{ru?'Рабочий контур':'Operating layer'}</span>
+    </div>
+    <div className="nxp-home-quote-card">
+     <span>FIELD NOTE / {String(liveNote+1).padStart(2,'0')}</span>
+     <b>{currentNote[0]}</b>
+     <p key={liveNote}>{currentNote[1]}</p>
     </div>
     <div className="nxp-home-orbit"/>
    </div>
