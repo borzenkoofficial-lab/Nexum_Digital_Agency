@@ -59,6 +59,7 @@ function Visual({tone='blue',label='NEXUM',sub='DIGITAL SYSTEM'}:{tone?:string;l
  </div>
 }
 function GlassOrb({label='NEXUM',tone='blue'}:{label?:string;tone?:string}){return <div className={'nxp-glass-orb nxp-tone-'+tone} aria-hidden="true"><span/><i/><b>{label}</b></div>}
+function ProductStage({label='NEXUM',tone='blue'}:{label?:string;tone?:string}){return <div className={'nxp-product-stage nxp-tone-'+tone} aria-hidden="true"><div className="nxp-product-stage-glow"/><div className="nxp-product-stage-grid"/><div className="nxp-product-stage-orbit"/><div className="nxp-product-stage-card"><small>NEXUM / SYSTEM</small><b>{label}</b><span>WEB · AI · DATA</span><i/><i/><i/></div></div>}
 function Hero({eyebrow,title,copy}:{eyebrow:string;title:React.ReactNode;copy:string}){
  return <section className="nxp-page-hero"><small>{eyebrow}</small><h1>{title}</h1><p>{copy}</p></section>
 }
