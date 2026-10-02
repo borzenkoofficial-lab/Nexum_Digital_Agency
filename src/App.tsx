@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react'
+import {Component,useEffect,useState} from 'react'
 
 type Lang='ru'|'en'
 type Page='home'|'services'|'projects'|'reviews'|'marketplace'|'portfolio'|'login'|'register'|'start'
@@ -11,6 +11,15 @@ const services=[['WEB','Websites & platforms','Промо, корпоратив�
 const projects=[['NEXUM AI','AI product','AI workspace / agent platform'],['GRUZLI','Marketplace','Заказчик → диспетчер → грузчик'],['DIGITAL CLOUD','Studio platform','Коммерческая digital-платформа']]
 const market=[['AI','AI-консультант','Исследование, прототип и AI-логика продукта.'],['WEB','Landing / site','Премиальный сайт под запуск продукта или компании.'],['BOT','Telegram bot','Бот с интерфейсом, сценариями и интеграциями.'],['CRM','Internal system','Рабочее пространство для команды и процессов.']]
 
+
+type BoundaryState={failed:boolean;message:string}
+class RuntimeBoundary extends Component<{children:React.ReactNode},BoundaryState>{
+ state:BoundaryState={failed:false,message:''}
+ static getDerivedStateFromError(error:Error){return{failed:true,message:error?.message||'Unexpected interface error'}}
+ componentDidCatch(error:Error,info:{componentStack:string}){try{localStorage.setItem('nexum-last-error',JSON.stringify({message:error.message,stack:error.stack,componentStack:info.componentStack,route:location.hash,time:new Date().toISOString()}))}catch{/* diagnostics must never break recovery */}}
+ reset=()=>location.reload()
+ render(){if(!this.state.failed)return this.props.children;return <div className="runtime-recovery"><div><span className="eyebrow">NEXUM / RECOVERY</span><h1>Интерфейс остановлен безопасно.</h1><p>Ошибка изолирована от остального приложения. Перезапустите UI-контур — данные страницы не должны потеряться.</p><code>{this.state.message}</code><button className="black-btn" onClick={this.reset}>Перезапустить NEXUM ↗</button></div></div>}
+}
 function go(p:Page){location.hash=p==='home'?'':p;window.scrollTo({top:0,behavior:'smooth'})}
 
 function Header({lang,setLang}:{lang:Lang;setLang:(v:Lang)=>void}){
@@ -85,14 +94,16 @@ function Auth({mode,lang}:{mode:'login'|'register';lang:Lang}){const [sent,setSe
 function Start({lang}:{lang:Lang}){const [sent,setSent]=useState(false);return <section className="start-page"><div><span className="eyebrow">NEXUM / NEW PROJECT</span><h1>Расскажите,<br/><em>что строим.</em></h1><p>Коротко опишите задачу. Мы вернёмся с направлением, этапами и вопросами.</p></div><form onSubmit={e=>{e.preventDefault();setSent(true)}}>{sent?<div className="success">Заявка сохранена в demo-режиме. Реальная отправка будет подключена отдельно.</div>:<><input placeholder="Имя / компания" required/><input type="email" placeholder="Email" required/><textarea placeholder="Что нужно сделать?" rows={7} required/><button className="black-btn" type="submit">{T[lang].start} ↗</button></>}</form></section>}
 
 export default function App(){
- const [lang,setLang]=useState<Lang>(()=>(localStorage.getItem('nexum-lang') as Lang)||'ru')
- const [page,setPage]=useState<Page>(()=>(location.hash.replace('#','') as Page)||'home')
- useEffect(()=>localStorage.setItem('nexum-lang',lang),[lang])
- useEffect(()=>{const f=()=>setPage((location.hash.replace('#','') as Page)||'home');addEventListener('hashchange',f);return()=>removeEventListener('hashchange',f)},[])
+ const [lang,setLang]=useState<Lang>(()=>{try{return(localStorage.getItem('nexum-lang') as Lang)||'ru'}catch{return'ru'}})
+ const allowed=['home','services','projects','reviews','marketplace','portfolio','login','register','start'] as const
+ const readRoute=():Page=>{const value=location.hash.replace('#','');return (allowed as readonly string[]).includes(value)?value as Page:'home'}
+ const [page,setPage]=useState<Page>(readRoute)
+ useEffect(()=>{try{localStorage.setItem('nexum-lang',lang)}catch{/* storage unavailable */}},[lang])
+ useEffect(()=>{const f=()=>setPage(readRoute());addEventListener('hashchange',f);return()=>removeEventListener('hashchange',f)},[])
  let content
  if(page==='home')content=<Home lang={lang}/>
  else if(page==='login'||page==='register')content=<Auth mode={page} lang={lang}/>
  else if(page==='start')content=<Start lang={lang}/>
  else content=<Generic type={page} lang={lang}/>
- return <><Header lang={lang} setLang={setLang}/><main>{content}</main><footer><span>© 2026 NEXUM</span><span>Digital products / AI / Design / Technology</span><button onClick={()=>go('start')}>Start a project ↗</button></footer></>
+ return <RuntimeBoundary><Header lang={lang} setLang={setLang}/><main>{content}</main><footer><span>© 2026 NEXUM</span><span>Digital products / AI / Design / Technology</span><button onClick={()=>go('start')}>Start a project ↗</button></footer></RuntimeBoundary>
 }
