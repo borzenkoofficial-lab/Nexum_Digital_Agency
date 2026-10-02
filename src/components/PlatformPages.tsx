@@ -52,7 +52,7 @@ function DigitalGlobe(){
   <div className="nxp-globe">
    <div className="nxp-globe-lat l1"/><div className="nxp-globe-lat l2"/><div className="nxp-globe-lat l3"/>
    <div className="nxp-globe-lon l1"/><div className="nxp-globe-lon l2"/><div className="nxp-globe-lon l3"/>
-   {Array.from({length:18},(_,i)=><i key={i} style={{'--i':i} as React.CSSProperties}/>)}
+   {Array.from({length:18},(_,i)=><i key={i} style={{left:`${12+(i%6)*14}%`,top:`${16+Math.floor(i/6)*23+(i%3)*4}%`}}/>)}
   </div>
   <span className="nxp-globe-label g1">AI SYSTEMS</span><span className="nxp-globe-label g2">WEB</span><span className="nxp-globe-label g3">MOBILE</span><span className="nxp-globe-label g4">DATA</span>
   <div className="nxp-globe-orbit o1"/><div className="nxp-globe-orbit o2"/>
