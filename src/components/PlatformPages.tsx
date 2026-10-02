@@ -21,15 +21,6 @@ const services: Service[] = [
  {id:'marketing',category:'MARKETING',ruCategory:'МАРКЕТИНГ',title:'Growth & performance',ruTitle:'Рост и performance',description:'SEO, content systems and conversion optimisation.',ruDescription:'SEO, контентные системы и оптимизация конверсии.',from:50000,timeline:'14–60 days',icon:Zap,tags:['SEO','Content','CRO']}
 ]
 
-const marketplace: Item[] = [
- {...services[0],kind:'service',orders:84,rating:4.9,seller:'NEXUM Studio'},
- {...services[3],kind:'service',orders:47,rating:4.8,seller:'NEXUM AI Lab'},
- {...services[1],kind:'service',orders:31,rating:5,seller:'Product Unit'},
- {...services[5],kind:'service',orders:109,rating:4.9,seller:'Northstar Design'},
- {id:'sales-agent',category:'AI PRODUCT',ruCategory:'AI-ПРОДУКТ',title:'Sales Copilot',ruTitle:'Sales Copilot',description:'AI sales assistant with knowledge and workflow templates.',ruDescription:'AI-ассистент продаж с готовой базой знаний и workflow.',from:24000,timeline:'Instant setup',icon:Sparkles,tags:['AI','Sales','Workflow'],kind:'agent',orders:212,rating:4.7,seller:'NEXUM AI Lab'},
- {id:'ui-kit',category:'DIGITAL PRODUCT',ruCategory:'DIGITAL PRODUCT',title:'Launch System UI Kit',ruTitle:'Launch System UI Kit',description:'Reusable UI system for product launches and dashboards.',ruDescription:'Готовый UI-набор для запусков продуктов и дашбордов.',from:18000,timeline:'Instant download',icon:Layers3,tags:['UI Kit','Figma','Components'],kind:'product',orders:386,rating:4.9,seller:'NEXUM Design'},
- {id:'ops-agent',category:'AI PRODUCT',ruCategory:'AI-ПРОДУКТ',title:'Operations Agent',ruTitle:'Operations Agent',description:'AI workflow for triage, routing and operations.',ruDescription:'AI-workflow для распределения задач и внутренних операций.',from:65000,timeline:'3–7 days',icon:WandSparkles,tags:['Agent','Ops','Automation'],kind:'agent',orders:63,rating:4.9,seller:'NEXUM AI Lab'}
-]
 
 const categories = [
  ['DEVELOPMENT','Разработка',Code2],['AI','AI',Sparkles],['DESIGN','Дизайн',Palette],['3D / CREATIVE','3D / Creative',Layers3],['BUSINESS','Бизнес',BarChart3],['MARKETING','Маркетинг',Zap]
@@ -70,27 +61,6 @@ function Visual({tone='blue',label='NEXUM',sub='DIGITAL SYSTEM'}:{tone?:string;l
  </div>
 }
 function GlassOrb({label='NEXUM',tone='blue'}:{label?:string;tone?:string}){return <div className={'nxp-glass-orb nxp-tone-'+tone} aria-hidden="true"><span/><i/><b>{label}</b></div>}
-function MarketplaceMockup({kind='service',title='Digital product',category='PRODUCT',tone='blue'}:{kind?:string;title?:string;category?:string;tone?:string}){
- const mode=kind==='agent'?'AI AGENT':kind==='product'?'PRODUCT':'SERVICE'
- return <div className={'nxp-market-mockup nxp-market-mockup-'+tone+' nxp-market-mockup-'+kind}>
-  <div className="nxp-mm-noise"/>
-  <div className="nxp-mm-top"><span><i/><i/><i/></span><small>NEXUM / {mode}</small><b>↗</b></div>
-  <div className="nxp-mm-grid"/>
-  {kind==='agent'?<div className="nxp-mm-agent">
-    <div className="nxp-mm-agent-orb"><span/></div>
-    <small>LIVE AGENT</small><strong>AI</strong>
-    <div className="nxp-mm-agent-lines"><i/><i/><i/></div>
-   </div>:kind==='product'?<div className="nxp-mm-product">
-    <div className="nxp-mm-product-window"><span/><span/><span/><b>{category}</b><i/><i/><i/><em>01</em></div>
-    <div className="nxp-mm-product-ring"/>
-    <div className="nxp-mm-product-chip">READY</div>
-   </div>:<div className="nxp-mm-service">
-    <div className="nxp-mm-service-card"><small>{category}</small><strong>{title}</strong><div><i/><i/><i/></div><span>STARTING FROM</span><b>₽</b></div>
-    <div className="nxp-mm-service-pill">NEXUM</div>
-   </div>}
-  <div className="nxp-mm-bottom"><span>0{kind==='agent'?'2':kind==='product'?'3':'1'} / {mode}</span><b>{title}</b></div>
- </div>
-}
 
 function ProductStage({label='DIGITAL PRODUCT',tone='blue'}:{label?:string;tone?:string}){return <div className="nxp-product-stage"><div className="nxp-stage-backdrop"/><div className="nxp-stage-card"><div className="nxp-stage-top"><span/><span/><span/><small>{label}</small></div><div className="nxp-stage-body"><div className="nxp-stage-sidebar"/><div className="nxp-stage-content"><i/><i/><i/><i/></div></div></div><GlassOrb label="AI" tone={tone}/><div className="nxp-stage-ring"/></div>}
 function Head({eyebrow,title,copy,action}:{eyebrow:string;title:React.ReactNode;copy?:React.ReactNode;action?:React.ReactNode}){
@@ -268,23 +238,48 @@ function ServicesCatalog({language}:{language:Language}){
  </main>
 }
 
-function MarketplacePage({language}:{language:Language}){
+function SolutionsPage({language}:{language:Language}){
  const ru=language==='ru'
- const urlQuery=new URLSearchParams(location.hash.split('?')[1]||'').get('search')||''
- const [query,setQuery]=useState(urlQuery),[kind,setKind]=useState('all'),[sort,setSort]=useState('popular'),[liked,setLiked]=useState<string[]>([])
- let visible=marketplace.filter(item=>(kind==='all'||item.kind===kind)&&(item.title+' '+item.description+' '+item.tags.join(' ')).toLowerCase().includes(query.toLowerCase()))
- if(sort==='price') visible=visible.slice().sort((a,b)=>a.from-b.from)
- if(sort==='rating') visible=visible.slice().sort((a,b)=>b.rating-a.rating)
- return <main className="nxp-page nxp-catalog-page">
-  <Hero eyebrow="02 / MARKETPLACE" title={ru?'Digital marketplace.':'Digital marketplace.'} copy={ru?'Полноценная витрина digital-услуг, AI-продуктов и готовых решений с подготовленным order flow.':'A full storefront for digital services, AI products and ready solutions with a prepared order flow.'}/>
-  <section className="nxp-section">
-   <div className="nxp-market-toolbar"><div className="nxp-searchbox"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder={ru?'Найти услугу, продукт или AI-агента':'Search service, product or AI agent'}/></div><select value={sort} onChange={e=>setSort(e.target.value)}><option value="popular">{ru?'Популярные':'Popular'}</option><option value="price">{ru?'Цена':'Price'}</option><option value="rating">{ru?'Рейтинг':'Rating'}</option></select></div>
-   <div className="nxp-filter-row">{[['all',ru?'Все':'All'],['service',ru?'Услуги':'Services'],['agent','AI'],['product','Digital products']].map(([id,label])=><button key={id} className={kind===id?'active':''} onClick={()=>setKind(id)}>{label}</button>)}</div>
-   <div className="nxp-product-grid">{visible.map(item=><article className="nxp-product-card" key={item.id}><div className="nxp-product-visual"><MarketplaceMockup kind={item.kind} tone={item.kind==='agent'?'violet':item.kind==='product'?'green':'blue'} category={item.category} title={ru?item.ruTitle:item.title}/><button type="button" className={'nxp-like '+(liked.includes(item.id)?'active':'')} onClick={()=>setLiked(v=>v.includes(item.id)?v.filter(x=>x!==item.id):v.concat(item.id))}>{liked.includes(item.id)?<Heart fill="currentColor"/>:<Heart/>}</button><span className="nxp-kind-badge">{item.kind==='agent'?'AI AGENT':item.kind==='product'?'DIGITAL PRODUCT':'SERVICE'}</span></div><div className="nxp-product-body"><small>{ru?item.ruCategory:item.category}</small><h3>{ru?item.ruTitle:item.title}</h3><p>{ru?item.ruDescription:item.description}</p><div className="nxp-product-meta"><span><Star size={13} fill="currentColor"/> {item.rating}</span><span>{item.orders} {ru?'заказов':'orders'}</span><span>{item.seller}</span></div><div className="nxp-product-action"><b>{ru?'от':'from'} {money(item.from,ru)}</b><button type="button" onClick={()=>go('#service/'+item.id)}>{ru?'Подробнее':'View'} <ArrowUpRight/></button></div></div></article>)}</div>
+ const [active,setActive]=useState('ALL')
+ const groups=[
+  {id:'ALL',ru:'Все решения',en:'All solutions'},
+  {id:'DEVELOPMENT',ru:'Разработка',en:'Development'},
+  {id:'AI',ru:'AI',en:'AI'},
+  {id:'DESIGN',ru:'Дизайн',en:'Design'},
+  {id:'3D / CREATIVE',ru:'3D / Creative',en:'3D / Creative'},
+  {id:'BUSINESS',ru:'Бизнес',en:'Business'},
+  {id:'MARKETING',ru:'Маркетинг',en:'Marketing'}
+ ]
+ const visible=active==='ALL'?services:services.filter(x=>x.category===active)
+ return <main className="nxp-page nxp-solutions-page">
+  <section className="nxp-solutions-hero">
+   <div className="nxp-solutions-hero-copy">
+    <small>02 / NEXUM SOLUTIONS</small>
+    <h1>{ru?<>Не каталог.<br/><em>Готовые направления.</em></>:<>Not a marketplace.<br/><em>Clear ways forward.</em></>}</h1>
+    <p>{t(ru,'Мы не продаём случайный набор услуг. Выберите направление — NEXUM соберёт под задачу нужную команду, технологию и формат работы.','We do not sell a random list of services. Choose a direction — NEXUM assembles the right team, technology and delivery model.')}</p>
+    <div className="nxp-solutions-hero-meta"><span>WEB</span><span>AI</span><span>PRODUCT</span><span>3D</span><span>AUTOMATION</span></div>
+   </div>
+   <div className="nxp-solutions-hero-art" aria-hidden="true">
+    <div className="nxp-solutions-art-core"><span>N</span></div>
+    <div className="nxp-solutions-art-ring r1"/><div className="nxp-solutions-art-ring r2"/><div className="nxp-solutions-art-ring r3"/>
+    <div className="nxp-solutions-art-label l1">01 / DIGITAL</div><div className="nxp-solutions-art-label l2">02 / AI</div><div className="nxp-solutions-art-label l3">03 / SYSTEMS</div>
+   </div>
   </section>
+  <section className="nxp-section nxp-solutions-list">
+   <div className="nxp-solutions-switcher">{groups.map(g=><button key={g.id} className={active===g.id?'active':''} onClick={()=>setActive(g.id)}>{ru?g.ru:g.en}</button>)}</div>
+   <div className="nxp-solutions-grid">{visible.map((item,i)=>{const Icon=item.icon;return <article className="nxp-solution-card" key={item.id}>
+    <div className="nxp-solution-card-top"><span>0{String(i+1).padStart(2,'0')}</span><Icon size={18}/></div>
+    <div className="nxp-solution-card-index">{item.category}</div>
+    <h2>{ru?item.ruTitle:item.title}</h2>
+    <p>{ru?item.ruDescription:item.description}</p>
+    <div className="nxp-solution-tags">{item.tags.map(tag=><span key={tag}>{tag}</span>)}</div>
+    <div className="nxp-solution-bottom"><span>{ru?'от':'from'} {money(item.from,ru)}</span><span>{item.timeline}</span><button onClick={()=>go('#service/'+item.id)}>{ru?'Открыть':'Explore'} <ArrowUpRight/></button></div>
+   </article>})}</div>
+  </section>
+  <section className="nxp-solutions-process"><div><small>03 / DELIVERY</small><h2>{t(ru,<>От идеи<br/><em>до работающего продукта.</em></>,<>From an idea<br/><em>to a working product.</em></>)}</h2></div><div className="nxp-solutions-steps"><div><b>01</b><strong>DISCOVER</strong><span>{t(ru,'Разбираем задачу и определяем результат.','We frame the problem and define the outcome.')}</span></div><div><b>02</b><strong>BUILD</strong><span>{t(ru,'Проектируем, разрабатываем и соединяем системы.','We design, build and connect the systems.')}</span></div><div><b>03</b><strong>LAUNCH</strong><span>{t(ru,'Запускаем и передаём рабочий digital-контур.','We launch and hand over a working digital system.')}</span></div></div></section>
+  <section className="nxp-cta-section"><small>04 / START</small><h2>{t(ru,<>Есть задача?<br/><em>Опишем решение.</em></>,<>Have a brief?<br/><em>Let's shape it.</em></>)}</h2><p>{t(ru,'Опишите результат своими словами. NEXUM предложит подходящий формат работы.','Describe the outcome in your own words. NEXUM will propose the right delivery model.')}</p><button className="nxp-button nxp-button-dark" onClick={()=>go('#start')}>{t(ru,'Начать проект','Start a project')} <ArrowUpRight/></button></section>
  </main>
 }
-
 function AIPage({language}:{language:Language}){
  const ru=language==='ru',[prompt,setPrompt]=useState(''),[submitted,setSubmitted]=useState(false)
  return <main className="nxp-page nxp-ai-page">
@@ -404,7 +399,7 @@ export default function PlatformRouter({language}:{language:Language}){
  const hash=location.hash||'', path=hash.split('?')[0]
  if(path===''||path==='#')return <Home language={language}/>
  if(path==='#services')return <ServicesCatalog language={language}/>
- if(path==='#marketplace')return <MarketplacePage language={language}/>
+ if(path==='#solutions'||path==='#marketplace')return <SolutionsPage language={language}/>
  if(path==='#ai')return <AIPage language={language}/>
  if(path==='#work'||path==='#projects')return <ProjectsPage language={language}/>
  if(path==='#experts')return <ExpertsPage language={language}/>
