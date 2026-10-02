@@ -473,3 +473,24 @@ body{margin:0;overflow-x:hidden}
  .nxp-service-hero .nxp-visual,.nxp-service-detail .nxp-visual{min-height:280px}
  .nxp-work-row:hover .nxp-visual{transform:none}
 }
+
+/* Routed-page hero scenes */
+.nxp-page-scene{position:absolute;right:clamp(18px,7vw,150px);top:clamp(110px,14vh,180px);width:clamp(220px,25vw,390px);height:clamp(220px,25vw,390px);z-index:0;pointer-events:none;opacity:.92}
+.nxp-page-scene .nxp-visual{height:100%;min-height:0;transform:scale(.82);transform-origin:center}
+.nxp-page> .nxp-page-hero{position:relative;z-index:1}
+.nxp-page-hero{position:relative;z-index:1}
+.nxp-page-scene + .nxp-page-hero{padding-right:clamp(280px,34vw,520px)}
+.nxp-ai-page .nxp-page-scene{top:95px}
+.nxp-business-page .nxp-page-scene{top:100px}
+.nxp-experts-page .nxp-page-scene{top:100px}
+.nxp-projects-page .nxp-page-scene{top:100px}
+.nxp-pricing-page .nxp-page-scene{top:100px}
+.nxp-knowledge-page .nxp-page-scene{top:100px}
+.nxp-about-page .nxp-page-scene{top:100px}
+.nxp-support-page .nxp-page-scene{top:100px}
+@media(max-width:900px){
+ .nxp-page-scene{position:relative;right:auto;top:auto!important;width:min(88vw,360px);height:min(88vw,360px);margin:8px auto -25px;z-index:1}
+ .nxp-page-scene .nxp-visual{transform:scale(.9)}
+ .nxp-page-scene + .nxp-page-hero{padding-right:18px}
+}
+@media(prefers-reduced-motion:reduce){.nxp-page-scene .nxp-visual *{animation:none!important}}
