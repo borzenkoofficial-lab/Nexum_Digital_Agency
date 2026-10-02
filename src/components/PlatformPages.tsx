@@ -284,7 +284,7 @@ function BusinessPage({language}:{language:Language}){
     <p>{t(ru,'Не набор подрядчиков. Один технологический контур: стратегия, дизайн, разработка, AI и автоматизация.', 'One technology layer: strategy, design, development, AI and automation.')}</p>
     <div className="nxp-business-v2-actions">
      <button className="nxp-button nxp-button-dark" onClick={()=>document.getElementById('business-contact')?.scrollIntoView({behavior:'smooth'})}>{t(ru,'Обсудить задачу','Discuss a project')} <ArrowUpRight/></button>
-     <button className="nxp-outline-link" onClick={()=>go('#work')}>{t(ru,'Смотреть проекты','View projects')} <ArrowUpRight/></button>
+     <button className="nxp-outline-link" onClick={()=>go('#solutions')}>{t(ru,'Смотреть решения','Explore solutions')} <ArrowUpRight/></button>
     </div>
    </div>
    <div className="nxp-business-v2-stage">
