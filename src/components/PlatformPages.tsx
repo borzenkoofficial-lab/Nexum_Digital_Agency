@@ -58,7 +58,8 @@ function Visual({tone='blue',label='NEXUM',sub='DIGITAL SYSTEM'}:{tone?:string;l
   <div className="nxp-visual-cursor">↗</div>
  </div>
 }
-function GlassOrb({label='NEXUM',tone='blue'}:{label?:string;tone?:string}){return <div className={'nxp-glass-orb nxp-tone-'+tone} aria-hidden="true"><span/><i/><b>{label}</b></div>}\nfunction Hero({eyebrow,title,copy}:{eyebrow:string;title:React.ReactNode;copy:string}){
+function GlassOrb({label='NEXUM',tone='blue'}:{label?:string;tone?:string}){return <div className={'nxp-glass-orb nxp-tone-'+tone} aria-hidden="true"><span/><i/><b>{label}</b></div>}
+function Hero({eyebrow,title,copy}:{eyebrow:string;title:React.ReactNode;copy:string}){
  return <section className="nxp-page-hero"><small>{eyebrow}</small><h1>{title}</h1><p>{copy}</p></section>
 }
 function Field({label,children}:{label:string;children:React.ReactNode}){ return <label className="nxp-field"><span>{label}</span>{children}</label> }
