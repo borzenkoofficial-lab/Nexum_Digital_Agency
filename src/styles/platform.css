@@ -201,3 +201,43 @@ body{background:var(--nx-canvas);color:var(--nx-ink)}
   .nxp-product-visual .nxp-visual-panel b{font-size:23px}
   .nxp-market-cards{grid-template-columns:1fr}
 }
+
+/* V1 global page frame: every routed page uses the same wide editorial canvas */
+.nxp-catalog-page,.nxp-service-detail{width:100%;overflow-x:clip}
+.nxp-catalog-page>.nxp-section{max-width:none}
+.nxp-catalog-page .nxp-page-hero{max-width:none}
+.nxp-catalog-page .nxp-toolbar,.nxp-catalog-page .nxp-market-toolbar{width:100%}
+.nxp-service-detail .nxp-service-hero,.nxp-service-detail .nxp-detail-grid,.nxp-service-detail .nx2-service-extra{width:100%;box-sizing:border-box}
+.nx2-service-extra{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;padding:70px 6vw;border-top:1px solid var(--nx-line);background:#fff}
+.nx2-panel{min-width:0;padding:32px;border:1px solid var(--nx-line);border-radius:20px;background:linear-gradient(145deg,#fff,#f7f8fb);box-shadow:0 18px 55px rgba(25,28,40,.06)}
+.nx2-panel h2{font-size:clamp(34px,4vw,64px);line-height:.95;letter-spacing:-.065em;margin:14px 0 28px}
+.nx2-list{display:grid;border-top:1px solid var(--nx-line)}
+.nx2-list div{display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;padding:15px 0;border-bottom:1px solid var(--nx-line);font-size:11px}
+.nx2-list b{color:var(--nx-subtle);font-size:8px}
+.nx2-faq{display:grid;border-top:1px solid var(--nx-line)}
+.nx2-faq details{padding:15px 0;border-bottom:1px solid var(--nx-line)}
+.nx2-faq summary{cursor:pointer;font-size:11px;font-weight:600;list-style:none}
+.nx2-faq summary::-webkit-details-marker{display:none}
+.nx2-faq p{font-size:10px;line-height:1.65;color:var(--nx-muted);max-width:650px;margin:10px 0 0}
+.nx2-review{display:grid;gap:7px;padding:16px 0;border-top:1px solid var(--nx-line)}
+.nx2-review strong{font-size:11px}
+.nx2-review span{font-size:9px;line-height:1.55;color:var(--nx-muted)}
+@media(min-width:1280px){
+ .nxp-catalog-page>.nxp-section,
+ .nxp-service-detail>.nxp-detail-grid,
+ .nxp-service-detail>.nx2-service-extra{padding-left:4.2vw;padding-right:4.2vw}
+ .nxp-service-detail>.nxp-service-hero{padding-left:4.2vw;padding-right:4.2vw}
+ .nxp-service-detail .nxp-service-hero{grid-template-columns:minmax(0,1fr) minmax(520px,.9fr);gap:6vw}
+ .nxp-service-detail .nxp-service-hero>.nxp-visual{min-width:0}
+ .nxp-service-detail .nxp-detail-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7vw}
+}
+@media(min-width:1800px){
+ .nxp-catalog-page>.nxp-section,
+ .nxp-service-detail>.nxp-detail-grid,
+ .nxp-service-detail>.nx2-service-extra{padding-left:3.2vw;padding-right:3.2vw}
+ .nxp-service-detail>.nxp-service-hero{padding-left:3.2vw;padding-right:3.2vw}
+}
+@media(max-width:800px){
+ .nx2-service-extra{grid-template-columns:1fr;padding:48px 20px}
+ .nx2-panel{padding:22px;border-radius:16px}
+}
