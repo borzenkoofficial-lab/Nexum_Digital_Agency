@@ -3,6 +3,20 @@ import {Component,ReactNode,useEffect,useState} from 'react'
 type Lang='ru'|'en'
 type Page='home'|'services'|'projects'|'reviews'|'marketplace'|'portfolio'|'login'|'register'|'start'
 
+/* Runtime Core: UI failures are contained, state is observable, and navigation is validated. */
+type RuntimeSnapshot={online:boolean;pending:number;lastError:string|null}
+const RUNTIME_ROUTES=['home','services','projects','reviews','marketplace','portfolio','login','register','start'] as const
+const runtime:RuntimeSnapshot={online:navigator.onLine,pending:0,lastError:null}
+const runtimeListeners=new Set<()=>void>()
+const notifyRuntime=()=>runtimeListeners.forEach(fn=>fn())
+const beginRuntime=()=>{runtime.pending+=1;notifyRuntime();let closed=false;return()=>{if(closed)return;closed=true;runtime.pending=Math.max(0,runtime.pending-1);notifyRuntime()}}
+const reportRuntimeError=(error:unknown)=>{runtime.lastError=error instanceof Error?error.message:String(error);try{localStorage.setItem('nexum-last-error',JSON.stringify({message:runtime.lastError,route:location.hash||'#home',time:new Date().toISOString()}))}catch{}notifyRuntime()}
+window.addEventListener('online',()=>{runtime.online=true;notifyRuntime()})
+window.addEventListener('offline',()=>{runtime.online=false;notifyRuntime()})
+window.addEventListener('error',event=>reportRuntimeError(event.error||event.message))
+window.addEventListener('unhandledrejection',event=>reportRuntimeError(event.reason))
+function subscribeRuntime(fn:()=>void){runtimeListeners.add(fn);return()=>runtimeListeners.delete(fn)}
+
 const T={
 ru:{nav:['Услуги','Проекты','Отзывы','Маркетплейс','Портфолио'],heroKicker:'NEXUM / DIGITAL PRODUCT STUDIO',heroTitle:'Создаём цифровые продукты, которыми хочется пользоваться.',heroText:'Сайты, приложения, AI-системы, брендинг и автоматизация — от идеи до работающего продукта.',start:'Обсудить проект',cases:'Смотреть проекты',services:'Всё необходимое для цифрового продукта.',projects:'Продукты, интерфейсы и системы.',reviews:'Опыт работы — в деталях, а не в обещаниях.',portfolio:'Interactive Lab',portfolioText:'Не статичные картинки. Откройте кейс и попробуйте интерфейс.',login:'Войти',register:'Регистрация'},
 en:{nav:['Services','Projects','Reviews','Marketplace','Portfolio'],heroKicker:'NEXUM / DIGITAL PRODUCT STUDIO',heroTitle:'We build digital products people want to use.',heroText:'Websites, apps, AI systems, identity and automation — from idea to working product.',start:'Start a project',cases:'View projects',services:'Everything a digital product needs.',projects:'Products, interfaces and systems.',reviews:'Show the work. Skip the empty promises.',portfolio:'Interactive Lab',portfolioText:'Not static screenshots. Open a case and try the interface.',login:'Sign in',register:'Create account'}}
@@ -20,7 +34,7 @@ class RuntimeBoundary extends Component<{children:ReactNode},BoundaryState>{
  reset=()=>location.reload()
  render(){if(!this.state.failed)return this.props.children;return <div className="runtime-recovery"><div><span className="eyebrow">NEXUM / RECOVERY</span><h1>Интерфейс остановлен безопасно.</h1><p>Ошибка изолирована от остального приложения. Перезапустите UI-контур — данные страницы не должны потеряться.</p><code>{this.state.message}</code><button className="black-btn" onClick={this.reset}>Перезапустить NEXUM ↗</button></div></div>}
 }
-function go(p:Page){location.hash=p==='home'?'':p;window.scrollTo({top:0,behavior:'smooth'})}
+function go(p:Page){if(!RUNTIME_ROUTES.includes(p))return;location.hash=p==='home'?'':p;window.scrollTo({top:0,behavior:'smooth'})}
 
 function Header({lang,setLang}:{lang:Lang;setLang:(v:Lang)=>void}){
  const c=T[lang]
@@ -89,15 +103,17 @@ function Generic({type,lang}:{type:Page;lang:Lang}){
  return <Portfolio lang={lang}/>
 }
 
-function Auth({mode,lang}:{mode:'login'|'register';lang:Lang}){const [sent,setSent]=useState(false);return <section className="auth-page"><div className="auth-card"><span className="eyebrow">NEXUM / ACCOUNT</span><h1>{mode==='login'?T[lang].login:T[lang].register}</h1>{sent?<div className="success">Готово. Это demo-flow, backend authentication пока не подключён.</div>:<form onSubmit={e=>{e.preventDefault();setSent(true)}}>{mode==='register'&&<input placeholder="Имя" required/>}<input type="email" placeholder="Email" required/><input type="password" placeholder="Password" required/>{mode==='register'&&<label><input type="checkbox" required/> Я принимаю условия</label>}<button className="black-btn" type="submit">{mode==='login'?'Войти':'Создать аккаунт'} →</button></form>}<button className="text-btn" onClick={()=>go('home')}>← На главную</button></div></section>}
+function Auth({mode,lang}:{mode:'login'|'register';lang:Lang}){const [sent,setSent]=useState(false);return <section className="auth-page"><div className="auth-card"><span className="eyebrow">NEXUM / ACCOUNT</span><h1>{mode==='login'?T[lang].login:T[lang].register}</h1>{sent?<div className="success">Готово. Это demo-flow, backend authentication пока не подключён.</div>:<form onSubmit={submit}>{mode==='register'&&<input placeholder="Имя" required/>}<input type="email" placeholder="Email" required/><input type="password" placeholder="Password" required/>{mode==='register'&&<label><input type="checkbox" required/> Я принимаю условия</label>}<button className="black-btn" type="submit">{mode==='login'?'Войти':'Создать аккаунт'} →</button></form>}<button className="text-btn" onClick={()=>go('home')}>← На главную</button></div></section>}
 
-function Start({lang}:{lang:Lang}){const [sent,setSent]=useState(false);return <section className="start-page"><div><span className="eyebrow">NEXUM / NEW PROJECT</span><h1>Расскажите,<br/><em>что строим.</em></h1><p>Коротко опишите задачу. Мы вернёмся с направлением, этапами и вопросами.</p></div><form onSubmit={e=>{e.preventDefault();setSent(true)}}>{sent?<div className="success">Заявка сохранена в demo-режиме. Реальная отправка будет подключена отдельно.</div>:<><input placeholder="Имя / компания" required/><input type="email" placeholder="Email" required/><textarea placeholder="Что нужно сделать?" rows={7} required/><button className="black-btn" type="submit">{T[lang].start} ↗</button></>}</form></section>}
+function Start({lang}:{lang:Lang}){const [sent,setSent]=useState(false);const [busy,setBusy]=useState(false);const submit=(e:React.FormEvent)=>{e.preventDefault();if(busy)return;const end=beginRuntime();setBusy(true);window.setTimeout(()=>{setBusy(false);setSent(true);end()},450)};return <section className="start-page"><div><div className="runtime-status"><span className={runtime.online?'online-dot':'offline-dot'}/>{runtime.online?'NEXUM ENGINE ONLINE':'OFFLINE MODE'}{runtime.pending>0&&<b> · PROCESSING</b>}</div><span className="eyebrow">NEXUM / NEW PROJECT</span><h1>Расскажите,<br/><em>что строим.</em></h1><p>Коротко опишите задачу. Мы вернёмся с направлением, этапами и вопросами.</p></div><form onSubmit={e=>{e.preventDefault();setSent(true)}}>{sent?<div className="success">Заявка сохранена в demo-режиме. Реальная отправка будет подключена отдельно.</div>:<><input placeholder="Имя / компания" required/><input type="email" placeholder="Email" required/><textarea placeholder="Что нужно сделать?" rows={7} required/><button className="black-btn" type="submit" disabled={busy}>{busy?'Обработка…':T[lang].start} ↗</button></>}</form></section>}
 
 export default function App(){
  const [lang,setLang]=useState<Lang>(()=>{try{return(localStorage.getItem('nexum-lang') as Lang)||'ru'}catch{return'ru'}})
  const allowed=['home','services','projects','reviews','marketplace','portfolio','login','register','start'] as const
  const readRoute=():Page=>{const value=location.hash.replace('#','');return (allowed as readonly string[]).includes(value)?value as Page:'home'}
  const [page,setPage]=useState<Page>(readRoute)
+ const [,refreshRuntime]=useState(0)
+ useEffect(()=>subscribeRuntime(()=>refreshRuntime(v=>v+1)),[])
  useEffect(()=>{try{localStorage.setItem('nexum-lang',lang)}catch{/* storage unavailable */}},[lang])
  useEffect(()=>{const f=()=>setPage(readRoute());addEventListener('hashchange',f);return()=>removeEventListener('hashchange',f)},[])
  let content
