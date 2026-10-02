@@ -531,3 +531,34 @@ body{margin:0;overflow-x:hidden}
  .nxp-float-card{width:170px;padding:13px 15px}
 }
 @media(prefers-reduced-motion:reduce){.nxp-hero-art:before,.nxp-hero-art:after,.nxp-globe,.nxp-globe-orbit,.nxp-globe-halo,.nxp-float-card{animation:none}}
+
+
+/* FINAL HERO / CANVAS GEOMETRY FIX — keep the homepage viewport truly full width */
+html,body,#root{width:100%;max-width:none;min-width:0;margin:0;padding:0;overflow-x:hidden}
+.nxp-page{width:100%;max-width:none;min-width:0;margin:0;padding-top:72px;overflow-x:clip}
+.nxp-hero{box-sizing:border-box;width:100%;max-width:none;margin-left:0;margin-right:0;min-width:0;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(18px,3vw,64px);padding-left:clamp(24px,6vw,140px);padding-right:clamp(24px,4vw,90px)}
+.nxp-hero-main{min-width:0;width:auto;max-width:760px}
+.nxp-hero-art{min-width:0;width:100%;max-width:none;right:auto;position:relative;top:auto;height:min(82vh,820px)}
+.nxp-globe-scene{width:min(48vw,720px);height:min(48vw,720px);min-width:0;min-height:0;max-width:100%;max-height:100%}
+.nxp-float-card{max-width:calc(100% - 20px)}
+@media(min-width:1440px){
+ .nxp-hero{padding-left:clamp(72px,6vw,150px);padding-right:clamp(40px,3vw,72px);grid-template-columns:minmax(560px,.86fr) minmax(620px,1.14fr)}
+ .nxp-hero-art{height:min(84vh,860px)}
+ .nxp-globe-scene{width:min(48vw,760px);height:min(48vw,760px)}
+}
+@media(min-width:1900px){
+ .nxp-hero{padding-left:clamp(96px,7vw,180px);padding-right:clamp(50px,3vw,100px);grid-template-columns:minmax(680px,.82fr) minmax(760px,1.18fr)}
+ .nxp-globe-scene{width:min(46vw,820px);height:min(46vw,820px)}
+}
+@media(max-width:900px){
+ .nxp-page{padding-top:72px}
+ .nxp-hero{width:100%;margin:0;display:block;padding:76px 18px 48px;min-height:auto;overflow:hidden}
+ .nxp-hero-main{width:100%;max-width:none}
+ .nxp-hero-art{width:100%;height:min(92vw,520px);margin-top:20px;display:grid;overflow:visible}
+ .nxp-globe-scene{width:min(92vw,520px);height:min(92vw,520px);min-width:0;min-height:0}
+}
+@media(max-width:520px){
+ .nxp-hero{padding-left:16px;padding-right:16px}
+ .nxp-hero-art{height:390px}
+ .nxp-globe-scene{width:94vw;height:94vw}
+}
