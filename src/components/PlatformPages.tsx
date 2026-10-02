@@ -167,7 +167,7 @@ function Home({language}:{language:Language}){
     <ProductStage label={ru?'SOLUTIONS':'NEXUM SOLUTIONS'} tone="green"/>
     <div className="nxp-spatial-copy">
      <small>03 / NEXUM SOLUTIONS</small>
-     <h2>{t(ru,<>Готовые<br/><em>направления.</em></>,<>Clear ways<br/><em>forward.</em>)}</h2>
+     <h2>{t(ru,<>Готовые<br/><em>направления.</em></>,<>Clear ways<br/><em>forward.</em></>)}</h2>
      <p>{t(ru,'Выберите направление — NEXUM соберёт под задачу нужные технологии, команду и формат работы.','Choose a direction — NEXUM assembles the right technology, team and delivery model.')}</p>
      <button className="nxp-outline-link" onClick={()=>go('#solutions')}>{t(ru,'Смотреть решения','Explore solutions')} <ArrowUpRight/></button>
     </div>
