@@ -130,7 +130,7 @@ function Home({language}:{language:Language}){
    <div className="nxp-home-system-head">
     <div>
      <small>01 / WHAT WE BUILD</small>
-     <h2>{t(ru,<>Не набор услуг.<br/><em>Цифровая система.</em></>,<>Not a list of services.<br/><em>A digital system.</em>)}</h2>
+     <h2>{t(ru,<>Не набор услуг.<br/><em>Цифровая система.</em></>,<>Not a list of services.<br/><em>A digital system.</em></>)}</h2>
     </div>
     <p>{t(ru,'Мы соединяем дизайн, разработку, AI и автоматизацию в один продуктовый контур — без лишних слоёв и посредников.','We connect design, engineering, AI and automation into one product system — without unnecessary layers.')}</p>
    </div>
@@ -158,7 +158,7 @@ function Home({language}:{language:Language}){
    </div>
    <div className="nxp-home-ai-copy">
     <small>02 / AI CORE</small>
-    <h2>{t(ru,<>AI, который<br/><em>делает работу.</em></>,<>AI that<br/><em>does the work.</em>)}</h2>
+    <h2>{t(ru,<>AI, который<br/><em>делает работу.</em></>,<>AI that<br/><em>does the work.</em></>)}</h2>
     <p>{t(ru,'От первого запроса до результата: AI понимает задачу, предлагает план и помогает собрать рабочий продукт.','From the first brief to delivery: AI understands the task, plans the work and helps build the product.')}</p>
     <div className="nxp-home-ai-points"><span><b>01</b>{t(ru,'Понимает контекст','Understands context')}</span><span><b>02</b>{t(ru,'Работает с инструментами','Works with tools')}</span><span><b>03</b>{t(ru,'Проверяет результат','Checks the result')}</span></div>
     <button className="nxp-button nxp-button-dark" onClick={()=>go('#ai')}><Sparkles/> {t(ru,'Открыть NEXUM AI','Open NEXUM AI')} <ArrowUpRight/></button>
@@ -167,7 +167,7 @@ function Home({language}:{language:Language}){
 
   <section className="nxp-home-work">
    <div className="nxp-home-work-head">
-    <div><small>03 / SELECTED WORK</small><h2>{t(ru,<>Продукты, которые<br/><em>можно показать.</em></>,<>Products worth<br/><em>showing.</em>)}</h2></div>
+    <div><small>03 / SELECTED WORK</small><h2>{t(ru,<>Продукты, которые<br/><em>можно показать.</em></>,<>Products worth<br/><em>showing.</em></>)}</h2></div>
     <button className="nxp-outline-link" onClick={()=>go('#work')}>{t(ru,'Все проекты','All projects')} <ArrowUpRight/></button>
    </div>
    <div className="nxp-home-work-grid">
@@ -195,7 +195,7 @@ function Home({language}:{language:Language}){
    <div className="nxp-home-final-art"><div className="nxp-home-final-glow"/><GlassOrb label="N" tone="violet"/><div className="nxp-home-final-orbit"/></div>
    <div className="nxp-home-final-copy">
     <small>05 / START</small>
-    <h2>{t(ru,<>Есть идея?<br/><em>Соберём.</em></>,<>Have an idea?<br/><em>Let's build.</em>)}</h2>
+    <h2>{t(ru,<>Есть идея?<br/><em>Соберём.</em></>,<>Have an idea?<br/><em>Let's build.</em></>)}</h2>
     <p>{t(ru,'Расскажите, что хотите запустить. Дальше соберём структуру, визуал и план разработки.','Tell us what you want to launch. We will shape the structure, visual direction and build plan.')}</p>
     <div><button className="nxp-button nxp-button-dark" onClick={()=>go('#start')}>{t(ru,'Начать проект','Start a project')} <ArrowUpRight/></button><button className="nxp-button nxp-button-light" onClick={()=>go('#solutions')}>{t(ru,'Смотреть решения','Explore solutions')} <ArrowRight/></button></div>
    </div>
