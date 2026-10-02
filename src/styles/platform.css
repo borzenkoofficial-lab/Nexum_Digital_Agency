@@ -737,3 +737,61 @@ html,body,#root{width:100%;max-width:none;min-width:0;margin:0;padding:0;overflo
 @media(max-width:1000px){.nxp-home-system-head,.nxp-home-work-head{grid-template-columns:1fr;gap:24px}.nxp-home-capability-grid{grid-template-columns:repeat(2,1fr)}.nxp-home-ai{grid-template-columns:1fr;gap:40px}.nxp-home-ai-art{height:390px;order:2}.nxp-home-work-grid{grid-template-columns:1fr}.nxp-home-work-card>.nxp-visual{height:280px}.nxp-home-business{grid-template-columns:1fr}.nxp-home-business-stage{height:380px}.nxp-home-final{grid-template-columns:1fr}.nxp-home-final-art{height:300px;order:-1}}
 @media(max-width:560px){.nxp-home-system,.nxp-home-work,.nxp-home-ai,.nxp-home-business,.nxp-home-final{padding-left:16px;padding-right:16px}.nxp-home-capability-grid{grid-template-columns:1fr}.nxp-home-capability-visual{height:210px}.nxp-home-ai-art{height:290px}.nxp-home-ai-art .nxp-glass-orb{transform:scale(1)}.nxp-home-ai-ring.r1{width:300px;height:125px}.nxp-home-ai-ring.r2{width:240px;height:100px}.nxp-home-business-stage{height:285px}.nxp-home-business-stage .nxp-glass-orb{transform:scale(.6);right:-8%}.nxp-home-business-float{transform:scale(.8);transform-origin:left top}.nxp-home-final-art{height:230px}.nxp-home-final-art .nxp-glass-orb{transform:scale(.95)}.nxp-home-final-orbit{width:280px;height:110px}}
 @media(prefers-reduced-motion:reduce){.nxp-home-capability,.nxp-home-work-card{transition:none}.nxp-home-ai-art .nxp-glass-orb,.nxp-home-ai-ring,.nxp-home-final-art .nxp-glass-orb,.nxp-home-final-orbit{animation:none}}
+
+
+/* HOME LIVE NOTES — rotating copy, humor and exploration */
+.nxp-live-note{
+  width:min(100%,560px);
+  margin:28px 0 0;
+  padding:14px 16px 13px;
+  border:1px solid rgba(25,30,45,.09);
+  border-radius:18px;
+  background:rgba(255,255,255,.68);
+  backdrop-filter:blur(20px);
+  box-shadow:0 16px 45px rgba(35,40,60,.06),inset 0 1px rgba(255,255,255,.95);
+  text-align:left;
+  cursor:pointer;
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.nxp-live-note:hover{transform:translateY(-3px);box-shadow:0 24px 60px rgba(35,40,60,.11);border-color:rgba(100,92,255,.18)}
+.nxp-live-note-top{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}
+.nxp-live-note-top i{display:flex;align-items:center;gap:6px;font-style:normal;font-size:7px;letter-spacing:.14em;color:#5e9b79}
+.nxp-live-note-top .nxp-live-dot{width:5px;height:5px}
+.nxp-live-note-top b{font-size:7px;letter-spacing:.14em;color:#8b909b;font-weight:600}
+.nxp-live-note-top small{font-size:7px;color:#a0a4ad;letter-spacing:.08em}
+.nxp-live-note strong{display:block;margin:10px 0 9px;font-size:12px;line-height:1.45;font-weight:500;letter-spacing:-.01em;color:#22252c;animation:nxpNoteIn .45s ease both}
+.nxp-live-note-hint{display:flex;align-items:center;gap:5px;color:#969aa4;font-size:7px;letter-spacing:.08em;text-transform:uppercase}
+.nxp-live-note-hint svg{transition:transform .2s ease}.nxp-live-note:hover .nxp-live-note-hint svg{transform:translateX(3px)}
+.nxp-home-quote-card{
+  position:absolute;
+  right:4%;
+  top:8%;
+  width:210px;
+  padding:14px 15px;
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:16px;
+  background:rgba(255,255,255,.72);
+  backdrop-filter:blur(18px);
+  box-shadow:0 22px 55px rgba(30,35,55,.11);
+  z-index:6;
+  transform:rotate(2deg);
+  animation:nxpHomeCardFloat 8s ease-in-out infinite reverse;
+}
+.nxp-home-quote-card>span{display:block;font-size:7px;letter-spacing:.13em;color:#989ca6}
+.nxp-home-quote-card>b{display:block;margin:8px 0 7px;font-size:9px;letter-spacing:.08em;color:#6f7480}
+.nxp-home-quote-card p{margin:0;font-size:10px;line-height:1.45;color:#30333a;animation:nxpNoteIn .45s ease both}
+@keyframes nxpNoteIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media(max-width:1000px){
+ .nxp-live-note{max-width:620px}
+ .nxp-home-quote-card{right:1%;top:4%;transform:rotate(2deg) scale(.9)}
+}
+@media(max-width:560px){
+ .nxp-live-note{margin-top:22px;padding:13px 14px;border-radius:15px}
+ .nxp-live-note strong{font-size:11px}
+ .nxp-home-quote-card{width:165px;right:-3%;top:3%;transform:rotate(2deg) scale(.78);transform-origin:top right}
+}
+@media(prefers-reduced-motion:reduce){
+ .nxp-live-note strong,.nxp-home-quote-card p{animation:none}
+ .nxp-home-quote-card{animation:none}
+ .nxp-live-note{transition:none}
+}
