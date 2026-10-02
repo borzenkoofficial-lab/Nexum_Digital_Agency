@@ -70,6 +70,28 @@ function Visual({tone='blue',label='NEXUM',sub='DIGITAL SYSTEM'}:{tone?:string;l
  </div>
 }
 function GlassOrb({label='NEXUM',tone='blue'}:{label?:string;tone?:string}){return <div className={'nxp-glass-orb nxp-tone-'+tone} aria-hidden="true"><span/><i/><b>{label}</b></div>}
+function MarketplaceMockup({kind='service',title='Digital product',category='PRODUCT',tone='blue'}:{kind?:string;title?:string;category?:string;tone?:string}){
+ const mode=kind==='agent'?'AI AGENT':kind==='product'?'PRODUCT':'SERVICE'
+ return <div className={'nxp-market-mockup nxp-market-mockup-'+tone+' nxp-market-mockup-'+kind}>
+  <div className="nxp-mm-noise"/>
+  <div className="nxp-mm-top"><span><i/><i/><i/></span><small>NEXUM / {mode}</small><b>↗</b></div>
+  <div className="nxp-mm-grid"/>
+  {kind==='agent'?<div className="nxp-mm-agent">
+    <div className="nxp-mm-agent-orb"><span/></div>
+    <small>LIVE AGENT</small><strong>AI</strong>
+    <div className="nxp-mm-agent-lines"><i/><i/><i/></div>
+   </div>:kind==='product'?<div className="nxp-mm-product">
+    <div className="nxp-mm-product-window"><span/><span/><span/><b>{category}</b><i/><i/><i/><em>01</em></div>
+    <div className="nxp-mm-product-ring"/>
+    <div className="nxp-mm-product-chip">READY</div>
+   </div>:<div className="nxp-mm-service">
+    <div className="nxp-mm-service-card"><small>{category}</small><strong>{title}</strong><div><i/><i/><i/></div><span>STARTING FROM</span><b>₽</b></div>
+    <div className="nxp-mm-service-pill">NEXUM</div>
+   </div>}
+  <div className="nxp-mm-bottom"><span>0{kind==='agent'?'2':kind==='product'?'3':'1'} / {mode}</span><b>{title}</b></div>
+ </div>
+}
+
 function ProductStage({label='DIGITAL PRODUCT',tone='blue'}:{label?:string;tone?:string}){return <div className="nxp-product-stage"><div className="nxp-stage-backdrop"/><div className="nxp-stage-card"><div className="nxp-stage-top"><span/><span/><span/><small>{label}</small></div><div className="nxp-stage-body"><div className="nxp-stage-sidebar"/><div className="nxp-stage-content"><i/><i/><i/><i/></div></div></div><GlassOrb label="AI" tone={tone}/><div className="nxp-stage-ring"/></div>}
 function Head({eyebrow,title,copy,action}:{eyebrow:string;title:React.ReactNode;copy?:React.ReactNode;action?:React.ReactNode}){
  return <div className="nxp-section-head"><div><small>{eyebrow}</small><h2>{title}</h2>{copy&&<p>{copy}</p>}</div>{action}</div>
@@ -184,7 +206,7 @@ function Home({language}:{language:Language}){
    <div className="nxp-market-cards">
     {marketplace.slice(0,4).map(item=>
      <button key={item.id} className="nxp-market-card" onClick={()=>go('#service/'+item.id)}>
-      <Visual tone={item.kind==='agent'?'violet':item.kind==='product'?'green':'blue'} label={item.category} sub={item.title}/>
+      <MarketplaceMockup kind={item.kind} tone={item.kind==='agent'?'violet':item.kind==='product'?'green':'blue'} category={item.category} title={ru?item.ruTitle:item.title}/>
       <div className="nxp-card-meta">
        <div><small>{item.category}</small><h3>{ru?item.ruTitle:item.title}</h3><p>{ru?item.ruDescription:item.description}</p></div>
        <strong>{money(item.from,ru)}</strong>
@@ -258,7 +280,7 @@ function MarketplacePage({language}:{language:Language}){
   <section className="nxp-section">
    <div className="nxp-market-toolbar"><div className="nxp-searchbox"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder={ru?'Найти услугу, продукт или AI-агента':'Search service, product or AI agent'}/></div><select value={sort} onChange={e=>setSort(e.target.value)}><option value="popular">{ru?'Популярные':'Popular'}</option><option value="price">{ru?'Цена':'Price'}</option><option value="rating">{ru?'Рейтинг':'Rating'}</option></select></div>
    <div className="nxp-filter-row">{[['all',ru?'Все':'All'],['service',ru?'Услуги':'Services'],['agent','AI'],['product','Digital products']].map(([id,label])=><button key={id} className={kind===id?'active':''} onClick={()=>setKind(id)}>{label}</button>)}</div>
-   <div className="nxp-product-grid">{visible.map(item=><article className="nxp-product-card" key={item.id}><div className="nxp-product-visual"><Visual tone={item.kind==='agent'?'violet':item.kind==='product'?'green':'blue'} label={item.category} sub={item.title}/><button type="button" className={'nxp-like '+(liked.includes(item.id)?'active':'')} onClick={()=>setLiked(v=>v.includes(item.id)?v.filter(x=>x!==item.id):v.concat(item.id))}>{liked.includes(item.id)?<Heart fill="currentColor"/>:<Heart/>}</button><span className="nxp-kind-badge">{item.kind==='agent'?'AI AGENT':item.kind==='product'?'DIGITAL PRODUCT':'SERVICE'}</span></div><div className="nxp-product-body"><small>{ru?item.ruCategory:item.category}</small><h3>{ru?item.ruTitle:item.title}</h3><p>{ru?item.ruDescription:item.description}</p><div className="nxp-product-meta"><span><Star size={13} fill="currentColor"/> {item.rating}</span><span>{item.orders} {ru?'заказов':'orders'}</span><span>{item.seller}</span></div><div className="nxp-product-action"><b>{ru?'от':'from'} {money(item.from,ru)}</b><button type="button" onClick={()=>go('#service/'+item.id)}>{ru?'Подробнее':'View'} <ArrowUpRight/></button></div></div></article>)}</div>
+   <div className="nxp-product-grid">{visible.map(item=><article className="nxp-product-card" key={item.id}><div className="nxp-product-visual"><MarketplaceMockup kind={item.kind} tone={item.kind==='agent'?'violet':item.kind==='product'?'green':'blue'} category={item.category} title={ru?item.ruTitle:item.title}/><button type="button" className={'nxp-like '+(liked.includes(item.id)?'active':'')} onClick={()=>setLiked(v=>v.includes(item.id)?v.filter(x=>x!==item.id):v.concat(item.id))}>{liked.includes(item.id)?<Heart fill="currentColor"/>:<Heart/>}</button><span className="nxp-kind-badge">{item.kind==='agent'?'AI AGENT':item.kind==='product'?'DIGITAL PRODUCT':'SERVICE'}</span></div><div className="nxp-product-body"><small>{ru?item.ruCategory:item.category}</small><h3>{ru?item.ruTitle:item.title}</h3><p>{ru?item.ruDescription:item.description}</p><div className="nxp-product-meta"><span><Star size={13} fill="currentColor"/> {item.rating}</span><span>{item.orders} {ru?'заказов':'orders'}</span><span>{item.seller}</span></div><div className="nxp-product-action"><b>{ru?'от':'from'} {money(item.from,ru)}</b><button type="button" onClick={()=>go('#service/'+item.id)}>{ru?'Подробнее':'View'} <ArrowUpRight/></button></div></div></article>)}</div>
   </section>
  </main>
 }
