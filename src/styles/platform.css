@@ -241,3 +241,34 @@ body{background:var(--nx-canvas);color:var(--nx-ink)}
  .nx2-service-extra{grid-template-columns:1fr;padding:48px 20px}
  .nx2-panel{padding:22px;border-radius:16px}
 }
+
+/* NEXUM visual language: liquid glass + lightweight CSS 3D motion */
+.nxp-visual{isolation:isolate;perspective:900px;transform-style:preserve-3d;overflow:hidden}
+.nxp-visual:before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(115deg,rgba(255,255,255,.38),transparent 34%,rgba(255,255,255,.08) 68%,rgba(255,255,255,.28));mix-blend-mode:screen;pointer-events:none}
+.nxp-liquid-glass{position:absolute;z-index:2;border:1px solid rgba(255,255,255,.65);background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(255,255,255,.12));backdrop-filter:blur(16px) saturate(145%);-webkit-backdrop-filter:blur(16px) saturate(145%);box-shadow:0 20px 50px rgba(20,25,50,.12),inset 0 1px rgba(255,255,255,.7);border-radius:22px;transform:translateZ(45px);pointer-events:none}
+.nxp-glass-a{width:34%;height:30%;right:7%;top:8%;animation:nxpGlassFloat 7s ease-in-out infinite}
+.nxp-glass-b{width:22%;height:38%;left:6%;bottom:9%;border-radius:50%;animation:nxpGlassFloat 9s ease-in-out -2s infinite}
+.nxp-visual-3d-orb{position:absolute;z-index:3;width:31%;aspect-ratio:1;right:13%;bottom:15%;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.95),rgba(175,184,255,.7) 34%,rgba(92,88,230,.22) 65%,transparent 72%);box-shadow:inset -18px -15px 30px rgba(50,50,120,.16),0 22px 45px rgba(50,50,120,.18);transform:translateZ(80px);animation:nxpOrbFloat 6s ease-in-out infinite;overflow:hidden}
+.nxp-visual-3d-orb:after{content:'';position:absolute;inset:13%;border:1px solid rgba(255,255,255,.7);border-radius:50%;transform:rotate(35deg) scaleX(.5)}
+.nxp-visual-3d-orb i{position:absolute;width:5px;height:5px;border-radius:50%;background:#fff;box-shadow:0 0 12px rgba(255,255,255,.8)}
+.nxp-visual-3d-orb i:nth-child(1){left:25%;top:31%}.nxp-visual-3d-orb i:nth-child(2){left:55%;top:20%}.nxp-visual-3d-orb i:nth-child(3){left:68%;top:47%}.nxp-visual-3d-orb i:nth-child(4){left:37%;top:68%}.nxp-visual-3d-orb i:nth-child(5){left:18%;top:54%}.nxp-visual-3d-orb i:nth-child(6){left:76%;top:70%}
+.nxp-visual-ring{position:absolute;z-index:2;border:1px solid rgba(255,255,255,.6);border-radius:50%;pointer-events:none;transform-style:preserve-3d}
+.nxp-ring-a{width:55%;height:25%;right:4%;bottom:21%;transform:rotate(-22deg) translateZ(55px);animation:nxpRingSpin 12s linear infinite}
+.nxp-ring-b{width:39%;height:17%;right:16%;bottom:27%;transform:rotate(54deg) translateZ(30px);animation:nxpRingSpin 16s linear reverse infinite}
+.nxp-visual-panel{z-index:4;transform:translateZ(65px);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s ease;box-shadow:0 18px 45px rgba(20,25,50,.12),inset 0 1px rgba(255,255,255,.72)!important;background:rgba(255,255,255,.62)!important;backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
+.nxp-visual-code{z-index:5;transform:translateZ(90px)}
+.nxp-visual-cursor{position:absolute;z-index:6;right:7%;top:7%;width:34px;height:34px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.55);backdrop-filter:blur(12px);border-radius:50%;box-shadow:0 10px 25px rgba(30,35,55,.12);animation:nxpCursorFloat 5s ease-in-out infinite;pointer-events:none}
+.nxp-visual:hover .nxp-visual-panel{transform:translate3d(-8px,-7px,82px)}
+.nxp-visual:hover .nxp-visual-3d-orb{transform:translate3d(-7px,-9px,110px) scale(1.05)}
+.nxp-visual:hover .nxp-ring-a{transform:rotate(-12deg) translateZ(70px) scale(1.05)}
+@keyframes nxpGlassFloat{0%,100%{transform:translate3d(0,0,45px) rotate(0)}50%{transform:translate3d(8px,-12px,60px) rotate(3deg)}}
+@keyframes nxpOrbFloat{0%,100%{transform:translate3d(0,0,80px)}50%{transform:translate3d(-10px,-14px,100px) rotate(6deg)}}
+@keyframes nxpRingSpin{from{rotate:0deg}to{rotate:360deg}}
+@keyframes nxpCursorFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@media(max-width:800px){
+ .nxp-visual-3d-orb{width:27%;right:11%;bottom:17%}.nxp-liquid-glass{border-radius:16px}.nxp-glass-a{width:31%}.nxp-visual-cursor{width:29px;height:29px;font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+ .nxp-liquid-glass,.nxp-visual-3d-orb,.nxp-visual-ring,.nxp-visual-cursor{animation:none!important}
+ .nxp-visual:hover .nxp-visual-panel,.nxp-visual:hover .nxp-visual-3d-orb{transform:translateZ(55px)}
+}
