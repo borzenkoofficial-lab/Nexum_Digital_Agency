@@ -6,7 +6,6 @@ import ShowcaseGallery from './ShowcaseGallery'
 
 export type Language = 'ru' | 'en'
 type Service = { id:string; category:string; ruCategory:string; title:string; ruTitle:string; description:string; ruDescription:string; from:number; timeline:string; icon:typeof Code2; tags:string[] }
-type Item = Service & { kind:'service'|'product'|'agent'; orders:number; rating:number; seller:string }
 
 const services: Service[] = [
  {id:'web',category:'DEVELOPMENT',ruCategory:'РАЗРАБОТКА',title:'Websites & landing pages',ruTitle:'Сайты и лендинги',description:'Premium marketing sites and conversion-focused digital experiences.',ruDescription:'Имиджевые и коммерческие сайты с сильной подачей продукта.',from:80000,timeline:'7–21 days',icon:Code2,tags:['Landing','Corporate','E-commerce']},
@@ -176,7 +175,7 @@ function Home({language}:{language:Language}){
    <div className="nxp-market-cards">
     {marketplace.slice(0,4).map(item=>
      <button key={item.id} className="nxp-market-card" onClick={()=>go('#service/'+item.id)}>
-      <MarketplaceMockup kind={item.kind} tone={item.kind==='agent'?'violet':item.kind==='product'?'green':'blue'} category={item.category} title={ru?item.ruTitle:item.title}/>
+      <Visual tone={item.category==='AI'?'violet':item.category==='DESIGN'?'green':'blue'} label={item.category} sub={ru?item.ruTitle:item.title}/>
       <div className="nxp-card-meta">
        <div><small>{item.category}</small><h3>{ru?item.ruTitle:item.title}</h3><p>{ru?item.ruDescription:item.description}</p></div>
        <strong>{money(item.from,ru)}</strong>
@@ -346,9 +345,8 @@ function SuccessState({language}:{language:Language}){const ru=language==='ru';r
 function ServiceDetailPage({language,id}:{language:Language;id:string}){
  const ru=language==='ru'
  const [open,setOpen]=useState(false)
- const marketItem=marketplace.find(x=>x.id===id)
- const item=marketItem||services.find(x=>x.id===id)
- const rating=marketItem?.rating??4.9
+ const item=services.find(x=>x.id===id)
+ const rating=4.9
  if(!item)return <main className="nxp-auth-page"><div className="nxp-auth-card"><h1>404</h1><p>Service not found.</p><button className="nxp-button nxp-button-dark" onClick={()=>go('#marketplace')}>Marketplace <ArrowRight/></button></div></main>
  return <main className="nxp-page nxp-service-detail"><div className="nxp-breadcrumb"><button onClick={()=>go('#marketplace')}>Marketplace</button><span>/</span><b>{ru?item.ruCategory:item.category}</b></div><section className="nxp-service-hero"><div><small>{ru?item.ruCategory:item.category}</small><h1>{ru?item.ruTitle:item.title}</h1><p>{ru?item.ruDescription:item.description}</p><div className="nxp-tag-row">{item.tags.map(x=><span key={x}>{x}</span>)}</div><div className="nxp-detail-actions"><button className="nxp-button nxp-button-dark" onClick={()=>setOpen(true)}>{t(ru,'Заказать','Order')} <ArrowUpRight/></button><button className="nxp-button nxp-button-light" onClick={()=>go('#experts')}>{t(ru,'Найти исполнителя','Find an expert')} <Users size={16}/></button></div></div><Visual tone={marketItem?.kind==='agent'?'violet':'blue'} label={item.category} sub={item.title}/></section><section className="nxp-detail-grid"><div><small>01 / INCLUDED</small><h2>{t(ru,'Что входит','What is included')}</h2><div className="nxp-check-list">{['Discovery','UX / structure','Production build','QA / launch'].map(x=><span key={x}><Check size={15}/>{x}</span>)}</div></div><div><small>02 / DELIVERY</small><h2>{t(ru,'Срок и стоимость','Timeline & price')}</h2><div className="nxp-detail-stat"><b>{money(item.from,ru)}</b><span>{t(ru,'ориентир «от»','indicative starting point')}</span></div><div className="nxp-detail-stat"><b>{item.timeline}</b><span>{t(ru,'типовой срок','typical timeline')}</span></div></div></section><section className="nxp-detail-grid"><div><small>03 / FLOW</small><h2>{t(ru,'Как проходит заказ','Order flow')}</h2><div className="nxp-step-list">{[t(ru,'Выбираете пакет','Choose a package'),t(ru,'Описываете задачу','Describe the task'),t(ru,'Добавляете материалы','Attach files'),t(ru,'Получаете scope','Receive scope'),t(ru,'Работаете в чате','Work in chat'),t(ru,'Подтверждаете результат','Confirm delivery')].map((x,i)=><div key={x}><span>0{i+1}</span><b>{x}</b></div>)}</div></div><div><small>04 / TRUST</small><h2>{t(ru,'Доверие','Trust')}</h2><div className="nxp-review-box"><Star size={17} fill="currentColor"/><b>{rating}</b><span>{t(ru,'Средний рейтинг','Average rating')}</span></div></div></section>
 <section className="nx2-service-extra">
