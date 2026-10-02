@@ -1,4 +1,4 @@
-import {Component,useEffect,useState} from 'react'
+import {Component,ReactNode,useEffect,useState} from 'react'
 
 type Lang='ru'|'en'
 type Page='home'|'services'|'projects'|'reviews'|'marketplace'|'portfolio'|'login'|'register'|'start'
@@ -13,7 +13,7 @@ const market=[['AI','AI-консультант','Исследование, пр�
 
 
 type BoundaryState={failed:boolean;message:string}
-class RuntimeBoundary extends Component<{children:React.ReactNode},BoundaryState>{
+class RuntimeBoundary extends Component<{children:ReactNode},BoundaryState>{
  state:BoundaryState={failed:false,message:''}
  static getDerivedStateFromError(error:Error){return{failed:true,message:error?.message||'Unexpected interface error'}}
  componentDidCatch(error:Error,info:{componentStack:string}){try{localStorage.setItem('nexum-last-error',JSON.stringify({message:error.message,stack:error.stack,componentStack:info.componentStack,route:location.hash,time:new Date().toISOString()}))}catch{/* diagnostics must never break recovery */}}
