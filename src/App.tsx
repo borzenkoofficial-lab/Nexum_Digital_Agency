@@ -20,7 +20,18 @@ function Header({lang,setLang}:{lang:Lang;setLang:(v:Lang)=>void}){
 }
 
 function ProductVisual(){
- return <div className="hero-visual"><div className="halo"/><div className="glass-window"><div className="window-top"><span/><span/><span/><b>NEXUM / PRODUCT</b></div><div className="window-content"><div className="visual-sidebar"><i>◌</i><i>⌁</i><i>□</i><i>＋</i></div><div className="visual-main"><div className="visual-label">LIVE SYSTEM</div><strong>Build something<br/>remarkable.</strong><div className="visual-chart"><span/><span/><span/><span/><span/></div></div><div className="visual-card"><small>AI CORE</small><strong>98%</strong><em>ready</em></div></div></div><div className="float-card card-one">AI / WEB / 3D</div><div className="float-card card-two"><b>24/7</b><span>digital systems</span></div></div>
+ return <div className="hero-visual">
+  <div className="halo"/>
+  <div className="system-orbit orbit-a"/>
+  <div className="system-orbit orbit-b"/>
+  <div className="system-core"><span>N</span><small>NEXUM CORE</small></div>
+  <div className="system-node node-web"><b>WEB</b><span>platforms</span></div>
+  <div className="system-node node-ai"><b>AI</b><span>agents</span></div>
+  <div className="system-node node-design"><b>DESIGN</b><span>systems</span></div>
+  <div className="system-node node-auto"><b>AUTO</b><span>workflows</span></div>
+  <div className="float-card card-one">AI / WEB / 3D</div>
+  <div className="float-card card-two"><b>24/7</b><span>digital systems</span></div>
+ </div>
 }
 
 function SectionTitle({eyebrow,title,text}:{eyebrow:string;title:string;text?:string}){return <div className="section-title"><span>{eyebrow}</span><h2>{title}</h2>{text&&<p>{text}</p>}</div>}
@@ -47,10 +58,12 @@ function Portfolio({lang}:{lang:Lang}){
 function Demo({type}:{type:number}){
  if(type===0)return <div className="demo commerce"><div className="demo-nav"><b>ATELIER</b><span>NEW / WOMEN / MEN / OBJECTS</span><i>Bag 02</i></div><div className="commerce-body"><div><small>SPRING / 26</small><h3>Objects<br/>in motion.</h3><button>Add to bag</button></div><div className="fashion-object"><div/></div></div></div>
  if(type===1)return <div className="demo ai-demo"><aside><b>NEXUM AI</b><span>Overview</span><span>Projects</span><span>Memory</span><span>Agents</span></aside><main><small>AI AGENT / ONLINE</small><h3>How can I help<br/>build your product?</h3><div className="ai-input">Describe a task…<b>↗</b></div><div className="ai-pills"><span>Research</span><span>Design</span><span>Build</span></div></main><div className="ai-orb"/></div>
- if(type===2)return <div className="demo bot-demo"><div className="phone"><div className="bot-head">NEXUM SERVICE<small>online</small></div><div className="messages"><p>Здравствуйте! Что нужно сделать?</p><button onClick={()=>alert('Demo action')}>Заказать сайт</button><button onClick={()=>alert('Demo action')}>AI-интеграция</button><p className="user-msg">Хочу обсудить проект</p></div><div className="bot-input">Сообщение…<b>→</b></div></div></div>
+ if(type===2)return <BotDemo/>
  if(type===3)return <div className="demo product-demo"><aside><b>PROJECT</b><span>Overview</span><span>Analytics</span><span>Tasks</span></aside><main><div className="dash-top"><small>MONDAY / 02 OCT</small><b>Good afternoon.</b></div><div className="metrics"><div><small>Revenue</small><strong>€84.2k</strong><span>+12.8%</span></div><div><small>Active users</small><strong>12,842</strong><span>+8.4%</span></div><div><small>Conversion</small><strong>6.82%</strong><span>+1.2%</span></div></div><div className="dash-chart"><i/><i/><i/><i/><i/><i/><i/></div></main></div>
  return <MiniGame/>
 }
+
+function BotDemo(){const [choice,setChoice]=useState('');return <div className="demo bot-demo"><div className="phone"><div className="bot-head">NEXUM SERVICE<small>online</small></div><div className="messages"><p>Здравствуйте! Что нужно сделать?</p><button onClick={()=>setChoice('Сайт')}>Заказать сайт</button><button onClick={()=>setChoice('AI')}>AI-интеграция</button>{choice&&<p className="user-msg">Выбрано: {choice}. Расскажите подробнее.</p>}</div><div className="bot-input">Сообщение…<b>→</b></div></div></div>}
 
 function MiniGame(){const [score,setScore]=useState(0);const [pos,setPos]=useState(50);const hit=()=>{setScore(v=>v+1);setPos(Math.round(15+Math.random()*70))};return <div className="demo game-demo"><div className="game-top"><b>NEXUM ARCADE</b><span>SCORE {String(score).padStart(2,'0')}</span><button onClick={()=>setScore(0)}>RESET</button></div><div className="game-field" onClick={hit}><div className="game-stars">✦　·　✧　·　✦　·　·　✧</div><div className="game-ball" style={{left:pos+'%'}}/><div className="game-paddle" style={{left:pos+'%'}}/><span className="game-help">TAP THE FIELD</span></div></div>}
 
