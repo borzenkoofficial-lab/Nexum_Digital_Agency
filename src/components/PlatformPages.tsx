@@ -241,43 +241,22 @@ function ServicesCatalog({language}:{language:Language}){
 function SolutionsPage({language}:{language:Language}){
  const ru=language==='ru'
  const [active,setActive]=useState('ALL')
- const groups=[
-  {id:'ALL',ru:'Все решения',en:'All solutions'},
-  {id:'DEVELOPMENT',ru:'Разработка',en:'Development'},
-  {id:'AI',ru:'AI',en:'AI'},
-  {id:'DESIGN',ru:'Дизайн',en:'Design'},
-  {id:'3D / CREATIVE',ru:'3D / Creative',en:'3D / Creative'},
-  {id:'BUSINESS',ru:'Бизнес',en:'Business'},
-  {id:'MARKETING',ru:'Маркетинг',en:'Marketing'}
- ]
+ const groups=[['ALL',ru?'Все':'All'],['DEVELOPMENT',ru?'Разработка':'Development'],['AI','AI'],['DESIGN',ru?'Дизайн':'Design'],['3D / CREATIVE',ru?'3D / Креатив':'3D / Creative'],['BUSINESS',ru?'Бизнес':'Business'],['MARKETING',ru?'Маркетинг':'Marketing']]
  const visible=active==='ALL'?services:services.filter(x=>x.category===active)
- return <main className="nxp-page nxp-solutions-page">
-  <section className="nxp-solutions-hero">
-   <div className="nxp-solutions-hero-copy">
-    <small>02 / NEXUM SOLUTIONS</small>
-    <h1>{ru?<>Не каталог.<br/><em>Готовые направления.</em></>:<>Not a marketplace.<br/><em>Clear ways forward.</em></>}</h1>
-    <p>{t(ru,'Мы не продаём случайный набор услуг. Выберите направление — NEXUM соберёт под задачу нужную команду, технологию и формат работы.','We do not sell a random list of services. Choose a direction — NEXUM assembles the right team, technology and delivery model.')}</p>
-    <div className="nxp-solutions-hero-meta"><span>WEB</span><span>AI</span><span>PRODUCT</span><span>3D</span><span>AUTOMATION</span></div>
-   </div>
-   <div className="nxp-solutions-hero-art" aria-hidden="true">
-    <div className="nxp-solutions-art-core"><span>N</span></div>
-    <div className="nxp-solutions-art-ring r1"/><div className="nxp-solutions-art-ring r2"/><div className="nxp-solutions-art-ring r3"/>
-    <div className="nxp-solutions-art-label l1">01 / DIGITAL</div><div className="nxp-solutions-art-label l2">02 / AI</div><div className="nxp-solutions-art-label l3">03 / SYSTEMS</div>
-   </div>
+ return <main className="nxp-solutions-v3">
+  <section className="nxp-solutions-v3-hero">
+   <div><small>02 / NEXUM SOLUTIONS</small><h1>{ru?<>Не каталог услуг.<br/><em>Конструктор решений.</em></>:<>Not a service list.<br/><em>A solution system.</em>}</h1><p>{t(ru,'Выберите задачу или направление. Каждое решение открывается как отдельный рабочий контур с понятным составом, сроками и следующим шагом.','Choose a direction or problem. Each solution opens as its own working system with scope, timing and a clear next step.')}</p><div className="nxp-solutions-v3-meta"><span>WEB</span><span>AI</span><span>PRODUCT</span><span>3D</span><span>AUTOMATION</span></div></div>
+   <div className="nxp-solutions-v3-visual"><div className="nxp-s3-orb"><b>N</b></div><div className="nxp-s3-ring r1"/><div className="nxp-s3-ring r2"/><div className="nxp-s3-label l1">DISCOVER</div><div className="nxp-s3-label l2">BUILD</div><div className="nxp-s3-label l3">LAUNCH</div></div>
   </section>
-  <section className="nxp-section nxp-solutions-list">
-   <div className="nxp-solutions-switcher">{groups.map(g=><button key={g.id} className={active===g.id?'active':''} onClick={()=>setActive(g.id)}>{ru?g.ru:g.en}</button>)}</div>
-   <div className="nxp-solutions-grid">{visible.map((item,i)=>{const Icon=item.icon;return <article className="nxp-solution-card" key={item.id}>
-    <div className="nxp-solution-card-top"><span>0{String(i+1).padStart(2,'0')}</span><Icon size={18}/></div>
-    <div className="nxp-solution-card-index">{item.category}</div>
-    <h2>{ru?item.ruTitle:item.title}</h2>
-    <p>{ru?item.ruDescription:item.description}</p>
-    <div className="nxp-solution-tags">{item.tags.map(tag=><span key={tag}>{tag}</span>)}</div>
-    <div className="nxp-solution-bottom"><span>{ru?'от':'from'} {money(item.from,ru)}</span><span>{item.timeline}</span><button onClick={()=>go('#service/'+item.id)}>{ru?'Открыть':'Explore'} <ArrowUpRight/></button></div>
-   </article>})}</div>
+  <section className="nxp-solutions-v3-catalog">
+   <div className="nxp-solutions-v3-toolbar"><div><small>01 / SOLUTION SYSTEM</small><h2>{t(ru,'Выберите направление.','Choose a direction.')}</h2></div><div className="nxp-s3-filters">{groups.map(([id,label])=><button key={id} className={active===id?'active':''} onClick={()=>setActive(id)}>{label}</button>)}</div></div>
+   <div className="nxp-solutions-v3-grid">{visible.map((item,i)=><button key={item.id} className="nxp-solution-v3-card" onClick={()=>go('#service/'+item.id)}>
+    <div className={'nxp-s3-card-art tone-'+(item.category==='AI'?'violet':item.category==='DESIGN'||item.category==='3D / CREATIVE'?'green':'blue')}><span>0{String(i+1).padStart(2,'0')}</span><b>{item.category}</b><div className="nxp-s3-mini-orb"/></div>
+    <div className="nxp-s3-card-body"><small>{ru?item.ruCategory:item.category}</small><h3>{ru?item.ruTitle:item.title}</h3><p>{ru?item.ruDescription:item.description}</p><div className="nxp-s3-card-tags">{item.tags.map(x=><span key={x}>{x}</span>)}</div><div className="nxp-s3-card-foot"><strong>{t(ru,'от','from')} {money(item.from,ru)}</strong><span>{item.timeline}</span><i>↗</i></div></div>
+   </button>)}</div>
   </section>
-  <section className="nxp-solutions-process"><div><small>03 / DELIVERY</small><h2>{t(ru,<>От идеи<br/><em>до работающего продукта.</em></>,<>From an idea<br/><em>to a working product.</em></>)}</h2></div><div className="nxp-solutions-steps"><div><b>01</b><strong>DISCOVER</strong><span>{t(ru,'Разбираем задачу и определяем результат.','We frame the problem and define the outcome.')}</span></div><div><b>02</b><strong>BUILD</strong><span>{t(ru,'Проектируем, разрабатываем и соединяем системы.','We design, build and connect the systems.')}</span></div><div><b>03</b><strong>LAUNCH</strong><span>{t(ru,'Запускаем и передаём рабочий digital-контур.','We launch and hand over a working digital system.')}</span></div></div></section>
-  <section className="nxp-cta-section"><small>04 / START</small><h2>{t(ru,<>Есть задача?<br/><em>Опишем решение.</em></>,<>Have a brief?<br/><em>Let's shape it.</em></>)}</h2><p>{t(ru,'Опишите результат своими словами. NEXUM предложит подходящий формат работы.','Describe the outcome in your own words. NEXUM will propose the right delivery model.')}</p><button className="nxp-button nxp-button-dark" onClick={()=>go('#start')}>{t(ru,'Начать проект','Start a project')} <ArrowUpRight/></button></section>
+  <section className="nxp-solutions-v3-bottom"><div><small>02 / DELIVERY</small><h2>{t(ru,<>Не покупка карточки.<br/><em>Запуск системы.</em></>,<>Not a card purchase.<br/><em>A system launch.</em>)}</h2></div><div className="nxp-s3-delivery"><article><b>01</b><strong>DISCOVER</strong><span>{t(ru,'Разбираем задачу.','Frame the problem.')}</span></article><article><b>02</b><strong>BUILD</strong><span>{t(ru,'Собираем решение.','Build the solution.')}</span></article><article><b>03</b><strong>LAUNCH</strong><span>{t(ru,'Запускаем и развиваем.','Launch and evolve.')}</span></article></div></section>
+  <section className="nxp-s3-cta"><small>03 / START</small><h2>{t(ru,<>Есть задача?<br/><em>Опишите результат.</em></>,<>Have a brief?<br/><em>Describe the outcome.</em>)}</h2><button className="nxp-button nxp-button-dark" onClick={()=>go('#start')}>{t(ru,'Начать проект','Start a project')} <ArrowUpRight/></button></section>
  </main>
 }
 function AIPage({language}:{language:Language}){
