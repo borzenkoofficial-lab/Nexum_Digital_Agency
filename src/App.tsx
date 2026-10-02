@@ -64,8 +64,30 @@ function ServiceGrid(){
  return <div className="service-grid">{services.map(([tag,title,text])=><button className={'service-card '+(active===tag?'selected':'')} key={tag} onClick={()=>setActive(active===tag?null:tag)}><span>{tag}</span><div><h3>{title}</h3><p>{text}</p>{active===tag&&<small className="service-more">Strategy · UX · Production · Launch</small>}</div><b>{active===tag?'−':'↗'}</b></button>)}</div>}
 
 function ProjectGrid(){
- return <div className="project-grid">{projects.map(([name,type,text],i)=><button className={'project-card p'+i} key={name} onClick={()=>go('portfolio')}><div className="project-art"><div className="art-orb"/><div className="art-grid"/><div className="art-window"><small>{type}</small><strong>{name}</strong><span>{text}</span></div><span className="case-index">0{i+1}</span></div><div className="project-info"><span>{type}</span><h3>{name}</h3><b>View case →</b></div></button>)}</div>
-
+ return (
+  <div className="project-grid">
+   {projects.map(([name,type,text],i)=>(
+    <button className={"project-card p"+i} key={name} onClick={()=>go("portfolio")}>
+     <div className="project-art">
+      <div className="art-orb"/>
+      <div className="art-grid"/>
+      <div className="art-window">
+       <small>{type}</small>
+       <strong>{name}</strong>
+       <span>{text}</span>
+      </div>
+      <span className="case-index">0{i+1}</span>
+     </div>
+     <div className="project-info">
+      <span>{type}</span>
+      <h3>{name}</h3>
+      <b>View case →</b>
+     </div>
+    </button>
+   ))}
+  </div>
+ )
+}
 function Reviews(){const data=[['01','Основатель продукта','“Команда быстро превратила сложную идею в понятный продуктовый интерфейс.”'],['02','Product lead','“Сильная связка стратегии, дизайна и разработки без лишней бюрократии.”'],['03','Founder','“Нам было важно получить не картинку, а систему, которую можно развивать.”']];return <div className="review-grid">{data.map(([n,role,text])=><article className="review" key={n}><span>{n}</span><div><div className="stars">★★★★★</div><p>{text}</p><small>{role}</small></div></article>)}</div>}
 
 function PortfolioStrip(){return <div className="lab-strip"><button onClick={()=>go('portfolio')} className="lab-main"><div className="lab-orbit"/><div><span>INTERACTIVE LAB</span><h3>5 live product experiences</h3><p>Commerce · AI · Telegram · Product · Game</p></div><b>↗</b></button><div className="lab-mini"><span>LIVE</span><strong>Try it yourself</strong><small>Real interactions, not screenshots.</small></div></div>}
@@ -103,7 +125,7 @@ function Generic({type,lang}:{type:Page;lang:Lang}){
  return <Portfolio lang={lang}/>
 }
 
-function Auth({mode,lang}:{mode:'login'|'register';lang:Lang}){const [sent,setSent]=useState(false);return <section className="auth-page"><div className="auth-card"><span className="eyebrow">NEXUM / ACCOUNT</span><h1>{mode==='login'?T[lang].login:T[lang].register}</h1>{sent?<div className="success">Готово. Это demo-flow, backend authentication пока не подключён.</div>:<form onSubmit={submit}>{mode==='register'&&<input placeholder="Имя" required/>}<input type="email" placeholder="Email" required/><input type="password" placeholder="Password" required/>{mode==='register'&&<label><input type="checkbox" required/> Я принимаю условия</label>}<button className="black-btn" type="submit">{mode==='login'?'Войти':'Создать аккаунт'} →</button></form>}<button className="text-btn" onClick={()=>go('home')}>← На главную</button></div></section>}
+function Auth({mode,lang}:{mode:'login'|'register';lang:Lang}){const [sent,setSent]=useState(false);const submit=(e:FormEvent)=>{e.preventDefault();setSent(true)};return <section className="auth-page"><div className="auth-card"><span className="eyebrow">NEXUM / ACCOUNT</span><h1>{mode==='login'?T[lang].login:T[lang].register}</h1>{sent?<div className="success">Готово. Это demo-flow, backend authentication пока не подключён.</div>:<form onSubmit={submit}>{mode==='register'&&<input placeholder="Имя" required/>}<input type="email" placeholder="Email" required/><input type="password" placeholder="Password" required/>{mode==='register'&&<label><input type="checkbox" required/> Я принимаю условия</label>}<button className="black-btn" type="submit">{mode==='login'?'Войти':'Создать аккаунт'} →</button></form>}<button className="text-btn" onClick={()=>go('home')}>← На главную</button></div></section>}
 
 function Start({lang}:{lang:Lang}){const [sent,setSent]=useState(false);const [busy,setBusy]=useState(false);const submit=(e:FormEvent)=>{e.preventDefault();if(busy)return;const end=beginRuntime();setBusy(true);window.setTimeout(()=>{setBusy(false);setSent(true);end()},450)};return <section className="start-page"><div><div className="runtime-status"><span className={runtime.online?'online-dot':'offline-dot'}/>{runtime.online?'NEXUM ENGINE ONLINE':'OFFLINE MODE'}{runtime.pending>0&&<b> · PROCESSING</b>}</div><span className="eyebrow">NEXUM / NEW PROJECT</span><h1>Расскажите,<br/><em>что строим.</em></h1><p>Коротко опишите задачу. Мы вернёмся с направлением, этапами и вопросами.</p></div><form onSubmit={e=>{e.preventDefault();setSent(true)}}>{sent?<div className="success">Заявка сохранена в demo-режиме. Реальная отправка будет подключена отдельно.</div>:<><input placeholder="Имя / компания" required/><input type="email" placeholder="Email" required/><textarea placeholder="Что нужно сделать?" rows={7} required/><button className="black-btn" type="submit" disabled={busy}>{busy?'Обработка…':T[lang].start} ↗</button></>}</form></section>}
 
