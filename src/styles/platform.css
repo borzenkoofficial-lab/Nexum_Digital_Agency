@@ -439,3 +439,37 @@ body{margin:0;overflow-x:hidden}
 @keyframes nxpStagePulse{from{transform:translateZ(-80px) scale(.94);opacity:.5}to{transform:translateZ(-80px) scale(1.06);opacity:1}}
 @media(max-width:900px){.nxp-spatial-intro{grid-template-columns:1fr;gap:26px}.nxp-product-stage{min-height:360px}.nxp-stage-card{left:3%;width:90%}.nxp-glass-orb{right:0;bottom:0;width:82px;height:82px}}
 @media(prefers-reduced-motion:reduce){.nxp-stage-card,.nxp-stage-backdrop,.nxp-glass-orb,.nxp-stage-ring{animation:none}}
+
+/* Page-specific visual consistency */
+.nxp-ai-workspace{position:relative;isolation:isolate}
+.nxp-ai-workspace:before{content:'';position:absolute;width:300px;height:300px;right:3%;top:4%;border-radius:50%;background:radial-gradient(circle,rgba(111,105,255,.16),transparent 68%);filter:blur(24px);animation:nxpSceneGlow 8s ease-in-out infinite alternate;pointer-events:none}
+.nxp-b2b-grid{position:relative}
+.nxp-b2b-grid:before{content:'';position:absolute;width:280px;height:280px;left:-5%;bottom:0;border-radius:50%;background:radial-gradient(circle,rgba(83,177,255,.12),transparent 70%);filter:blur(30px);pointer-events:none}
+.nxp-pricing-grid article,.nxp-knowledge-grid article,.nxp-experts-large article,.nxp-support-grid>*{position:relative;overflow:hidden}
+.nxp-pricing-grid article:after,.nxp-knowledge-grid article:after,.nxp-experts-large article:after,.nxp-support-grid>*:after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.22),transparent 38%,rgba(120,130,255,.05));pointer-events:none}
+.nxp-auth-page{position:relative;isolation:isolate;overflow:hidden}
+.nxp-auth-page:before,.nxp-auth-page:after{content:'';position:absolute;border-radius:50%;filter:blur(42px);pointer-events:none}
+.nxp-auth-page:before{width:340px;height:340px;left:-100px;top:10%;background:rgba(115,105,255,.13)}
+.nxp-auth-page:after{width:280px;height:280px;right:-70px;bottom:5%;background:rgba(70,180,255,.11)}
+.nxp-auth-card{position:relative;z-index:1}
+.nxp-service-hero .nxp-visual{min-height:340px}
+.nxp-service-detail .nxp-visual{min-height:360px}
+.nxp-detail-grid{position:relative}
+.nxp-detail-grid:before{content:'';position:absolute;width:320px;height:320px;right:4%;top:8%;border-radius:50%;background:radial-gradient(circle,rgba(120,110,255,.11),transparent 70%);filter:blur(25px);pointer-events:none}
+.nxp-dashboard{position:relative;isolation:isolate}
+.nxp-dashboard:before{content:'';position:absolute;width:420px;height:300px;right:8%;top:0;background:radial-gradient(circle,rgba(120,125,255,.1),transparent 68%);filter:blur(35px);pointer-events:none}
+.nxp-dashboard>*{position:relative;z-index:1}
+
+/* Richer project rows */
+.nxp-work-row{position:relative;isolation:isolate;overflow:hidden}
+.nxp-work-row .nxp-visual{transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.nxp-work-row:hover .nxp-visual{transform:perspective(1000px) rotateY(-3deg) translateY(-6px) scale(1.015)}
+.nxp-work-row:after{content:'';position:absolute;inset:12% 45% 12% 0;border-radius:50%;background:radial-gradient(circle,rgba(120,120,255,.08),transparent 68%);filter:blur(20px);z-index:-1;pointer-events:none}
+
+/* Never let decorative layers create a scroll axis */
+.nxp-page,.nxp-auth-page,.nxp-dashboard,.nxp-service-detail,.nxp-catalog-page{overflow-x:clip}
+@media(max-width:800px){
+ .nxp-ai-workspace:before,.nxp-b2b-grid:before,.nxp-dashboard:before,.nxp-detail-grid:before{opacity:.55}
+ .nxp-service-hero .nxp-visual,.nxp-service-detail .nxp-visual{min-height:280px}
+ .nxp-work-row:hover .nxp-visual{transform:none}
+}
