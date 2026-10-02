@@ -164,23 +164,23 @@ function Home({language}:{language:Language}){
   </section>
   <section className="nxp-section nxp-spatial-section">
    <div className="nxp-spatial-intro">
-    <ProductStage label={ru?'MARKETPLACE':'DIGITAL MARKET'} tone="green"/>
+    <ProductStage label={ru?'SOLUTIONS':'NEXUM SOLUTIONS'} tone="green"/>
     <div className="nxp-spatial-copy">
-     <small>03 / MARKETPLACE</small>
-     <h2>{t(ru,<>Digital supply,<br/><em>в одном месте.</em></>,<>Digital supply,<br/><em>in one place.</em></>)}</h2>
-     <p>{t(ru,'Услуги, AI-агенты и готовые digital products. Marketplace становится центральным слоем выбора и заказа.','Services, AI agents and ready digital products in one marketplace layer.')}</p>
-     <button className="nxp-outline-link" onClick={()=>go('#marketplace')}>{t(ru,'Открыть','Open')} <ArrowUpRight/></button>
+     <small>03 / NEXUM SOLUTIONS</small>
+     <h2>{t(ru,<>Готовые<br/><em>направления.</em></>,<>Clear ways<br/><em>forward.</em>)}</h2>
+     <p>{t(ru,'Выберите направление — NEXUM соберёт под задачу нужные технологии, команду и формат работы.','Choose a direction — NEXUM assembles the right technology, team and delivery model.')}</p>
+     <button className="nxp-outline-link" onClick={()=>go('#solutions')}>{t(ru,'Смотреть решения','Explore solutions')} <ArrowUpRight/></button>
     </div>
    </div>
    <div className="nxp-market-cards">
-    {marketplace.slice(0,4).map(item=>
+    {services.slice(0,4).map(item=>
      <button key={item.id} className="nxp-market-card" onClick={()=>go('#service/'+item.id)}>
       <Visual tone={item.category==='AI'?'violet':item.category==='DESIGN'?'green':'blue'} label={item.category} sub={ru?item.ruTitle:item.title}/>
       <div className="nxp-card-meta">
-       <div><small>{item.category}</small><h3>{ru?item.ruTitle:item.title}</h3><p>{ru?item.ruDescription:item.description}</p></div>
+       <div><small>{ru?item.ruCategory:item.category}</small><h3>{ru?item.ruTitle:item.title}</h3><p>{ru?item.ruDescription:item.description}</p></div>
        <strong>{money(item.from,ru)}</strong>
       </div>
-      <div className="nxp-card-foot"><span><Star size={12} fill="currentColor"/> {item.rating}</span><span>{item.orders} {t(ru,'заказов','orders')}</span><span>{item.seller}</span></div>
+      <div className="nxp-card-foot"><span>{item.timeline}</span><span>{item.tags.slice(0,2).join(' · ')}</span><span>NEXUM</span></div>
      </button>
     )}
    </div>
